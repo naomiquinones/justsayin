@@ -1,0 +1,22 @@
+{
+  "name": "justsayin",
+  "version": "1.0.0",
+  "description": "A translation and messaging app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/naomiquinones/justsayin.git"
+  },
+  "author": "Naomi Quinones",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/naomiquinones/justsayin/issues"
+  },
+  "homepage": "https://github.com/naomiquinones/justsayin#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
