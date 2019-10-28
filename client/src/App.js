@@ -6,10 +6,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        
-        <p>
+        <h1>
           Just Say In
-        </p>
+        </h1>
        
       </header>
     </div>
