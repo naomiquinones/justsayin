@@ -46,15 +46,15 @@ The third milestone for Just Say In is a mobile app. A few additional features w
 
 The home page will allow translation regardless of the user’s login status. Logging in will allow the user to manage contacts, groups, and messages.
 
-![Just Say In user flow-homepage login](/Users/naomiquinones/Documents/Techtonica/JustSayIn/readme_images/Just Say In user flow-homepage login.png)
+![Just Say In user flow-homepage login](readme_images/Just Say In user flow-homepage login.png)
 
-![Just Say In user flow-translation](/Users/naomiquinones/Documents/Techtonica/JustSayIn/readme_images/Just Say In user flow-translation.png)
+![Just Say In user flow-translation](readme_images/Just Say In user flow-translation.png)
 
-![Just Say In user flow-people](/Users/naomiquinones/Documents/Techtonica/JustSayIn/readme_images/Just Say In user flow-people.png)
+![Just Say In user flow-people](readme_images/Just Say In user flow-people.png)
 
-![Just Say In user flow-groups](/Users/naomiquinones/Documents/Techtonica/JustSayIn/readme_images/Just Say In user flow-groups.png)
+![Just Say In user flow-groups](readme_images/Just Say In user flow-groups.png)
 
-![Just Say In user flow-messages](/Users/naomiquinones/Documents/Techtonica/JustSayIn/readme_images/Just Say In user flow-messages.png)
+![Just Say In user flow-messages](readme_images/Just Say In user flow-messages.png)
 
 
 ## Data Models:
