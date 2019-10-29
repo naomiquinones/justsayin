@@ -11,7 +11,7 @@ class SavedTexts extends Component {
   componentDidMount() {
     fetch('/api/test')
       .then(res => res.json())
-      .then(text => this.setState({text}, () => console.log('Text fetched...', text)));
+      .then(text => this.setState({savedText:text}, () => console.log('Text fetched...', text)));
   }
   render() {
     return (
