@@ -46,7 +46,7 @@ The third milestone for Just Say In is a mobile app. A few additional features w
 
 The home page will allow translation regardless of the user’s login status. Logging in will allow the user to manage contacts, groups, and messages.
 
-![Just Say In user flow-homepage login](readme_images/Just Say In user flow-homepage login.png)
+![Just Say In user flow-homepage login](./readme_images/Just Say In user flow-homepage login.png)
 
 ![Just Say In user flow-translation](readme_images/Just Say In user flow-translation.png)
 
