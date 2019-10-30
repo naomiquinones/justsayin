@@ -59,7 +59,7 @@ The home page will allow translation regardless of the user’s login status. Lo
 
 ## Data Models:
 
-![Just Say In data models](readme_images/Just Say In data models.png)
+![Just Say In data models](readme_images/Just_Say_In_data_models.png)
 
 ## Tech stack
 
