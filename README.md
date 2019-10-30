@@ -46,15 +46,15 @@ The third milestone for Just Say In is a mobile app. A few additional features w
 
 The home page will allow translation regardless of the user’s login status. Logging in will allow the user to manage contacts, groups, and messages.
 
-![Just Say In user flow-homepage login](https://github.com/naomiquinones/justsayin/readme_images/Just_Say_In_user_flow-homepage_login.png)
+![Just Say In user flow-homepage login](readme_images/Just_Say_In_user_flow-homepage_login.png)
 
-![Just Say In user flow-translation](https://github.com/naomiquinones/justsayin/readme_images/Just_Say_In_user_flow-translation.png)
+![Just Say In user flow-translation](readme_images/Just_Say_In_user_flow-translation.png)
 
-![Just Say In user flow-people](https://github.com/naomiquinones/justsayin/readme_images/Just_Say_In_user_flow-people.png)
+![Just Say In user flow-people](readme_images/Just_Say_In_user_flow-people.png)
 
-![Just Say In user flow-groups](https://github.com/naomiquinones/justsayin/readme_images/Just_Say_In_user_flow-groups.png)
+![Just Say In user flow-groups](readme_images/Just_Say_In_user_flow-groups.png)
 
-![Just Say In user flow-messages](https://github.com/naomiquinones/justsayin/readme_images/Just_Say_In_user_flow-messages.png)
+![Just Say In user flow-messages](readme_images/Just_Say_In_user_flow-messages.png)
 
 
 ## Data Models:
