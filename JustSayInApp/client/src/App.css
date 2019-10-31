@@ -1,14 +1,15 @@
 @import url('./components/savedTexts.css');
+@import url('./components/formContainer.css');
 
 .App {
-  text-align: center;
+  background-color: #43B1E5;
 }
 
 .JustSayIn-logo {
   height: 10vmin;
 }
 
-.App-header {
+.page-header {
   background-color: #343028;
   min-height: 10vh;
   display: flex;
@@ -17,4 +18,19 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.page-footer {
+  padding: 2rem 0 .5rem;
+  text-align: center;
+  font-size: .65rem;
+  color: #34302875;
+}
+main {
+}
+@media (min-width:768px) {
+
+}
+@media (min-width:950px) {
+
 }

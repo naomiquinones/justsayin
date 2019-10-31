@@ -1,0 +1,14 @@
+form {
+  width: 40%;
+  padding: 2.5%;
+  font-size: 1.5rem;
+}
+textarea {
+  width: 100%;
+  min-height: 20vh;
+}
+@media (min-width:768px) {
+  form {
+    width:45%;
+  }
+}
