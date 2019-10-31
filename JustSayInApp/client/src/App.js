@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import SavedTexts from './components/SavedTexts';
+import JustSayInlogo from './JustSayIn-logo-wordmark.svg'
 
 class App extends Component {
   render() {
@@ -8,7 +9,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1>
-            Just Say In
+            <img src={JustSayInlogo} className="JustSayIn-logo" alt="Just Say In" title="Just Say In"/>
           </h1>
         
         </header>

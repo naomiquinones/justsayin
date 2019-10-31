@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class SavedTexts extends Component {
   constructor() {
@@ -9,9 +10,10 @@ class SavedTexts extends Component {
   }
 
   componentDidMount() {
-    fetch('/api/test')
-      .then(res => res.json())
-      .then(text => this.setState({savedText:text}, () => console.log('Text fetched...', text)));
+    axios.get('/api/test')
+      .then(response => {
+        this.setState({savedText:response.data}, () => console.log('Text fetched...', response.data));
+      })
   }
   render() {
     return (
