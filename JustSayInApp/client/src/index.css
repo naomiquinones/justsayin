@@ -2,6 +2,15 @@ html, body {
   height: 100%;
   font-size: 120%;
 }
+:root {
+  --app-blue: #43B1E5;
+  --app-black: rgb(22, 29, 32);
+  --app-grey: rgb(108, 129, 138);
+  --app-white: #fafafa;
+}
+* {
+  box-sizing: border-box; 
+ }
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
@@ -9,8 +18,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #fefefe;
-  color: #343028;
+  background-color: var(--app-white);
+  color: var(--app-black);
 }
 
 code {

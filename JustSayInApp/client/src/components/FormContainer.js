@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // import CheckBox from '../components/CheckBox';  
 import Input from '../components/Input';  
 import TextArea from '../components/TextArea';  
-// import Select from '../components/Select';
+import SelectMenu from './SelectMenu';
 // import Button from '../components/Button'
 
 class FormContainer extends Component {
@@ -19,7 +19,7 @@ class FormContainer extends Component {
   }
 
   handleChange(event) {
-    this.setState({ value: event.target.value })
+    this.setState({ value: event.target.value });
   }
 
   handleFormSubmit() {
@@ -31,13 +31,16 @@ class FormContainer extends Component {
 
   render() {
     return (
-      <form className="formContainer" onSubmit={this.handleFormSubmit}>
+      <form className="form-container" onSubmit={this.handleFormSubmit}>
         <TextArea
-              placeholder={'Enter text to translate'}
-              name={'sourceText'}
+            placeholder={'Enter text to translate'}
+            name={'sourceText'}
+        />
+        <SelectMenu 
+            id={'languages-list'}
+            placeholder={'Add target language'}
         />
         <Input type={'submit'}
-
         />
       </form>
     )

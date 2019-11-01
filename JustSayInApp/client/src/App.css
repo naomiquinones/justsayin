@@ -2,7 +2,6 @@
 @import url('./components/formContainer.css');
 
 .App {
-  background-color: #43B1E5;
 }
 
 .JustSayIn-logo {
@@ -10,7 +9,7 @@
 }
 
 .page-header {
-  background-color: #343028;
+  background-color: var(--app-black);
   min-height: 10vh;
   display: flex;
   flex-direction: column;

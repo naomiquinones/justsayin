@@ -1,14 +1,49 @@
 form {
-  width: 40%;
-  padding: 2.5%;
   font-size: 1.5rem;
+}
+input[type="submit"] {
+  width: 100%;
+  font-size: 1.25em;
+  margin: 1em 0 0;
+  border-radius: 10px;
+  color: var(--app-blue, #49f);
+}
+.textarea-container {
+  padding: 2%;
+  background-color: var(--app-blue,#49f);
 }
 textarea {
   width: 100%;
   min-height: 20vh;
 }
+select {
+  width: 96%;
+  margin-left: 2%;
+  color: var(--app-grey,#ccc);
+  font-size: 1rem;
+}
+option {
+  /* color: var(--app-grey,#ccc); */
+}
+
+
+/* responsive */
 @media (min-width:768px) {
   form {
-    width:45%;
+  }
+  .textarea-container, .select-container {
+    width: 50%;
+    margin: 0;
+    float: left;
+  }
+  .select-container {
+    width: 40%;
+    margin-left: 5%;
+    float: left;
+  }
+  input[type="submit"] {
+    width: 92%;
+    margin: 1em 4%;
+    color: var(--app-blue);
   }
 }
