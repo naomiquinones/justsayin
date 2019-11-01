@@ -1,8 +1,9 @@
 # **“Just Say In” app**
+![Just-Say-In-logo-wordmark](readme_images/Just-Say-In-logo-wordmark.png)
 
 ---
 
-# What is Just Say In?
+## What is Just Say In?
 
 Just Say In is a translation and communication app that lets the user translate words and phrases into multiple languages at once, and also send out messages to one or more contacts. It will start off as a web app, and eventually will have a mobile app counterpart.
 
