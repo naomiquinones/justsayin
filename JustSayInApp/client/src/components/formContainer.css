@@ -1,37 +1,50 @@
 form {
   font-size: 1.5rem;
 }
-input[type="submit"] {
+input,
+select,
+button,
+textarea {
+  font-size: 1rem;
+}
+input,
+textarea {
   width: 100%;
-  font-size: 1.25em;
+  color: var(--app-blue, #49f);
+}
+input[type="submit"] {
   margin: 1em 0 0;
   border-radius: 10px;
-  color: var(--app-blue, #49f);
 }
 .textarea-container {
   padding: 2%;
-  background-color: var(--app-blue,#49f);
+  background-color: var(--app-blue, #49f);
 }
 textarea {
-  width: 100%;
   min-height: 20vh;
 }
+textarea:focus {
+  outline-color: var(--app-white);
+}
 select {
-  width: 96%;
+  width: 80%;
   margin-left: 2%;
-  color: var(--app-grey,#ccc);
-  font-size: 1rem;
+  color: var(--app-grey, #ccc);
 }
 option {
   /* color: var(--app-grey,#ccc); */
 }
-
-
+button {
+  width: 10%;
+}
+.target-lang-selector {
+}
 /* responsive */
-@media (min-width:768px) {
+@media (min-width: 768px) {
   form {
   }
-  .textarea-container, .select-container {
+  .textarea-container,
+  .select-container {
     width: 50%;
     margin: 0;
     float: left;
@@ -39,7 +52,6 @@ option {
   .select-container {
     width: 40%;
     margin-left: 5%;
-    float: left;
   }
   input[type="submit"] {
     width: 92%;
