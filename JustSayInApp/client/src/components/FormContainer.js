@@ -32,7 +32,7 @@ class FormContainer extends Component {
       <form className="form-container" onSubmit={this.handleFormSubmit}>
         <TextArea placeholder={"Enter text to translate"} name={"sourceText"} />
         <TargetLanguageSelector name={"language-list"} />
-        <Input type={"submit"} />
+        <Input type={"submit"} value={"Translate"} />
       </form>
     );
   }
