@@ -96,3 +96,4 @@ The home page will allow translation regardless of the user’s login status. Lo
     *   ability to speak into the app and have the translation go out
     *   Ability to train the speech to text module to recognize an individual’s regional dialect and pronunciation pattern
 *   Offline storage
+*   Undoable delete
