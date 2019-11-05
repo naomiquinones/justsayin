@@ -9,7 +9,7 @@ twilioClient.messages
   .create({
     body: "I am testing my final project send message function.",
     from: "+13236153004",
-    to: "+13109486677"
+    to: "+13102547608"
   })
   .then(message => console.log(message.sid));
 // end Twilio SMS code
