@@ -5,7 +5,7 @@ const send = () => {
   const twilioClient = require("twilio")(accountSid, authToken);
   twilioClient.messages
     .create({
-      body: "Hello, sending my message again. Today is November 5, 2019.",
+      body: "Hello, let's try a message again. Today is November 6, 2019.",
       from: "+13236153004",
       to: "+13102547608"
     })
