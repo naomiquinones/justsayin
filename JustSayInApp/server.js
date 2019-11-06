@@ -17,7 +17,7 @@ app.get("/api/test", (req, res) => {
 // Below post for twilio incoming
 app.post("/sms", (req, res) => {
   const twiml = new MessagingResponse();
-  twiml.message("Thank you for using the Just Say In app");
+  twiml.message("Thank you for helping test my app");
 
   res.writeHead(200, { "Content-Type": "text/xml" });
   res.end(twiml.toString());
