@@ -1,5 +1,7 @@
 require('dotenv').config();
+const http = require("http");
 const express = require("express");
+const MessagingResponse = require("twilio").twiml.MessagingResponse;
 
 const app = express();
 
@@ -12,6 +14,18 @@ app.get("/api/test", (req, res) => {
   res.json(testData);
 });
 
-const port = 5000;
+app.post('/sms', (req, res) => {
+  const twiml = new MessagingResponse();
 
-app.listen(port, () => console.log(`Server started on port ${port}`));
+  twiml.message("This is Naomi's app");
+
+  res.writeHead(200, {'Content-type': 'text/xml'});
+  res.end(twiml.toString());
+});
+http.createServer(app).listen(1337, () => {
+  console.log('Server on port 1337');
+});
+
+// const port = 5000;
+
+// app.listen(port, () => console.log(`Server started on port ${port}`));
