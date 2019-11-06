@@ -1,10 +1,14 @@
-require('dotenv').config();
-const http = require("http"); //for twilio incoming
+require("dotenv").config();
+
+// const http = require("http"); //for twilio incoming
 
 const express = require("express");
 const MessagingResponse = require("twilio").twiml.MessagingResponse; //for twilio incoming
 
 const app = express();
+
+// bring in twilio files
+const viewSMS = require("./view_sms");
 
 app.get("/api/test", (req, res) => {
   const testData = [
@@ -23,10 +27,11 @@ app.post("/sms", (req, res) => {
   res.writeHead(200, { "Content-Type": "text/xml" });
   res.end(twiml.toString());
 });
-http.createServer(app).listen(1337, () => {
-  console.log("On port 1337");
-});
+// http.createServer(app).listen(1337, () => {
+//   console.log("On port 1337");
+// });
 
-// const port = 5000;
+viewSMS.viewAll();
+const port = 5000;
 
-// app.listen(port, () => console.log(`Server started on port ${port}`));
+app.listen(port, () => console.log(`Server started on port ${port}`));
