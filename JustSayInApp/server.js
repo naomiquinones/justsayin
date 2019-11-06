@@ -32,7 +32,7 @@ app.post("/sms", (req, res) => {
 });
 
 // viewSMS.viewAll();
-sendSMS.send;
+sendSMS.send();
 
 app.listen(port, hostname, () =>
   console.log(`Server started on ${hostname} at port ${port}`)
