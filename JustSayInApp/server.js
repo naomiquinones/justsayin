@@ -1,7 +1,8 @@
 require('dotenv').config();
-const http = require("http");
+const http = require("http"); //for twilio incoming
+
 const express = require("express");
-const MessagingResponse = require("twilio").twiml.MessagingResponse;
+const MessagingResponse = require("twilio").twiml.MessagingResponse; //for twilio incoming
 
 const app = express();
 
@@ -14,16 +15,16 @@ app.get("/api/test", (req, res) => {
   res.json(testData);
 });
 
-app.post('/sms', (req, res) => {
+// Below post for twilio incoming
+app.post("/sms", (req, res) => {
   const twiml = new MessagingResponse();
+  twiml.message("Thank you for helping test my app");
 
-  twiml.message("This is Naomi's app");
-
-  res.writeHead(200, {'Content-type': 'text/xml'});
+  res.writeHead(200, { "Content-Type": "text/xml" });
   res.end(twiml.toString());
 });
 http.createServer(app).listen(1337, () => {
-  console.log('Server on port 1337');
+  console.log("On port 1337");
 });
 
 // const port = 5000;
