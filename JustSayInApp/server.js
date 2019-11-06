@@ -1,6 +1,9 @@
 require("dotenv").config();
-
 // const http = require("http"); //for twilio incoming
+
+// Read the host address and the port from the environment
+const hostname = process.env.HOST;
+const port = process.env.PORT;
 
 const express = require("express");
 const MessagingResponse = require("twilio").twiml.MessagingResponse; //for twilio incoming
@@ -27,11 +30,12 @@ app.post("/sms", (req, res) => {
   res.writeHead(200, { "Content-Type": "text/xml" });
   res.end(twiml.toString());
 });
-// http.createServer(app).listen(1337, () => {
-//   console.log("On port 1337");
+// http.createServer(app).listen(port, hostname, () => {
+//   console.log(`Server running on ${port}`);
 // });
 
-viewSMS.viewAll();
-const port = 5000;
+// viewSMS.viewAll();
 
-app.listen(port, () => console.log(`Server started on port ${port}`));
+app.listen(port, hostname, () =>
+  console.log(`Server started on ${hostname} at port ${port}`)
+);
