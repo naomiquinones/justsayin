@@ -23,7 +23,7 @@ app.get("/api/test", (req, res) => {
 });
 
 // Send a message
-let recipients = ["+17076068321", "+13102547608"];
+let recipients = ["+15102258545", "+13102547608"];
 for (let recipient of recipients) {
   sendSMS.send(recipient);
 }

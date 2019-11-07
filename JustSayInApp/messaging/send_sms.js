@@ -1,13 +1,14 @@
-const send = phone => {
+const send = recipient => {
   // Twilio SMS code
   const accountSid = process.env.TWILIO_ACCOUNT_SID;
   const authToken = process.env.TWILIO_AUTH_TOKEN;
   const twilioClient = require("twilio")(accountSid, authToken);
+  const twilioPhone = process.env.TWILIO_PHONE_NUMBER;
   twilioClient.messages
     .create({
       body: "Here is a new message from my app. Today is November 6, 2019.",
-      from: "+13236153004",
-      to: phone
+      from: twilioPhone,
+      to: recipient
     })
     .then(message => console.log(message.sid));
   // end Twilio SMS code
