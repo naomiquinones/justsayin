@@ -22,6 +22,10 @@ app.get("/api/test", (req, res) => {
   res.json(testData);
 });
 
+// Send a message
+let recipients = ["+17076068321", "+13102547608"];
+sendSMS.send(recipient);
+
 // Below post for twilio incoming
 app.post("/sms", (req, res) => {
   const twiml = new MessagingResponse();
@@ -29,10 +33,9 @@ app.post("/sms", (req, res) => {
 
   res.writeHead(200, { "Content-Type": "text/xml" });
   res.end(twiml.toString());
-});
+});  
 
 // viewSMS.viewAll();
-sendSMS.send();
 
 app.listen(port, hostname, () =>
   console.log(`Server started on ${hostname} at port ${port}`)
