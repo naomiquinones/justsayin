@@ -10,8 +10,8 @@ const MessagingResponse = require("twilio").twiml.MessagingResponse; //for twili
 const app = express();
 
 // bring in twilio files
-const viewSMS = require("./view_sms");
-const sendSMS = require("./send_sms");
+const viewSMS = require("./messaging/view_sms");
+const sendSMS = require("./messaging/send_sms");
 
 app.get("/api/test", (req, res) => {
   const testData = [
@@ -24,7 +24,9 @@ app.get("/api/test", (req, res) => {
 
 // Send a message
 let recipients = ["+17076068321", "+13102547608"];
-sendSMS.send(recipient);
+for (let recipient of recipients) {
+  sendSMS.send(recipient);
+}
 
 // Below post for twilio incoming
 app.post("/sms", (req, res) => {
@@ -33,7 +35,7 @@ app.post("/sms", (req, res) => {
 
   res.writeHead(200, { "Content-Type": "text/xml" });
   res.end(twiml.toString());
-});  
+});
 
 // viewSMS.viewAll();
 
