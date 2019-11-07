@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+console.log(process.env.PORT);
 // Read the host address and port from the environment
 const hostname = process.env.HOST;
 const port = process.env.PORT;
@@ -13,6 +13,7 @@ const app = express();
 const viewSMS = require("./messaging/view_sms");
 const sendSMS = require("./messaging/send_sms");
 
+// test endpoint
 app.get("/api/test", (req, res) => {
   const testData = [
     { id: 1, sourceText: "Good morning", translatedText: "Buenos dias" },
@@ -23,7 +24,7 @@ app.get("/api/test", (req, res) => {
 });
 
 // Send a message
-let recipients = ["+15102258545", "+13102547608"];
+let recipients = ["+13102547608"];
 for (let recipient of recipients) {
   sendSMS.send(recipient);
 }
