@@ -70,7 +70,7 @@ The home page will allow translation regardless of the user’s login status. Lo
 *   React
 *   Node
 *   Express
-*   Postgresql
+*   PostgreSQL
 
 ### List of API’s to use :
 
