@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import JustSayInlogo from "./JustSayIn-logo-wordmark.svg";
+import JustSayInlogo from "./images/JustSayIn-logo-wordmark.svg";
 import cookie from "react-cookies";
 
 import { googleTranslate } from "./utils/googleTranslate";
