@@ -1,5 +1,5 @@
-@import url('./components/savedTexts.css');
-@import url('./components/formContainer.css');
+@import url("./components/savedTexts.css");
+@import url("./components/formContainer.css");
 
 .App {
 }
@@ -20,16 +20,15 @@
 }
 
 .page-footer {
-  padding: 2rem 0 .5rem;
+  padding: 2rem 0 0.5rem;
   text-align: center;
-  font-size: .65rem;
-  color: #34302875;
+  font-size: 0.5rem;
+  color: #d8d3c5cb;
+  letter-spacing: 0.5rem;
 }
 main {
 }
-@media (min-width:768px) {
-
+@media (min-width: 768px) {
 }
-@media (min-width:950px) {
-
+@media (min-width: 950px) {
 }
