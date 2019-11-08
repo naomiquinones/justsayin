@@ -9,7 +9,7 @@ require("dotenv").config();
     console.log(res.data.data.translations[0].translatedText);
   });
  */
-const apiKey = process.env.GOOGLE_TRANSLATE_API_KEY;
+const apiKey = process.env.JUST_SAY_IN_GOOGLE_TRANSLATE_API_KEY;
 const googleTranslate = require("google-translate")(apiKey);
 
 // const textToTranslate =
