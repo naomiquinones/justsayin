@@ -7,6 +7,15 @@ import { googleTranslate } from "./utils/googleTranslate";
 // import SavedTexts from './components/SavedTexts';
 import FormContainer from "./components/FormContainer";
 
+console.log("googleTranslate is:", googleTranslate);
+console.log("Test outside of class definition:");
+googleTranslate.getSupportedLanguages("en", function(err, languageCodes) {
+  console.log(
+    "outside of class definition, running googleTranslate.getSupportedLanguages",
+    languageCodes
+  );
+});
+
 class App extends Component {
   state = {
     languageCodes: [],
@@ -18,6 +27,10 @@ class App extends Component {
 
   componentDidMount() {
     googleTranslate.getSupportedLanguages("en", function(err, languageCodes) {
+      console.log(
+        "in componentDidMount, running googleTranslate.getSupportedLanguages",
+        languageCodes
+      );
       getLanguageCodes(languageCodes);
     });
 
@@ -28,7 +41,7 @@ class App extends Component {
 
   render() {
     const { languageCodes, language, question } = this.state;
-
+    console.log("from app, language codes:", languageCodes);
     return (
       <div className="App">
         <header className="page-header">
@@ -44,7 +57,19 @@ class App extends Component {
         <main>
           {/* <SavedTexts /> */}
           <p>{question}</p>
-          <FormContainer />
+          {/* iterate through language options to create a select box */}
+          <select
+            className="select-language"
+            value={language}
+            onChange={e => this.changeHandler(e.target.value)}
+          >
+            {languageCodes.map(lang => (
+              <option key={lang.language} value={lang.language}>
+                {lang.name}
+              </option>
+            ))}
+          </select>
+          <FormContainer languageCodes={languageCodes} />
         </main>
         <footer className="page-footer">
           Copyright &copy; 2019 Naomi Quiñones
@@ -52,6 +77,30 @@ class App extends Component {
       </div>
     );
   }
+
+  changeHandler = language => {
+    let { question } = this.state;
+    let cookieLanguage = cookie.load("language");
+    let transQuestion = "";
+
+    const translating = transQuestion => {
+      if (question !== transQuestion) {
+        this.setState({ question: transQuestion });
+        cookie.save("question", transQuestion, { path: "/" });
+      }
+    };
+
+    // translate the question when selecting a different language
+    if (language !== cookieLanguage) {
+      googleTranslate.translate(question, language, function(err, translation) {
+        transQuestion = translation.translatedText;
+        translating(transQuestion);
+      });
+    }
+
+    this.setState({ language });
+    cookie.save("language", language, { path: "/" });
+  };
 }
 
 export default App;

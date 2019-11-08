@@ -28,10 +28,15 @@ class FormContainer extends Component {
   }
 
   render() {
+    console.log(this.props);
+    // const { languageCodes } = this.props.languageCodes;
     return (
       <form className="form-container" onSubmit={this.handleFormSubmit}>
         <TextArea placeholder={"Enter text to translate"} name={"sourceText"} />
-        <TargetLanguageSelector name={"language-list"} />
+        <TargetLanguageSelector
+          name={"language-list"}
+          /* languages={languageCodes} */
+        />
         <Input type={"submit"} value={"Translate"} />
       </form>
     );
