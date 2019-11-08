@@ -1,28 +1,58 @@
-html, body {
+html,
+body {
   height: 100%;
   font-size: 120%;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  box-sizing: border-box;
 }
 :root {
-  --app-blue: #43B1E5;
+  --app-blue: #43b1e5;
   --app-black: rgb(22, 29, 32);
   --app-grey: rgb(108, 129, 138);
   --app-white: #fafafa;
 }
-* {
-  box-sizing: border-box; 
- }
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Ubuntu",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--app-white);
   color: var(--app-black);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+main {
+  display: block;
+}
+a {
+  background-color: transparent;
+}
+img {
+  border-style: none;
+}
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+button,
+input {
+  overflow: visible;
+}
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
 }
