@@ -23,17 +23,16 @@ app.get("/api/test", (req, res) => {
   res.json(testData);
 });
 
-// app.post("/api/message", (req, res) => {
-// Send a message
-let recipients = [process.env.TEST_RECIPIENT2];
+app.post("/api/message", (req, res) => {
+  // Send a message
+  let recipients = [process.env.TEST_RECIPIENT2];
 
-// let recipients = ["+5102258545"];
-let msg = "Special message from the Just Say In app";
-for (let recipient of recipients) {
-  sendSMS.send(recipient, msg);
-}
-// console.log(req);
-// });
+  let msg = "Special message from the Just Say In app";
+  for (let recipient of recipients) {
+    sendSMS.send(recipient, msg);
+  }
+  res.sendStatus(200);
+});
 
 // Below post for twilio incoming
 app.post("/sms", (req, res) => {

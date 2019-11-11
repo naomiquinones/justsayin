@@ -3,7 +3,7 @@ const send = (recipient, message) => {
 
   if (!message) {
     const today = new Date();
-    message = `Sent from Just Say In app at ${today.getHours()}:${today.getMinutes()} on ${today.getMonth()}/${today.getDay()}/${today.getFullYear()}.`;
+    message = `Please confirm you got this message from Just Say In app, sent at ${today.getHours()}:${today.getMinutes()} on ${today.getMonth()}/${today.getDay()}/${today.getFullYear()}.`;
   }
   sender.messageClient.messages
     .create({
