@@ -3,12 +3,12 @@ const send = (recipient, message) => {
 
   if (!message) {
     const today = new Date();
-    message = `Testing a new message from my app at ${today.getHours()}:${today.getMinutes()} on ${today.getMonth()}/${today.getDay()}/${today.getFullYear()}.`;
+    message = `Sent from Just Say In app at ${today.getHours()}:${today.getMinutes()} on ${today.getMonth()}/${today.getDay()}/${today.getFullYear()}.`;
   }
   sender.messageClient.messages
     .create({
       body: message,
-      from: sender.myPhone,
+      from: sender.phoneNumber,
       to: recipient
     })
     .then(message => console.log(message.sid));
