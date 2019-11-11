@@ -6,7 +6,7 @@ const send = recipient => {
   const twilioPhone = process.env.TWILIO_PHONE_NUMBER;
   twilioClient.messages
     .create({
-      body: "Testing a new message from my app. Today is November 7, 2019.",
+      body: "Testing a new message from my app. Today is November 11, 2019.",
       from: twilioPhone,
       to: recipient
     })
