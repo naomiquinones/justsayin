@@ -1,13 +1,14 @@
-const send = recipient => {
-  // Twilio SMS code
-  const accountSid = process.env.TWILIO_ACCOUNT_SID;
-  const authToken = process.env.TWILIO_AUTH_TOKEN;
-  const twilioClient = require("twilio")(accountSid, authToken);
-  const twilioPhone = process.env.TWILIO_PHONE_NUMBER;
-  twilioClient.messages
+const send = (recipient, message) => {
+  const sender = require("../utils/messagingUtil");
+
+  if (!message) {
+    const today = new Date();
+    message = `Testing a new message from my app at ${today.getHours()}:${today.getMinutes()} on ${today.getMonth()}/${today.getDay()}/${today.getFullYear()}.`;
+  }
+  sender.messageClient.messages
     .create({
-      body: "Testing a new message from my app. Today is November 11, 2019.",
-      from: twilioPhone,
+      body: message,
+      from: sender.myPhone,
       to: recipient
     })
     .then(message => console.log(message.sid));
