@@ -25,8 +25,9 @@ app.get("/api/test", (req, res) => {
 
 // Send a message
 let recipients = ["+13102547608"];
+let msg = "Sent today, from the Just Say In app";
 for (let recipient of recipients) {
-  sendSMS.send(recipient);
+  sendSMS.send(recipient, msg);
 }
 
 // Below post for twilio incoming
