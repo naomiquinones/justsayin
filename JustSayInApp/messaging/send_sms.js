@@ -12,6 +12,5 @@ const send = (recipient, message) => {
       to: recipient
     })
     .then(message => console.log(message.sid));
-  // end Twilio SMS code
 };
 module.exports = { send };
