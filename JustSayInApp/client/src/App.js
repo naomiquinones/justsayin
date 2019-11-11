@@ -3,18 +3,9 @@ import "./App.css";
 import JustSayInlogo from "./images/JustSayIn-logo-wordmark.svg";
 import cookie from "react-cookies";
 
-import { googleTranslate } from "./utils/googleTranslate";
+import { googleTranslate } from "../../utils/googleTranslate";
 // import SavedTexts from './components/SavedTexts';
 import FormContainer from "./components/FormContainer";
-
-console.log("googleTranslate is:", googleTranslate);
-console.log("Test outside of class definition:");
-googleTranslate.getSupportedLanguages("en", function(err, languageCodes) {
-  console.log(
-    "outside of class definition, running googleTranslate.getSupportedLanguages",
-    languageCodes
-  );
-});
 
 class App extends Component {
   state = {

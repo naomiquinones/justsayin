@@ -9,9 +9,7 @@ require("dotenv").config();
     console.log(res.data.data.translations[0].translatedText);
   });
  */
-const apiKey = process.env.JUST_SAY_IN_APP_GOOGLE_TRANSLATE_API_KEY;
-// console.log(apiKey);
-const googleTranslate = require("google-translate")(apiKey);
+const googleTranslate = require("../utils/googleTranslate");
 
 const textToTranslate =
   "George went to the grocery store this morning, thinking he would buy a gallon of milk. Instead, he came out with a tub of ice cream, two cans of anchovies and a bag of kale.";
