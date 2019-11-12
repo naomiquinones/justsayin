@@ -1,9 +1,9 @@
+require("dotenv").config();
 const translate = (
   textToTranslate = "Message sent from Just Say In app",
   sourceLanguage = "en",
   targetLanguage = "ja"
 ) => {
-  require("dotenv").config();
   const translator = require("../utils/googleTranslate");
 
   translator.translate(textToTranslate, targetLanguage, (err, translation) => {

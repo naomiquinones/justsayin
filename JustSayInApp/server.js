@@ -5,9 +5,10 @@ const hostname = process.env.HOST;
 const port = process.env.PORT;
 
 const express = require("express");
-const MessagingResponse = require("twilio").twiml.MessagingResponse; //for twilio incoming
-
 const app = express();
+
+const MessagingResponse = require("twilio").twiml.MessagingResponse;
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -19,27 +20,24 @@ const sendSMS = require("./messaging/send_sms");
 const translate = require("./translate/translate");
 
 // test endpoint
-app.get("/api/test", (req, res) => {
+/* app.get("/api/test", (req, res) => {
   const testData = [
     { id: 1, sourceText: "Good morning", translatedText: "Buenos dias" },
     { id: 2, sourceText: "Good morning", translatedText: "お早うございます" }
   ];
 
   res.json(testData);
-});
+}); */
 
 // translation endpoint
-app.post("/api/translate", (req, res) => {
-  // console.log(req.body.text, req.body.source, req.body.target);
-  const data = req.body;
-  console.log(res.json({ data }));
-  // const textToTranslate = req.body.text;
-  // const sourceLang = req.body.source;
-  // const targetLang = req.body.target;
+app.post("/api/translate", (req, res, next) => {
+  const textToTranslate = req.body.text;
+  const sourceLang = req.body.source;
+  const targetLang = req.body.target;
 
   // for (let lang of targetLangs) {
-  translate("Very small dots are hard to see", "en", "es");
-  // translate(textToTranslate, sourceLang, targetLang);
+  // translate("Very small dots are hard to see", "en", "es");
+  translate(textToTranslate, sourceLang, targetLang);
   // }
   res.sendStatus(200);
 });
