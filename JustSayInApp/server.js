@@ -17,7 +17,7 @@ const sendSMS = require("./messaging/send_sms");
 
 // bring in translation file
 const translator = require("./translate/translate");
-console.log(translator());
+
 // test endpoint
 app.get("/api/test", (req, res) => {
   const testData = [
@@ -35,7 +35,7 @@ app.post("/api/translate", (req, res) => {
   const targetLang = req.body.target;
 
   // for (let lang of targetLangs) {
-  // translator.translate(toTranslate, sourceLang, targetLang);
+  translator(toTranslate, sourceLang, targetLang);
   // }
   res.sendStatus(200);
 });
