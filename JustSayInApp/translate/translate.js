@@ -1,18 +1,16 @@
-const translate = (textToTranslate, sourceLanguage, targetLanguage) => {
+const translate = (
+  textToTranslate = "Message sent from Just Say In app",
+  sourceLanguage = "en",
+  targetLanguage = "ja"
+) => {
   require("dotenv").config();
-  const run = require("../utils/googleTranslate");
+  const translator = require("../utils/googleTranslate");
 
-  let text =
-    textToTranslate || "Baby Miki was born on Saturday, November 9, 2019.";
-
-  let source = sourceLanguage || "en";
-  let target = targetLanguage || "es";
-
-  run.translate(textToTranslate, targetLanguage, (err, translation) => {
+  translator.translate(textToTranslate, targetLanguage, (err, translation) => {
     console.log(translation.translatedText);
   });
-  run.getSupportedLanguages(sourceLanguage, (err, codes) => {
-    console.log(codes);
-  });
+  // translator.getSupportedLanguages(sourceLanguage, (err, codes) => {
+  //   console.log(codes);
+  // });
 };
 module.exports = translate;
