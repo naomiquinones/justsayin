@@ -1,5 +1,5 @@
 require("dotenv").config();
-console.log(process.env.PORT);
+
 // Read the host address and port from the environment
 const hostname = process.env.HOST;
 const port = process.env.PORT;
@@ -30,7 +30,9 @@ app.get("/api/test", (req, res) => {
 
 // translation endpoint
 app.post("/api/translate", (req, res) => {
-  console.log(req.body.text, req.body.source, req.body.target);
+  // console.log(req.body.text, req.body.source, req.body.target);
+  const data = req.body;
+  console.log(res.json({ data }));
   // const textToTranslate = req.body.text;
   // const sourceLang = req.body.source;
   // const targetLang = req.body.target;
