@@ -8,11 +8,16 @@ const express = require("express");
 const MessagingResponse = require("twilio").twiml.MessagingResponse; //for twilio incoming
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// bring in twilio files
+// bring in messaging files
 const viewSMS = require("./messaging/view_sms");
 const sendSMS = require("./messaging/send_sms");
 
+// bring in translation file
+const translator = require("./translate/translate");
+console.log(translator());
 // test endpoint
 app.get("/api/test", (req, res) => {
   const testData = [
@@ -23,14 +28,30 @@ app.get("/api/test", (req, res) => {
   res.json(testData);
 });
 
-app.post("/api/message", (req, res) => {
-  // Send a message
-  let recipients = [process.env.TEST_RECIPIENT2];
+// translation endpoint
+app.post("/api/translate", (req, res) => {
+  const toTranslate = req.body.text;
+  const sourceLang = req.body.source;
+  const targetLang = req.body.target;
 
-  let msg = "Special message from the Just Say In app";
-  for (let recipient of recipients) {
-    sendSMS.send(recipient, msg);
-  }
+  // for (let lang of targetLangs) {
+  // translator.translate(toTranslate, sourceLang, targetLang);
+  // }
+  res.sendStatus(200);
+});
+
+app.post("/api/message", (req, res) => {
+  console.log(req.body);
+  // const { recipient } = req.body;
+
+  // Send a message
+  // let recipients = req.recipient || [process.env.TEST_RECIPIENT1];
+
+  // let msg = "Special message from the Just Say In app";
+  // for (let recipient of recipients) {
+  //   sendSMS.send(recipient, msg);
+  // }
+  // console.log(recipient);
   res.sendStatus(200);
 });
 

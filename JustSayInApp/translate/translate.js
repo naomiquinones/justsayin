@@ -1,6 +1,5 @@
-require("dotenv").config();
-
 const translate = (textToTranslate, sourceLanguage, targetLanguage) => {
+  require("dotenv").config();
   const run = require("../utils/googleTranslate");
 
   let text =
