@@ -17,7 +17,9 @@ const viewSMS = require("./messaging/view_sms");
 const sendSMS = require("./messaging/send_sms");
 
 // bring in translation file
-const translate = require("./translate/translate");
+const translator = require("./translate/translate");
+
+console.log(translator);
 
 // test endpoint
 /* app.get("/api/test", (req, res) => {
@@ -37,7 +39,7 @@ app.post("/api/translate", (req, res, next) => {
 
   // for (let lang of targetLangs) {
   // translate("Very small dots are hard to see", "en", "es");
-  translate(textToTranslate, sourceLang, targetLang);
+  translator.translate(textToTranslate, sourceLang, targetLang);
   // }
   res.sendStatus(200);
 });
