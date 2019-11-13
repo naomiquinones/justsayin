@@ -1,4 +1,3 @@
-require("dotenv").config();
 module.exports = {
   translate: (
     textToTranslate = "Hola, gracias por usar el app",
