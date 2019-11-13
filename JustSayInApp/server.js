@@ -31,8 +31,18 @@ console.log(translator);
   res.json(testData);
 }); */
 
+// getLanguages endpoint
+app.get("/getLanguages", (req, res) => {
+  console.log("get languages");
+  // if(translator) {
+  const langs = translator.getSupportedLanguages();
+  console.log("langs", langs);
+  // }
+  res.sendStatus(200);
+});
+
 // translation endpoint
-app.post("/api/translate", (req, res, next) => {
+app.post("/api/translate", (req, res) => {
   const textToTranslate = req.body.text;
   const sourceLang = req.body.source;
   const targetLang = req.body.target;
