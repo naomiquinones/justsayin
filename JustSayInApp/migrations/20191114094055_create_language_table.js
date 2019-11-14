@@ -9,6 +9,7 @@ exports.up = function(knex) {
     t.string("name")
       .notNull()
       .unique();
+    t.timestamps(true);
   });
 };
 

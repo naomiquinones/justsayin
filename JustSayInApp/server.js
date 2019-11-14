@@ -31,8 +31,8 @@ console.log(translator);
   res.json(testData);
 }); */
 
-// getLanguages endpoint
-app.get("/getLanguages", (req, res) => {
+// get languages endpoint
+app.get("/languages", (req, res) => {
   console.log("get languages");
   // if(translator) {
   const langs = translator.getSupportedLanguages();
@@ -40,6 +40,9 @@ app.get("/getLanguages", (req, res) => {
   // }
   res.sendStatus(200);
 });
+
+// post languages endpoint
+app.post("/languages");
 
 // translation endpoint
 app.post("/api/translate", (req, res) => {
