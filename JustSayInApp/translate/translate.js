@@ -22,15 +22,11 @@ module.exports = {
   getSupportedLanguages: sourceLanguage => {
     const google = require("../utils/googleTranslate");
     const result = new Promise((resolve, reject) => {
-      let response;
-
       google.getSupportedLanguages(sourceLanguage, (err, codes) => {
-        // console.log(err, codes);
         if (err) {
           reject(err);
         } else {
-          response = codes;
-          resolve(response);
+          resolve(codes);
         }
       });
     });
