@@ -3,31 +3,30 @@ import "./App.css";
 import JustSayInlogo from "./images/JustSayIn-logo-wordmark.svg";
 import cookie from "react-cookies";
 
-import { googleTranslate } from "../../utils/googleTranslate";
 // import SavedTexts from './components/SavedTexts';
 import FormContainer from "./components/FormContainer";
 
+import axios from "axios";
+
 class App extends Component {
   state = {
-    languageCodes: [],
-    language: cookie.load("language") ? cookie.load("language") : "en",
-    question: cookie.load("question")
-      ? cookie.load("question")
-      : "What language do you prefer to use?"
+    languageCodes: []
   };
-
   componentDidMount() {
-    googleTranslate.getSupportedLanguages("en", function(err, languageCodes) {
-      console.log(
-        "in componentDidMount, running googleTranslate.getSupportedLanguages",
-        languageCodes
-      );
-      getLanguageCodes(languageCodes);
-    });
+    this.fetchData();
+  }
 
-    const getLanguageCodes = languageCodes => {
-      this.setState({ languageCodes });
-    };
+  async fetchData() {
+    let response = await axios.get("http://localhost:1337/languages");
+
+    console.log("hello from web");
+    // console.log(response.data[0]);
+    let languages = response.data;
+    for (var i = 0; i < languages.length; i++) {
+      const fullName = Object.values(languages[i]);
+      this.state.languageCodes.push(fullName);
+    }
+    console.log("full names", this.state.languageCodes);
   }
 
   render() {
@@ -47,19 +46,6 @@ class App extends Component {
         </header>
         <main>
           {/* <SavedTexts /> */}
-          <p>{question}</p>
-          {/* iterate through language options to create a select box */}
-          <select
-            className="select-language"
-            value={language}
-            onChange={e => this.changeHandler(e.target.value)}
-          >
-            {languageCodes.map(lang => (
-              <option key={lang.language} value={lang.language}>
-                {lang.name}
-              </option>
-            ))}
-          </select>
           <FormContainer languageCodes={languageCodes} />
         </main>
         <footer className="page-footer">
@@ -68,30 +54,6 @@ class App extends Component {
       </div>
     );
   }
-
-  changeHandler = language => {
-    let { question } = this.state;
-    let cookieLanguage = cookie.load("language");
-    let transQuestion = "";
-
-    const translating = transQuestion => {
-      if (question !== transQuestion) {
-        this.setState({ question: transQuestion });
-        cookie.save("question", transQuestion, { path: "/" });
-      }
-    };
-
-    // translate the question when selecting a different language
-    if (language !== cookieLanguage) {
-      googleTranslate.translate(question, language, function(err, translation) {
-        transQuestion = translation.translatedText;
-        translating(transQuestion);
-      });
-    }
-
-    this.setState({ language });
-    cookie.save("language", language, { path: "/" });
-  };
 }
 
 export default App;

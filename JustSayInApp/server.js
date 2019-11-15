@@ -5,10 +5,12 @@ const hostname = process.env.HOST;
 const port = process.env.PORT;
 
 const express = require("express");
+const cors = require("cors");
 const app = express();
 
 const MessagingResponse = require("twilio").twiml.MessagingResponse;
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -18,8 +20,6 @@ const sendSMS = require("./messaging/send_sms");
 
 // bring in translation file
 const translator = require("./translate/translate");
-
-console.log(translator);
 
 // test endpoint
 /* app.get("/api/test", (req, res) => {
@@ -32,17 +32,18 @@ console.log(translator);
 }); */
 
 // get languages endpoint
-app.get("/languages", (req, res) => {
+app.get("/languages", async (req, res) => {
   console.log("get languages");
-  // if(translator) {
-  const langs = translator.getSupportedLanguages();
-  console.log("langs", langs);
-  // }
-  res.sendStatus(200);
+  const langs = await translator.getSupportedLanguages("en");
+  console.log(langs);
+
+  res.status(200).json(langs);
 });
 
 // post languages endpoint
-app.post("/languages");
+app.post("/languages", (req, res) => {
+  res.send("languages:").sendStatus(200);
+});
 
 // translation endpoint
 app.post("/api/translate", (req, res) => {
@@ -51,7 +52,6 @@ app.post("/api/translate", (req, res) => {
   const targetLang = req.body.target;
 
   // for (let lang of targetLangs) {
-  // translate("Very small dots are hard to see", "en", "es");
   translator.translate(textToTranslate, sourceLang, targetLang);
   // }
   res.sendStatus(200);
@@ -84,5 +84,5 @@ app.post("/sms", (req, res) => {
 // viewSMS.viewAll();
 
 app.listen(port, hostname, () =>
-  console.log(`Server started on ${hostname} at port ${port}`)
+  console.log(`Using CORS. Server started on ${hostname} at port ${port}`)
 );
