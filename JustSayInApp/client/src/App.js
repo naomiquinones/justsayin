@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 import JustSayInlogo from "./images/JustSayIn-logo-wordmark.svg";
-import cookie from "react-cookies";
 
 // import SavedTexts from './components/SavedTexts';
 import FormContainer from "./components/FormContainer";
@@ -10,7 +9,7 @@ import axios from "axios";
 
 class App extends Component {
   state = {
-    languageCodes: []
+    languages: []
   };
   componentDidMount() {
     this.fetchData();
@@ -22,15 +21,18 @@ class App extends Component {
     console.log("hello from web");
     // console.log(response.data[0]);
     let languages = response.data;
+
+    let langsArray = [];
     for (var i = 0; i < languages.length; i++) {
-      const fullName = Object.values(languages[i]);
-      this.state.languageCodes.push(fullName);
+      const codeAndName = Object.values(languages[i]);
+      langsArray.push(codeAndName);
     }
-    console.log("full names", this.state.languageCodes);
+    this.setState({ languages: langsArray });
+    console.log("full names", this.state.languages);
   }
 
   render() {
-    const { languageCodes, language, question } = this.state;
+    const { languages: languageCodes, language, question } = this.state;
     console.log("from app, language codes:", languageCodes);
     return (
       <div className="App">
