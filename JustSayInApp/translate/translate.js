@@ -6,7 +6,6 @@ module.exports = {
   ) => {
     const google = require("../utils/googleTranslate");
     // const amazon = require amazon
-    // const another_translator = require another translator
 
     // in future version, check which translator is best for a particular language pair, then call that translator
     google.translate(
@@ -22,11 +21,11 @@ module.exports = {
   getSupportedLanguages: sourceLanguage => {
     const google = require("../utils/googleTranslate");
     const result = new Promise((resolve, reject) => {
-      google.getSupportedLanguages(sourceLanguage, (err, codes) => {
+      google.getSupportedLanguages(sourceLanguage, (err, langs) => {
         if (err) {
           reject(err);
         } else {
-          resolve(codes);
+          resolve(langs);
         }
       });
     });
