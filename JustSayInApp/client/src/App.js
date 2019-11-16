@@ -18,8 +18,6 @@ class App extends Component {
   async fetchData() {
     let response = await axios.get("http://localhost:1337/languages");
 
-    console.log("hello from web");
-    // console.log(response.data[0]);
     let languages = response.data;
 
     let langsArray = [];
@@ -28,11 +26,10 @@ class App extends Component {
       langsArray.push(codeAndName);
     }
     this.setState({ languages: langsArray });
-    console.log("full names", this.state.languages);
   }
 
   render() {
-    const { languages: languageCodes, language, question } = this.state;
+    const { languages: languageCodes } = this.state;
     console.log("from app, language codes:", languageCodes);
     return (
       <div className="App">
