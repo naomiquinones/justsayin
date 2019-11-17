@@ -18,7 +18,7 @@ class App extends Component {
   async fetchData() {
     let response = await axios.get("http://localhost:1337/languages");
 
-    console.log("hello from web");
+    // console.log("hello from web");
     // console.log(response.data[0]);
     let languages = response.data;
 
@@ -32,8 +32,7 @@ class App extends Component {
   }
 
   render() {
-    const { languages: languageCodes, language, question } = this.state;
-    console.log("from app, language codes:", languageCodes);
+    const { languages } = this.state;
     return (
       <div className="App">
         <header className="page-header">
@@ -48,7 +47,7 @@ class App extends Component {
         </header>
         <main>
           {/* <SavedTexts /> */}
-          <FormContainer languageCodes={languageCodes} />
+          <FormContainer languageCodes={languages} />
         </main>
         <footer className="page-footer">
           Copyright &copy; 2019 Naomi Quiñones
