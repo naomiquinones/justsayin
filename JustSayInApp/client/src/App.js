@@ -12,7 +12,7 @@ class App extends Component {
     super();
     this.state = {
       isLoading: true,
-      languages: [],
+      availableLanguages: [],
       value: ""
     };
   }
@@ -24,46 +24,37 @@ class App extends Component {
   }
   handleSubmit(event) {
     event.preventDefault();
+
+    this.fetchTranslation();
   }
   async fetchLanguages() {
-    let response = await axios.get("http://localhost:1337/languages").then(
-      response => {
-        let languages = response.data;
+    let response = await axios.get("http://localhost:1337/languages");
 
-        let langsArray = [];
-        for (var i = 0; i < languages.length; i++) {
-          const codeAndName = Object.values(languages[i]);
-          langsArray.push(codeAndName);
-        }
-        this.setState({ languages: langsArray, isLoading: false });
-        // console.log("full names", this.state.languages);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    let languages = response.data;
+
+    let langsArray = [];
+    for (var i = 0; i < languages.length; i++) {
+      const codeAndName = Object.values(languages[i]);
+      langsArray.push(codeAndName);
+    }
+    this.setState({ availableLanguages: langsArray, isLoading: false });
+    // console.log("full names", this.state.languages);
   }
 
   async fetchTranslation() {
-    let response = await axios
-      .post("http://localhost:1337/translate", {
-        text: this.state.text,
-        source: this.state.source,
-        target: this.state.value
-      })
-      .then(
-        response => {
-          console.log(response);
-          let translation = response.data;
-        },
-        error => {
-          console.log(error);
-        }
-      );
+    let response = await axios.post("http://localhost:1337/translate", {
+      text: this.state.text,
+      source: this.state.source,
+      target: this.state.value
+    });
+
+    console.log(response);
+    let translation = response.data;
+    return translation;
   }
 
   render() {
-    const { languages, isLoading } = this.state;
+    const { availableLanguages, isLoading } = this.state;
     console.log("isLoading", isLoading);
     return (
       <div className="App">
@@ -80,7 +71,7 @@ class App extends Component {
         <main>
           {/* <SavedTexts /> */}
           <FormContainer
-            languageCodes={languages}
+            languageCodes={availableLanguages}
             isLoading={isLoading}
             onSubmit={this.handleSubmit}
           />
