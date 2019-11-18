@@ -47,9 +47,9 @@ import Loading from "../components/Loading";
 // }
 
 const FormContainer = props => {
-  const { languageCodes, isLoading } = props;
+  const { languageCodes, isLoading, value, handleSubmit } = props;
   return (
-    <form className="form-container" onSubmit={props.handleSubmit}>
+    <form className="form-container" onSubmit={handleSubmit}>
       <TextArea placeholder={"Enter text to translate"} name={"sourceText"} />
       {isLoading ? (
         <Loading message={"Getting target languages"} />
@@ -57,6 +57,7 @@ const FormContainer = props => {
         <TargetLanguageSelector
           name={"language-list"}
           languages={languageCodes}
+          value={value}
         />
       )}
       <Input type={"submit"} value={"Translate"} />
