@@ -19,8 +19,9 @@ import Button from "../components/Button";
 const TargetLanguageSelector = props => {
   return (
     <div className="form-group target-lang-selector">
-      <SelectMenu id={"languages-list"} placeholder={"Add target language"} />
-      <Button name={"add"} value={"+"} />
+      <p className="select-instruction">Select Languages</p>
+      <SelectMenu id={"languages-list"} placeholder={"Add target language"} languages={props.languages}/>
+      <Button className="add-button" name={"addLang"} value={"+ add"} />
     </div>
   );
 };

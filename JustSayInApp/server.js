@@ -11,7 +11,9 @@ const app = express();
 const MessagingResponse = require("twilio").twiml.MessagingResponse;
 
 app.use(cors());
+// parse application/json
 app.use(express.json());
+// parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
 // bring in messaging files
@@ -31,30 +33,30 @@ const translator = require("./translate/translate");
   res.json(testData);
 }); */
 
-// get languages endpoint
+// language list endpoint
 app.get("/languages", async (req, res) => {
   console.log("get languages");
   const langs = await translator.getSupportedLanguages("en");
-  console.log(langs);
 
   res.status(200).json(langs);
 });
 
-// post languages endpoint
+// send languages endpoint
 app.post("/languages", (req, res) => {
   res.send("languages:").sendStatus(200);
 });
 
 // translation endpoint
-app.post("/api/translate", (req, res) => {
+app.post("/translate", async (req, res) => {
   const textToTranslate = req.body.text;
   const sourceLang = req.body.source;
   const targetLang = req.body.target;
 
   // for (let lang of targetLangs) {
-  translator.translate(textToTranslate, sourceLang, targetLang);
+  const translation = await translator.translate(textToTranslate, sourceLang, targetLang);
+  // console.log("the translated text is:",translation);
   // }
-  res.sendStatus(200);
+  res.status(200).json(translation);
 });
 
 app.post("/api/message", (req, res) => {
@@ -83,6 +85,7 @@ app.post("/sms", (req, res) => {
 
 // viewSMS.viewAll();
 
+// Set app to listen on the server
 app.listen(port, hostname, () =>
   console.log(`Using CORS. Server started on ${hostname} at port ${port}`)
 );

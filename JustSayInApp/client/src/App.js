@@ -8,29 +8,63 @@ import FormContainer from "./components/FormContainer";
 import axios from "axios";
 
 class App extends Component {
-  state = {
-    languages: []
-  };
+  constructor() {
+    super();
+    this.state = {
+      isLoading: true,
+      languages: [],
+      value: ""
+    };
+  }
   componentDidMount() {
-    this.fetchData();
+    this.fetchLanguages();
+  }
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+  }
+  handleSubmit(event) {
+    event.preventDefault();
+  }
+  async fetchLanguages() {
+    let response = await axios.get("http://localhost:1337/languages").then(
+      response => {
+        let languages = response.data;
+
+        let langsArray = [];
+        for (var i = 0; i < languages.length; i++) {
+          const codeAndName = Object.values(languages[i]);
+          langsArray.push(codeAndName);
+        }
+        this.setState({ languages: langsArray, isLoading: false });
+        // console.log("full names", this.state.languages);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
-  async fetchData() {
-    let response = await axios.get("http://localhost:1337/languages");
-
-    let languages = response.data;
-
-    let langsArray = [];
-    for (var i = 0; i < languages.length; i++) {
-      const codeAndName = Object.values(languages[i]);
-      langsArray.push(codeAndName);
-    }
-    this.setState({ languages: langsArray });
+  async fetchTranslation() {
+    let response = await axios
+      .post("http://localhost:1337/translate", {
+        text: this.state.text,
+        source: this.state.source,
+        target: this.state.value
+      })
+      .then(
+        response => {
+          console.log(response);
+          let translation = response.data;
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   render() {
-    const { languages: languageCodes } = this.state;
-    console.log("from app, language codes:", languageCodes);
+    const { languages, isLoading } = this.state;
+    console.log("isLoading", isLoading);
     return (
       <div className="App">
         <header className="page-header">
@@ -45,7 +79,11 @@ class App extends Component {
         </header>
         <main>
           {/* <SavedTexts /> */}
-          <FormContainer languageCodes={languageCodes} />
+          <FormContainer
+            languageCodes={languages}
+            isLoading={isLoading}
+            onSubmit={this.handleSubmit}
+          />
         </main>
         <footer className="page-footer">
           Copyright &copy; 2019 Naomi Quiñones
