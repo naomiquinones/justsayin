@@ -36,21 +36,30 @@ import React /* , { Component } */ from "react";
 // }
 
 const SelectMenu = props => {
-  const { languages } = props;
+  const { languages, name, title, placeholder, value } = props;
+  const handleChange = event => {
+    this.setState({ value: event.target.value });
+  };
+
   const languageOptions = languages.map(language => {
-    return <option>{language[1]}</option>;
+    return (
+      <option key={language[0]} value={language[0]}>
+        {language[1]}
+      </option>
+    );
   });
   return (
     <div className="form-group select-group">
-      <label htmlFor={props.name} className="form-label">
-        {props.title}
+      <label htmlFor={name} className="form-label">
+        {title}
       </label>
       <select
         className="form-input language-list select-container"
-        id={props.name}
-        name={props.name}
-        onChange={props.handleChange}
-        placeholder={props.placeholder}
+        id={name}
+        name={name}
+        value={value}
+        onChange={handleChange}
+        placeholder={placeholder}
       >
         {languageOptions}
       </select>
