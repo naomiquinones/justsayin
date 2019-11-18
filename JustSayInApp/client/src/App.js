@@ -13,9 +13,12 @@ class App extends Component {
     this.state = {
       isLoading: true,
       availableLanguages: [],
-      value: ""
+      value: "es"
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   componentDidMount() {
     this.fetchLanguages();
   }
@@ -54,7 +57,7 @@ class App extends Component {
   }
 
   render() {
-    const { availableLanguages, isLoading } = this.state;
+    const { availableLanguages, isLoading, value } = this.state;
     console.log("isLoading", isLoading);
     return (
       <div className="App">
@@ -73,6 +76,7 @@ class App extends Component {
           <FormContainer
             languageCodes={availableLanguages}
             isLoading={isLoading}
+            value={value}
             onSubmit={this.handleSubmit}
           />
         </main>
