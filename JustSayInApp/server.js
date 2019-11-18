@@ -47,7 +47,7 @@ app.post("/languages", (req, res) => {
 });
 
 // translation endpoint
-app.post("/api/translate", async (req, res) => {
+app.post("/translate", async (req, res) => {
   const textToTranslate = req.body.text;
   const sourceLang = req.body.source;
   const targetLang = req.body.target;
