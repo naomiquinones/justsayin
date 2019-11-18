@@ -5,7 +5,7 @@ import Input from "../components/Input";
 import TextArea from "../components/TextArea";
 
 import TargetLanguageSelector from "../components/TargetLanguageSelector";
-
+import Loading from "../components/Loading";
 class FormContainer extends Component {
   constructor(props) {
     super(props);
@@ -28,15 +28,15 @@ class FormContainer extends Component {
   }
 
   render() {
-    console.log(this.props);
-    // const { languageCodes } = this.props.languageCodes;
+    const { languageCodes, isLoading } = this.props;
     return (
       <form className="form-container" onSubmit={this.handleFormSubmit}>
-        <TextArea placeholder={"Enter text to translate"} name={"sourceText"} />
-        <TargetLanguageSelector
-          name={"language-list"}
-          /* languages={languageCodes} */
-        />
+        <TextArea placeholder={"Enter text to translate"} name={"sourceText"} />{isLoading? <Loading message={"Getting target languages"} /> : 
+          <TargetLanguageSelector
+            name={"language-list" }
+            languages={languageCodes}
+          />
+        }
         <Input type={"submit"} value={"Translate"} />
       </form>
     );
