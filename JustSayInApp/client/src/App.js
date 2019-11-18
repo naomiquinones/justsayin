@@ -8,18 +8,21 @@ import FormContainer from "./components/FormContainer";
 import axios from "axios";
 
 class App extends Component {
-  state = {
-    languages: []
-  };
+  constructor() {
+    super();
+    this.state = {
+      isLoading: true,
+      languages: []
+    };
+
+  }
   componentDidMount() {
-    this.fetchData();
+    this.fetchLanguages();
   }
 
-  async fetchData() {
+  async fetchLanguages() {
     let response = await axios.get("http://localhost:1337/languages");
 
-    // console.log("hello from web");
-    // console.log(response.data[0]);
     let languages = response.data;
 
     let langsArray = [];
@@ -27,12 +30,13 @@ class App extends Component {
       const codeAndName = Object.values(languages[i]);
       langsArray.push(codeAndName);
     }
-    this.setState({ languages: langsArray });
-    console.log("full names", this.state.languages);
+    this.setState({ languages: langsArray, /* isLoading: false */ });
+    // console.log("full names", this.state.languages);
   }
 
   render() {
-    const { languages } = this.state;
+    const { languages, isLoading } = this.state;
+    console.log("isLoading",isLoading)
     return (
       <div className="App">
         <header className="page-header">
@@ -47,7 +51,7 @@ class App extends Component {
         </header>
         <main>
           {/* <SavedTexts /> */}
-          <FormContainer languageCodes={languages} />
+          <FormContainer languageCodes={languages} isLoading={isLoading}/>
         </main>
         <footer className="page-footer">
           Copyright &copy; 2019 Naomi Quiñones
