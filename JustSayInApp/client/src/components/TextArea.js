@@ -39,18 +39,22 @@ import React /* , { Component } */ from "react";
 // }
 
 const TextArea = props => {
+  const { name, title, placeholder } = props;
+  const handleChange = event => {
+    this.setState({ value: event.target.value });
+  };
+
   return (
     <div className="form-group textarea-container">
-      <label htmlFor={props.name} className="form-label">
-        {props.title}
+      <label htmlFor={name} className="form-label">
+        {title}
       </label>
       <textarea
         className="form-input"
-        id={props.name}
-        name={props.name}
-        value={props.value}
-        onChange={props.handleChange}
-        placeholder={props.placeholder}
+        id={name}
+        name={name}
+        onChange={handleChange}
+        placeholder={placeholder}
       ></textarea>
     </div>
   );
