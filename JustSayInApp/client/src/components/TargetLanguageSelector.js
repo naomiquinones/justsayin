@@ -20,7 +20,7 @@ const TargetLanguageSelector = props => {
   return (
     <div className="form-group target-lang-selector">
       <p className="select-instruction">Select Languages</p>
-      <SelectMenu id={"languages-list"} placeholder={"Add target language"} />
+      <SelectMenu id={"languages-list"} placeholder={"Add target language"} languages={props.languages}/>
       <Button className="add-button" name={"addLang"} value={"+ add"} />
     </div>
   );
