@@ -23,16 +23,6 @@ const sendSMS = require("./messaging/send_sms");
 // bring in translation file
 const translator = require("./translate/translate");
 
-// test endpoint
-/* app.get("/api/test", (req, res) => {
-  const testData = [
-    { id: 1, sourceText: "Good morning", translatedText: "Buenos dias" },
-    { id: 2, sourceText: "Good morning", translatedText: "お早うございます" }
-  ];
-
-  res.json(testData);
-}); */
-
 // language list endpoint
 app.get("/languages", async (req, res) => {
   console.log("get languages");
@@ -53,7 +43,11 @@ app.post("/translate", async (req, res) => {
   const targetLang = req.body.target;
 
   // for (let lang of targetLangs) {
-  const translation = await translator.translate(textToTranslate, sourceLang, targetLang);
+  const translation = await translator.translate(
+    textToTranslate,
+    sourceLang,
+    targetLang
+  );
   // console.log("the translated text is:",translation);
   // }
   res.status(200).json(translation);
