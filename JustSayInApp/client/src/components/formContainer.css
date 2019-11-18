@@ -6,11 +6,11 @@ select,
 button,
 textarea {
   font-size: 1rem;
+  color: var(--app-blue, #49f);
 }
 input,
 textarea {
   width: 100%;
-  color: var(--app-blue, #49f);
 }
 input[type="submit"] {
   margin: 1em 0 0;
@@ -38,6 +38,15 @@ button {
   width: 10%;
 }
 .target-lang-selector {
+  padding: .125rem 2.5% 1rem;
+  color: var(--app-grey, #999);
+}
+.select-instruction {
+  font-size: .75rem;
+}
+.add-button{
+  float: right;
+  margin: .5rem 2.5% .25rem 5%;
 }
 /* responsive */
 @media (min-width: 768px) {
@@ -58,4 +67,11 @@ button {
     margin: 1em 4%;
     color: var(--app-blue);
   }
+  .target-lang-selector {
+  }
+  .select-instruction {
+    font-size: .75rem;
+    margin:0 1.25% .5rem 3.75%;
+  }
+  
 }
