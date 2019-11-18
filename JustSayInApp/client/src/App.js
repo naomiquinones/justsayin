@@ -12,26 +12,48 @@ class App extends Component {
     super();
     this.state = {
       isLoading: true,
-      languages: []
+      languages: [],
+      value: ''
     };
 
   }
   componentDidMount() {
     this.fetchLanguages();
   }
-
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+  handleSubmit(event) {
+    event.preventDefault();
+    
+  }
   async fetchLanguages() {
-    let response = await axios.get("http://localhost:1337/languages");
+    let response = await axios.get("http://localhost:1337/languages").then((response) => {
+      let languages = response.data;
+  
+      let langsArray = [];
+      for (var i = 0; i < languages.length; i++) {
+        const codeAndName = Object.values(languages[i]);
+        langsArray.push(codeAndName);
+      }
+      this.setState({ languages: langsArray, isLoading: false });
+      // console.log("full names", this.state.languages);
+    }, (error) => {
+      console.log(error);
+    });
 
-    let languages = response.data;
+  }
 
-    let langsArray = [];
-    for (var i = 0; i < languages.length; i++) {
-      const codeAndName = Object.values(languages[i]);
-      langsArray.push(codeAndName);
-    }
-    this.setState({ languages: langsArray, /* isLoading: false */ });
-    // console.log("full names", this.state.languages);
+  async fetchTranslation() {
+    let response = await axios.post("http://localhost:1337/translate", {text:this.state.text, source:this.state.source,target:this.state.value})
+    .then((response) => {
+      console.log(response);
+      let translation = response.data;
+    }, (error) => {
+      console.log(error);
+    });
+
+
   }
 
   render() {
@@ -51,7 +73,7 @@ class App extends Component {
         </header>
         <main>
           {/* <SavedTexts /> */}
-          <FormContainer languageCodes={languages} isLoading={isLoading}/>
+          <FormContainer languageCodes={languages} isLoading={isLoading} onSubmit={this.handleSubmit}/>
         </main>
         <footer className="page-footer">
           Copyright &copy; 2019 Naomi Quiñones
