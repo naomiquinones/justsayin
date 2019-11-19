@@ -13,7 +13,10 @@ class App extends Component {
     this.state = {
       isLoading: true,
       availableLanguages: [],
-      value: "es"
+      source: "en",
+      value: "es",
+      textToTranslate: "",
+      translation: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -52,12 +55,17 @@ class App extends Component {
     });
 
     console.log(response);
-    let translation = response.data;
-    return translation;
+    let translatedText = response.data;
+    this.setState({ translation: translatedText });
   }
 
   render() {
-    const { availableLanguages, isLoading, value } = this.state;
+    const {
+      availableLanguages,
+      isLoading,
+      value,
+      textToTranslate
+    } = this.state;
     console.log("isLoading", isLoading);
     return (
       <div className="App">
@@ -77,6 +85,7 @@ class App extends Component {
             languageCodes={availableLanguages}
             isLoading={isLoading}
             value={value}
+            textToTranslate={textToTranslate}
             onSubmit={this.handleSubmit}
           />
         </main>
