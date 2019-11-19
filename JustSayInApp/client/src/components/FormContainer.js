@@ -25,7 +25,6 @@ const FormContainer = props => {
           value={textToTranslate}
           onChange={handleTextChange}
           placeholder="Enter text to translate"
-          textToTranslate={textToTranslate}
         ></textarea>
       </div>
 
