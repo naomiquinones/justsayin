@@ -71,7 +71,6 @@ class App extends Component {
       value,
       textToTranslate
     } = this.state;
-    console.log("isLoading", isLoading);
     return (
       <div className="App">
         <header className="page-header">
