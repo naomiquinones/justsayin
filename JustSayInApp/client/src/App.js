@@ -26,7 +26,7 @@ class App extends Component {
     this.fetchLanguages();
   }
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    this.setState({ [event.target.name]: event.target.value });
   }
   handleSubmit(event) {
     event.preventDefault();
@@ -87,6 +87,7 @@ class App extends Component {
             value={value}
             textToTranslate={textToTranslate}
             onSubmit={this.handleSubmit}
+            handleChange={this.handleChange}
           />
         </main>
         <footer className="page-footer">
