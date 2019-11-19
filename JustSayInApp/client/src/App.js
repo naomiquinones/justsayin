@@ -14,8 +14,8 @@ class App extends Component {
     this.state = {
       isLoading: true,
       availableLanguages: [],
-      source: "en",
-      value: "es",
+      sourceLanguage: "en",
+      targetLanguage: "es",
       textToTranslate: "",
       translation: ""
     };
@@ -101,9 +101,8 @@ class App extends Component {
             For testing purposes, display text to translate:
             {this.state.textToTranslate}
           </p>
-          <p>Source language: {this.state.source}</p>
-          <p>Target: {this.state.value}</p>
-          <p>{this.state["language-list"] && this.state["language-list"]}</p>
+          <p>Source language: {this.state.sourceLanguage}</p>
+          <p>Target: {this.state.targetLanguage}</p>
         </main>
         <footer className="page-footer">
           Copyright &copy; 2019 Naomi Quiñones

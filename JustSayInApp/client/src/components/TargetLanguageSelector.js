@@ -18,9 +18,6 @@ const TargetLanguageSelector = ({ languages, handleChange, value, name }) => {
       <p className="select-instruction">Select one or more target languages</p>
 
       <div className="form-group select-group">
-        <label htmlFor={name} className="form-label">
-          {"set a target language"}
-        </label>
         <select
           className="form-input language-list select-container"
           id={"languages-list"}

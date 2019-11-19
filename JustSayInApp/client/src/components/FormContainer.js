@@ -5,14 +5,13 @@ import Input from "../components/Input";
 
 import TargetLanguageSelector from "../components/TargetLanguageSelector";
 
-const FormContainer = props => {
-  const {
-    languageCodes,
-    value,
-    handleSubmit,
-    handleChange,
-    textToTranslate
-  } = props;
+const FormContainer = ({
+  languageCodes,
+  value,
+  handleSubmit,
+  handleChange,
+  textToTranslate
+}) => {
   const handleTextChange = event => {
     handleChange(event);
   };
@@ -29,7 +28,7 @@ const FormContainer = props => {
       </div>
 
       <TargetLanguageSelector
-        name={"language-list"}
+        name={"targetLanguage"}
         languages={languageCodes}
         value={value}
         handleChange={handleChange}
