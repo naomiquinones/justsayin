@@ -1,6 +1,7 @@
 form {
   font-size: 1.5rem;
 }
+label,
 input,
 select,
 button,
@@ -38,15 +39,15 @@ button {
   width: 10%;
 }
 .target-lang-selector {
-  padding: .125rem 2.5% 1rem;
+  padding: 0.125rem 2.5% 1rem;
   color: var(--app-grey, #999);
 }
 .select-instruction {
-  font-size: .75rem;
+  font-size: 0.75rem;
 }
-.add-button{
+.add-button {
   float: right;
-  margin: .5rem 2.5% .25rem 5%;
+  margin: 0.5rem 2.5% 0.25rem 5%;
 }
 /* responsive */
 @media (min-width: 768px) {
@@ -70,8 +71,7 @@ button {
   .target-lang-selector {
   }
   .select-instruction {
-    font-size: .75rem;
-    margin:0 1.25% .5rem 3.75%;
+    font-size: 0.75rem;
+    margin: 0 1.25% 0.5rem 3.75%;
   }
-  
 }
