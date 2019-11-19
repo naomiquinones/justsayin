@@ -41,7 +41,6 @@ import React /* , { Component } */ from "react";
 const TextArea = props => {
   const { name, title, placeholder, textToTranslate, handleChange } = props;
   const handleTextChange = event => {
-    // [event.target.name] = event.target.value;
     handleChange(event);
   };
 
