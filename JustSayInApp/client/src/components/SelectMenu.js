@@ -36,10 +36,9 @@ import React /* , { Component } */ from "react";
 // }
 
 const SelectMenu = props => {
-  const { languages, name, title, placeholder, value } = props;
-  const handleChange = event => {
-    this.props.handleChange(event.target.value);
-    console.log();
+  const { languages, name, title, placeholder, value, handleChange } = props;
+  const handleSelectChange = event => {
+    handleChange(event);
   };
 
   const languageOptions = languages.map(language => {
@@ -49,6 +48,7 @@ const SelectMenu = props => {
       </option>
     );
   });
+
   return (
     <div className="form-group select-group">
       <label htmlFor={name} className="form-label">
@@ -59,7 +59,7 @@ const SelectMenu = props => {
         id={name}
         name={name}
         value={value}
-        onChange={handleChange}
+        onChange={handleSelectChange}
         placeholder={placeholder}
       >
         {languageOptions}
