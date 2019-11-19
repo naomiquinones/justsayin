@@ -26,12 +26,14 @@ class App extends Component {
     this.fetchLanguages();
   }
   handleChange(event) {
-    const {name, value} = event.target
+    const { name, value } = event.target;
     this.setState({ [name]: value });
+    // instead of
+    // [event.target.name] = event.target.value;
   }
   handleSubmit(event) {
+    console.log("from App handleSubmit, event is", event);
     event.preventDefault();
-
     this.fetchTranslation();
   }
   async fetchLanguages() {
@@ -50,7 +52,7 @@ class App extends Component {
 
   async fetchTranslation() {
     let response = await axios.post("http://localhost:1337/translate", {
-      text: this.state.text,
+      text: this.state.textToTranslate,
       source: this.state.source,
       target: this.state.value
     });
@@ -90,6 +92,12 @@ class App extends Component {
             onSubmit={this.handleSubmit}
             handleChange={this.handleChange}
           />
+          <p>
+            For testing purposes, display text to translate:
+            {this.state.textToTranslate}
+          </p>
+          <p>Source language: {this.state.source}</p>
+          <p>Target: {this.state.value}</p>
         </main>
         <footer className="page-footer">
           Copyright &copy; 2019 Naomi Quiñones
