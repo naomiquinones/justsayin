@@ -2,39 +2,39 @@ import React /* , { Component } */ from "react";
 /* Import Components */
 // import CheckBox from '../components/CheckBox';
 import Input from "../components/Input";
-import TextArea from "../components/TextArea";
 
 import TargetLanguageSelector from "../components/TargetLanguageSelector";
-import Loading from "../components/Loading";
 
 const FormContainer = props => {
   const {
     languageCodes,
-    isLoading,
     value,
     handleSubmit,
     handleChange,
     textToTranslate
   } = props;
+  const handleTextChange = event => {
+    handleChange(event);
+  };
   return (
     <form className="form-container" onSubmit={handleSubmit}>
-      <TextArea
-        placeholder={"Enter text to translate"}
-        name={"textToTranslate"}
-        textToTranslate={textToTranslate}
+      <div className="form-group textarea-container">
+        <textarea
+          className="form-input"
+          name="textToTranslate"
+          value={textToTranslate}
+          onChange={handleTextChange}
+          placeholder="Enter text to translate"
+          textToTranslate={textToTranslate}
+        ></textarea>
+      </div>
+
+      <TargetLanguageSelector
+        name={"language-list"}
+        languages={languageCodes}
+        value={value}
         handleChange={handleChange}
       />
-
-      {isLoading ? (
-        <Loading message={"Getting target languages"} />
-      ) : (
-        <TargetLanguageSelector
-          name={"language-list"}
-          languages={languageCodes}
-          value={value}
-          handleChange={handleChange}
-        />
-      )}
 
       <Input type={"submit"} value={"Translate"} />
     </form>

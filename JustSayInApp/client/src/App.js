@@ -6,6 +6,7 @@ import JustSayInlogo from "./images/JustSayIn-logo-wordmark.svg";
 import FormContainer from "./components/FormContainer";
 
 import axios from "axios";
+import Loading from "./components/Loading";
 
 class App extends Component {
   constructor() {
@@ -85,14 +86,18 @@ class App extends Component {
         </header>
         <main>
           {/* <SavedTexts /> */}
-          <FormContainer
-            languageCodes={availableLanguages}
-            isLoading={isLoading}
-            value={value}
-            textToTranslate={textToTranslate}
-            onSubmit={this.handleSubmit}
-            handleChange={this.handleChange}
-          />
+          {isLoading ? (
+            <Loading message="Getting available languages" />
+          ) : (
+            <FormContainer
+              languageCodes={availableLanguages}
+              isLoading={isLoading}
+              value={value}
+              textToTranslate={textToTranslate}
+              onSubmit={this.handleSubmit}
+              handleChange={this.handleChange}
+            />
+          )}
           <p>
             For testing purposes, display text to translate:
             {this.state.textToTranslate}
