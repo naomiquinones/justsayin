@@ -1,24 +1,5 @@
-import React /* , { Component } */ from "react";
+import React from "react";
 
-// class Input extends Component {
-//   constructor() {
-//     super();
-//     this.state = {
-//       type: 'submit',
-//       value: 'Translate'
-//     }
-//   }
-
-//   componentDidMount() {
-//     console.log('input loaded');
-//   }
-
-//   render() {
-//     return (
-//         <input type={this.state.type} value={this.state.value} placeholder="Text to translate"></input>
-//     );
-//   }
-// }
 const Input = props => {
   const { name, title, type, value, handleChange, placeholder } = props;
   return (

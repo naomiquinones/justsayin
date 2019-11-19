@@ -27,6 +27,7 @@ class App extends Component {
   }
   handleChange(event) {
     const { name, value } = event.target;
+    console.log(name, value);
     this.setState({ [name]: value });
     // instead of
     // [event.target.name] = event.target.value;
@@ -98,6 +99,7 @@ class App extends Component {
           </p>
           <p>Source language: {this.state.source}</p>
           <p>Target: {this.state.value}</p>
+          <p>{this.state["language-list"] && this.state["language-list"]}</p>
         </main>
         <footer className="page-footer">
           Copyright &copy; 2019 Naomi Quiñones

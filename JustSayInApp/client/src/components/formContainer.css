@@ -32,11 +32,9 @@ select {
   margin-left: 2%;
   color: var(--app-grey, #ccc);
 }
-option {
-  /* color: var(--app-grey,#ccc); */
-}
 button {
-  width: 10%;
+  width: 20%;
+  border-radius: 5px;
 }
 .target-lang-selector {
   padding: 0.125rem 2.5% 1rem;

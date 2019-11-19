@@ -1,6 +1,5 @@
 import React /* , { Component } */ from "react";
 import SelectMenu from "../components/SelectMenu";
-import Button from "../components/Button";
 
 // class TargetLanguageSelector extends Component {
 //   constructor(props) {
@@ -30,7 +29,9 @@ const TargetLanguageSelector = props => {
         title={"set a target language"}
         name={name}
       />
-      <Button className="add-button" name={"addLang"} value={"+ add"} />
+      <button className="add-button" name="addLang" value="addLanguage">
+        {"Add language"}
+      </button>
     </div>
   );
 };

@@ -38,6 +38,7 @@ import React /* , { Component } */ from "react";
 const SelectMenu = props => {
   const { languages, name, title, placeholder, value, handleChange } = props;
   const handleSelectChange = event => {
+    // console.log("in handleSelectChange,", event);
     handleChange(event);
   };
 
