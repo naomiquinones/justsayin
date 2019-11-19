@@ -39,7 +39,7 @@ import React /* , { Component } */ from "react";
 // }
 
 const TextArea = props => {
-  const { name, title, placeholder } = props;
+  const { name, title, placeholder, textToTranslate } = props;
   const handleChange = event => {
     this.setState({ value: event.target.value });
   };
@@ -53,6 +53,7 @@ const TextArea = props => {
         className="form-input"
         id={name}
         name={name}
+        value={textToTranslate}
         onChange={handleChange}
         placeholder={placeholder}
       ></textarea>
