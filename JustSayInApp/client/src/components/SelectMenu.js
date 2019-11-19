@@ -38,7 +38,8 @@ import React /* , { Component } */ from "react";
 const SelectMenu = props => {
   const { languages, name, title, placeholder, value } = props;
   const handleChange = event => {
-    this.setState({ value: event.target.value });
+    this.props.handleChange(event.target.value);
+    console.log();
   };
 
   const languageOptions = languages.map(language => {
