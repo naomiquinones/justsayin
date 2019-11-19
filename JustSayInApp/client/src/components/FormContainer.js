@@ -47,10 +47,21 @@ import Loading from "../components/Loading";
 // }
 
 const FormContainer = props => {
-  const { languageCodes, isLoading, value, handleSubmit } = props;
+  const {
+    languageCodes,
+    isLoading,
+    value,
+    handleSubmit,
+    textToTranslate
+  } = props;
   return (
     <form className="form-container" onSubmit={handleSubmit}>
-      <TextArea placeholder={"Enter text to translate"} name={"sourceText"} />
+      <TextArea
+        placeholder={"Enter text to translate"}
+        name={"sourceText"}
+        textToTranslate={textToTranslate}
+      />
+
       {isLoading ? (
         <Loading message={"Getting target languages"} />
       ) : (
@@ -60,6 +71,7 @@ const FormContainer = props => {
           value={value}
         />
       )}
+
       <Input type={"submit"} value={"Translate"} />
     </form>
   );
