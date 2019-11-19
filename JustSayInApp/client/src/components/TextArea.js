@@ -39,9 +39,9 @@ import React /* , { Component } */ from "react";
 // }
 
 const TextArea = props => {
-  const { name, title, placeholder, textToTranslate } = props;
-  const handleChange = event => {
-    this.setState({ value: event.target.value });
+  const { name, title, placeholder, textToTranslate, handleChange } = props;
+  const handleTextChange = event => {
+    [event.target.name] = event.target.value;
   };
 
   return (
@@ -54,7 +54,7 @@ const TextArea = props => {
         id={name}
         name={name}
         value={textToTranslate}
-        onChange={handleChange}
+        onChange={handleTextChange}
         placeholder={placeholder}
       ></textarea>
     </div>
