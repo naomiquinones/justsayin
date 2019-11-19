@@ -1,7 +1,6 @@
 import React from "react";
 
-const TargetLanguageSelector = props => {
-  const { languages, handleChange, value, name } = props;
+const TargetLanguageSelector = ({ languages, handleChange, value, name }) => {
   const languageOptions = languages.map(language => {
     return (
       <option key={language[0]} value={language[0]}>
