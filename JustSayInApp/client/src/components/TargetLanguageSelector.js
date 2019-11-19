@@ -1,34 +1,39 @@
-import React /* , { Component } */ from "react";
-import SelectMenu from "../components/SelectMenu";
+import React from "react";
 
-// class TargetLanguageSelector extends Component {
-//   constructor(props) {
-//     super(props);
-//   }
-
-//   render() {
-//     return (
-//       <div id="">
-//         <SelectMenu id={"languages-list"} placeholder={"Add target language"} />
-//         <Button value={this.props.value} />
-//       </div>
-//     );
-//   }
-// }
 const TargetLanguageSelector = props => {
   const { languages, handleChange, value, name } = props;
+  const languageOptions = languages.map(language => {
+    return (
+      <option key={language[0]} value={language[0]}>
+        {language[1]}
+      </option>
+    );
+  });
+  const handleSelectChange = event => {
+    // console.log("in handleSelectChange,", event);
+    handleChange(event);
+  };
+
   return (
     <div className="form-group target-lang-selector">
       <p className="select-instruction">Select one or more target languages</p>
-      <SelectMenu
-        id={"languages-list"}
-        placeholder={"Add target language"}
-        languages={languages}
-        value={value}
-        handleChange={handleChange}
-        title={"set a target language"}
-        name={name}
-      />
+
+      <div className="form-group select-group">
+        <label htmlFor={name} className="form-label">
+          {"set a target language"}
+        </label>
+        <select
+          className="form-input language-list select-container"
+          id={"languages-list"}
+          name={name}
+          value={value}
+          onChange={handleSelectChange}
+          placeholder="Add target language"
+        >
+          {languageOptions}
+        </select>
+      </div>
+
       <button className="add-button" name="addLang" value="addLanguage">
         {"Add language"}
       </button>
