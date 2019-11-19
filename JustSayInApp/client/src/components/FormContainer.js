@@ -52,14 +52,16 @@ const FormContainer = props => {
     isLoading,
     value,
     handleSubmit,
+    handleChange,
     textToTranslate
   } = props;
   return (
     <form className="form-container" onSubmit={handleSubmit}>
       <TextArea
         placeholder={"Enter text to translate"}
-        name={"sourceText"}
+        name={"textToTranslate"}
         textToTranslate={textToTranslate}
+        handleChange={handleChange}
       />
 
       {isLoading ? (
@@ -69,6 +71,7 @@ const FormContainer = props => {
           name={"language-list"}
           languages={languageCodes}
           value={value}
+          handleChange={handleChange}
         />
       )}
 
