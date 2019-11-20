@@ -9,11 +9,10 @@ const FormContainer = ({
   handleChange,
   textToTranslate
 }) => {
-
-  const addTargetLanguageSelector = (event) => {
+  const addTargetLanguageSelector = event => {
     // add another drop-down menu here
     event.preventDefault();
-    console.log('add another drop-down');
+    console.log("add another drop-down");
   };
 
   return (
@@ -37,6 +36,7 @@ const FormContainer = ({
       <button
         className="add-button"
         name="addLang"
+        type="button"
         value="addLanguage"
         onClick={addTargetLanguageSelector}
       >
