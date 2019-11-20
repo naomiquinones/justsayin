@@ -10,10 +10,10 @@ const FormContainer = ({
   textToTranslate
 }) => {
 
-
   const addTargetLanguageSelector = (event) => {
     // add another drop-down menu here
     event.preventDefault();
+    console.log('add another drop-down');
   };
 
   return (

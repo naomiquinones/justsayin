@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import "./App.css";
 import JustSayInlogo from "./images/JustSayIn-logo-wordmark.svg";
+import axios from "axios";
+
+// import { FontAwesomeIcon } from 'react-fontawesome'
+// import { fa-globe-Americas } from '@fortawesome/free-solid-svg-icons'
 
 // import SavedTexts from './components/SavedTexts';
 import FormContainer from "./components/FormContainer";
 
-import axios from "axios";
 import Loading from "./components/Loading";
 
 class App extends Component {
