@@ -53,7 +53,7 @@ app.post("/translate", async (req, res) => {
   res.status(200).json(translation);
 });
 
-app.post("/api/message", (req, res) => {
+app.post("/message", (req, res) => {
   console.log(req.body);
   const { recipient } = req.body;
 

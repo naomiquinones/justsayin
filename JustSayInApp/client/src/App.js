@@ -50,7 +50,7 @@ class App extends Component {
       langsArray.push(codeAndName);
     }
     this.setState({ availableLanguages: langsArray, isLoading: false });
-    // console.log("full names", this.state.languages);
+    
   }
 
   async fetchTranslation() {
@@ -93,8 +93,8 @@ class App extends Component {
               languageList={availableLanguages}
               value={targetLanguage}
               textToTranslate={textToTranslate}
-              onSubmit={this.handleSubmit}
               handleChange={this.handleChange}
+              onSubmit={this.handleSubmit}
             />
           )}
           <p>
