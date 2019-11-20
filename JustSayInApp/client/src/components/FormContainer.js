@@ -1,6 +1,6 @@
 import React from "react";
 
-import TargetLanguageSelector from "../components/TargetLanguageSelector";
+import TargetLanguageSelector from "./TargetLanguageSelector";
 
 const FormContainer = ({
   languageList,
@@ -9,11 +9,11 @@ const FormContainer = ({
   handleChange,
   textToTranslate
 }) => {
-  const handleTextChange = event => {
-    handleChange(event);
-  };
-  const addTargetLanguageSelector = () => {
+
+
+  const addTargetLanguageSelector = (event) => {
     // add another drop-down menu here
+    event.preventDefault();
   };
 
   return (
@@ -23,7 +23,7 @@ const FormContainer = ({
           className="form-input"
           name="textToTranslate"
           value={textToTranslate}
-          onChange={handleTextChange}
+          onChange={handleChange}
           placeholder="Enter text to translate"
         />
       </div>
