@@ -34,6 +34,7 @@ class App extends Component {
     // [event.target.name] = event.target.value;
   }
   handleSubmit(event) {
+    alert("in handleSubmit");
     console.log("from App handleSubmit, event is", event);
     event.preventDefault();
     this.fetchTranslation();
@@ -55,8 +56,8 @@ class App extends Component {
   async fetchTranslation() {
     let response = await axios.post("http://localhost:1337/translate", {
       text: this.state.textToTranslate,
-      source: this.state.source,
-      target: this.state.value
+      source: this.state.sourceLanguage,
+      target: this.state.targetLanguage
     });
 
     console.log(response);
@@ -68,8 +69,8 @@ class App extends Component {
     const {
       availableLanguages,
       isLoading,
-      value,
-      textToTranslate
+      textToTranslate,
+      targetLanguage
     } = this.state;
     return (
       <div className="App">
@@ -89,9 +90,8 @@ class App extends Component {
             <Loading message="Getting available languages" />
           ) : (
             <FormContainer
-              languageCodes={availableLanguages}
-              isLoading={isLoading}
-              value={value}
+              languageList={availableLanguages}
+              value={targetLanguage}
               textToTranslate={textToTranslate}
               onSubmit={this.handleSubmit}
               handleChange={this.handleChange}

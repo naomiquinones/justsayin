@@ -1,16 +1,13 @@
 @import url("./components/savedTexts.css");
 @import url("./components/formContainer.css");
 
-.App {
-}
-
 .JustSayIn-logo {
-  height: 10vmin;
+  height: 8vmin;
 }
 
 .page-header {
   background-color: var(--app-black);
-  min-height: 10vh;
+  min-height: 6vh;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -9,7 +9,6 @@ const TargetLanguageSelector = ({ languages, handleChange, value, name }) => {
     );
   });
   const handleSelectChange = event => {
-    // console.log("in handleSelectChange,", event);
     handleChange(event);
   };
 
@@ -29,10 +28,6 @@ const TargetLanguageSelector = ({ languages, handleChange, value, name }) => {
           {languageOptions}
         </select>
       </div>
-
-      <button className="add-button" name="addLang" value="addLanguage">
-        {"Add language"}
-      </button>
     </div>
   );
 };
