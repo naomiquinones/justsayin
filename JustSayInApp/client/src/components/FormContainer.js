@@ -3,18 +3,19 @@ import React from "react";
 import TargetLanguageSelector from "./TargetLanguageSelector";
 
 const FormContainer = ({
-  languageList,
-  value,
+  availableLanguages,
+  // value,
   handleSubmit,
   handleChange,
-  textToTranslate
+  textToTranslate,
+  targetLanguages,
+  translation
 }) => {
-  const addTargetLanguageSelector = event => {
-    // add another drop-down menu here
-    event.preventDefault();
-    console.log("add another drop-down");
-  };
-
+  // const addTargetLanguageSelector = event => {
+  //   // add another drop-down menu here
+  //   event.preventDefault();
+  //   console.log("add another drop-down");
+  // };
   return (
     <form className="form-container" onSubmit={handleSubmit}>
       <div className="form-group textarea-container">
@@ -28,12 +29,14 @@ const FormContainer = ({
       </div>
 
       <TargetLanguageSelector
-        name={"targetLanguage"}
-        languages={languageList}
-        value={value}
+        name={"targetLanguages"}
+        targetLanguages={targetLanguages}
+        availableLanguages={availableLanguages}
         handleChange={handleChange}
+        translation={translation}
       />
-      <button
+
+      {/* <button
         className="add-button"
         name="addLang"
         type="button"
@@ -41,7 +44,7 @@ const FormContainer = ({
         onClick={addTargetLanguageSelector}
       >
         {"Add language"}
-      </button>
+      </button> */}
       <div className="form-group">
         <input
           className="form-input"

@@ -3,9 +3,6 @@ import "./App.css";
 import JustSayInlogo from "./images/JustSayIn-logo-wordmark.svg";
 import axios from "axios";
 
-// import { FontAwesomeIcon } from 'react-fontawesome'
-// import { fa-globe-Americas } from '@fortawesome/free-solid-svg-icons'
-
 // import SavedTexts from './components/SavedTexts';
 import FormContainer from "./components/FormContainer";
 
@@ -18,7 +15,7 @@ class App extends Component {
       isLoading: true,
       availableLanguages: [],
       sourceLanguage: "en",
-      targetLanguage: "es",
+      targetLanguages: ["es", "ja"],
       textToTranslate: "",
       translation: ""
     };
@@ -31,16 +28,19 @@ class App extends Component {
   }
   handleChange(event) {
     const { name, value } = event.target;
-    console.log(name, value);
+    console.log("name is", name, "value is", value);
+    // if (name==="")
     this.setState({ [name]: value });
-    // instead of
-    // [event.target.name] = event.target.value;
+    // instead of [event.target.name] = event.target.value;
   }
   handleSubmit(event) {
-    alert("in handleSubmit");
-    console.log("from App handleSubmit, event is", event);
+    // console.log("from App handleSubmit, event is", event);
     event.preventDefault();
-    this.fetchTranslation();
+    for (let i = 0; i < this.state.targetLanguages.length; i++) {
+      let currentTargetLanguage = this.state.targetLanguages[i];
+      console.log(currentTargetLanguage);
+      this.fetchTranslation(currentTargetLanguage);
+    }
   }
   async fetchLanguages() {
     let response = await axios.get("http://localhost:1337/languages");
@@ -55,11 +55,11 @@ class App extends Component {
     this.setState({ availableLanguages: langsArray, isLoading: false });
   }
 
-  async fetchTranslation() {
+  async fetchTranslation(currentTargetLanguage) {
     let response = await axios.post("http://localhost:1337/translate", {
       text: this.state.textToTranslate,
       source: this.state.sourceLanguage,
-      target: this.state.targetLanguage
+      target: currentTargetLanguage
     });
 
     console.log(response);
@@ -72,7 +72,8 @@ class App extends Component {
       availableLanguages,
       isLoading,
       textToTranslate,
-      targetLanguage
+      targetLanguages,
+      translation
     } = this.state;
     return (
       <div className="App">
@@ -92,11 +93,12 @@ class App extends Component {
             <Loading message="Getting available languages" />
           ) : (
             <FormContainer
-              languageList={availableLanguages}
-              value={targetLanguage}
+              availableLanguages={availableLanguages}
+              targetLanguages={targetLanguages}
               textToTranslate={textToTranslate}
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
+              translation={translation}
             />
           )}
           <p>
@@ -104,7 +106,8 @@ class App extends Component {
             {this.state.textToTranslate}
           </p>
           <p>Source language: {this.state.sourceLanguage}</p>
-          <p>Target: {this.state.targetLanguage}</p>
+          <p>Target language 1: {this.state.targetLanguages[0]}</p>
+          <p>Target language 2: {this.state.targetLanguages[1]}</p>{" "}
         </main>
         <footer className="page-footer">
           Copyright &copy; 2019 Naomi Quiñones
