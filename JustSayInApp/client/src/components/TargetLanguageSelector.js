@@ -1,6 +1,7 @@
 import React from "react";
 
 const TargetLanguageSelector = ({ languages, handleChange, value, name }) => {
+
   const languageOptions = languages.map(language => {
     return (
       <option key={language[0]} value={language[0]}>
@@ -8,9 +9,6 @@ const TargetLanguageSelector = ({ languages, handleChange, value, name }) => {
       </option>
     );
   });
-  const handleSelectChange = event => {
-    handleChange(event);
-  };
 
   return (
     <div className="form-group target-lang-selector">
@@ -18,11 +16,11 @@ const TargetLanguageSelector = ({ languages, handleChange, value, name }) => {
 
       <div className="form-group select-group">
         <select
-          className="form-input language-list select-container"
+          className="language-list select-container"
           id={"languages-list"}
           name={name}
           value={value}
-          onChange={handleSelectChange}
+          onChange={handleChange}
           placeholder="Add target language"
         >
           {languageOptions}
