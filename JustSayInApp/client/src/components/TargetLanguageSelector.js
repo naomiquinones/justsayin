@@ -3,11 +3,12 @@ import React from "react";
 const TargetLanguageSelector = ({
   availableLanguages,
   handleChange,
-  // value,
   name,
   targetLanguages,
   translation
 }) => {
+  const [values,setValues] = React.useState(targetLanguages)
+  console.log("values:",values)
   const languageOptions = availableLanguages.map(language => {
     return (
       <option key={language[0]} value={language[0]}>
@@ -25,8 +26,14 @@ const TargetLanguageSelector = ({
           className="language-list select-container"
           id={"languages-list"}
           name={name}
-          value={targetLanguages}
-          onChange={handleChange}
+          value={values}
+          onChange={e => {
+            setValues(Array.apply(null,e.currentTarget.options).filter(opt => opt.selected).map(opt => opt.value),
+            );
+            console.log("onChange values:",values)
+
+            handleChange(e)
+          }}
           placeholder="Add target language"
         >
           {languageOptions}
