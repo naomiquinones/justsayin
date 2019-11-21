@@ -9,49 +9,34 @@ import FormContainer from "./components/FormContainer";
 import Loading from "./components/Loading";
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      isLoading: true,
-      availableLanguages: [],
-      sourceLanguage: "en",
-      targetLanguages: ["es", "ja"],
-      textToTranslate: "",
-      allTranslations: [],
-      translation: ""
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  state = {
+    isLoading: true,
+    availableLanguages: [],
+    sourceLanguage: "en",
+    targetLanguages: ["es", "ja"],
+    textToTranslate: "",
+    allTranslations: [],
+    translation: ""
+  };
 
   componentDidMount() {
     this.fetchLanguages();
   }
-  handleChange(event) {
-    const { name, value } = event.target;
-    console.log("name is", name, "value is", value);
-    if (name==="targetLanguages"){
-      console.log("before setState, this.state.targetLanguages",this.state.targetLanguages)
-      this.setState({
-        targetLanguages: this.state.targetLanguages.concat(value)
-      });
-      console.log("after setState, this.state.targetLanguages",this.state.targetLanguages)
-      
-    } else {
-      this.setState({ [name]: value });
-    }
-    // instead of [event.target.name] = event.target.value;
-  }
-  handleSubmit(event) {
+
+  updateState = changes => {
+    this.setState(changes);
+  };
+
+  handleSubmit = event => {
     this.setState({ allTranslations: [] });
     event.preventDefault();
     for (let i = 0; i < this.state.targetLanguages.length; i++) {
       let currentTargetLanguage = this.state.targetLanguages[i];
       this.fetchTranslation(currentTargetLanguage);
     }
-  }
+  };
   async fetchLanguages() {
-    if(this.state.availableLanguages.length < 80){
+    if (this.state.availableLanguages.length < 80) {
       let response = await axios.get("http://localhost:1337/languages");
 
       let languages = response.data;
@@ -72,12 +57,13 @@ class App extends Component {
       target: currentTargetLanguage
     });
 
-    console.log(response);
+    // console.log(response);
     let translatedText = response.data;
     this.setState({
       allTranslations: this.state.allTranslations.concat(translatedText)
     });
     console.log(this.state.allTranslations);
+
     this.setState({ translation: translatedText });
   }
 
@@ -110,7 +96,7 @@ class App extends Component {
               availableLanguages={availableLanguages}
               targetLanguages={targetLanguages}
               textToTranslate={textToTranslate}
-              handleChange={this.handleChange}
+              handleChange={this.updateState}
               handleSubmit={this.handleSubmit}
               translation={translation}
             />
