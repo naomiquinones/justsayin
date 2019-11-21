@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const TargetLanguageSelector = ({
   availableLanguages,
@@ -7,8 +7,6 @@ const TargetLanguageSelector = ({
   targetLanguages,
   translation
 }) => {
-  const [values,setValues] = useState(targetLanguages)
-  console.log("TargtLanguageSelector initial useState values:",values)
   const languageOptions = availableLanguages.map(language => {
     return (
       <option key={language[0]} value={language[0]}>
@@ -26,13 +24,15 @@ const TargetLanguageSelector = ({
           className="language-list select-container"
           id={"languages-list"}
           name={name}
-          value={values}
+          value={targetLanguages}
           onChange={e => {
-            setValues(Array.apply(null,e.currentTarget.options).filter(opt => opt.selected).map(opt => opt.value),
-            );
-            console.log("onChange values:",values)
+            const newValues = Array.apply(null, e.currentTarget.options)
+              .filter(opt => opt.selected)
+              .map(opt => opt.value);
 
-            // handleChange(e)
+            console.log("onChange values:", newValues);
+
+            handleChange({ targetLanguages: newValues });
           }}
           placeholder="Add target language"
         >
