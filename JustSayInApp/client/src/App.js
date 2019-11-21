@@ -57,7 +57,6 @@ class App extends Component {
       target: currentTargetLanguage
     });
 
-    // console.log(response);
     let translatedText = response.data;
     this.setState({
       allTranslations: this.state.allTranslations.concat(translatedText)
@@ -75,6 +74,16 @@ class App extends Component {
       targetLanguages,
       translation
     } = this.state;
+
+    const displayTranslations = this.state.allTranslations.map(
+      (translation, index) => {
+        return (
+          <p>
+            Target language {index + 1}: {translation}
+          </p>
+        );
+      }
+    );
     return (
       <div className="App">
         <header className="page-header">
@@ -101,13 +110,11 @@ class App extends Component {
               translation={translation}
             />
           )}
-          <p>
-            For testing purposes, display text to translate:
-            {this.state.textToTranslate}
-          </p>
-          <p>Source language: {this.state.sourceLanguage}</p>
-          <p>Target language 1: {this.state.targetLanguages[0]}</p>
-          <p>Target language 2: {this.state.targetLanguages[1]}</p>{" "}
+          <section className="display">
+            {displayTranslations.length ? <p>Translations:</p> : null}
+
+            {displayTranslations.length ? displayTranslations : null}
+          </section>
         </main>
         <footer className="page-footer">
           Copyright &copy; 2019 Naomi Quiñones

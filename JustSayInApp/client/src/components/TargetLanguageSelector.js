@@ -39,9 +39,6 @@ const TargetLanguageSelector = ({
           {languageOptions}
         </select>
       </div>
-      <p className="translated" type="text" id="translation1">
-        {translation}
-      </p>
     </div>
   );
 };
