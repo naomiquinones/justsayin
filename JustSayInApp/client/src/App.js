@@ -29,13 +29,21 @@ class App extends Component {
   }
   handleChange(event) {
     const { name, value } = event.target;
-    // console.log("name is", name, "value is", value);
-    // if (name==="")
-    this.setState({ [name]: value });
+    console.log("name is", name, "value is", value);
+    if (name==="targetLanguages"){
+      console.log("before setState, this.state.targetLanguages",this.state.targetLanguages)
+      this.setState({
+        targetLanguages: this.state.targetLanguages.concat(value)
+      });
+      console.log("after setState, this.state.targetLanguages",this.state.targetLanguages)
+      
+    } else {
+      this.setState({ [name]: value });
+    }
     // instead of [event.target.name] = event.target.value;
   }
   handleSubmit(event) {
-    console.log("from App handleSubmit, event.target is", event.target);
+    this.setState({ allTranslations: [] });
     event.preventDefault();
     for (let i = 0; i < this.state.targetLanguages.length; i++) {
       let currentTargetLanguage = this.state.targetLanguages[i];
@@ -43,16 +51,18 @@ class App extends Component {
     }
   }
   async fetchLanguages() {
-    let response = await axios.get("http://localhost:1337/languages");
+    if(this.state.availableLanguages.length < 80){
+      let response = await axios.get("http://localhost:1337/languages");
 
-    let languages = response.data;
+      let languages = response.data;
 
-    let langsArray = [];
-    for (var i = 0; i < languages.length; i++) {
-      const codeAndName = Object.values(languages[i]);
-      langsArray.push(codeAndName);
+      let langsArray = [];
+      for (var i = 0; i < languages.length; i++) {
+        const codeAndName = Object.values(languages[i]);
+        langsArray.push(codeAndName);
+      }
+      this.setState({ availableLanguages: langsArray, isLoading: false });
     }
-    this.setState({ availableLanguages: langsArray, isLoading: false });
   }
 
   async fetchTranslation(currentTargetLanguage) {
