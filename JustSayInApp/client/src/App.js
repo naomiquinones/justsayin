@@ -17,6 +17,7 @@ class App extends Component {
       sourceLanguage: "en",
       targetLanguages: ["es", "ja"],
       textToTranslate: "",
+      allTranslations: [],
       translation: ""
     };
     this.handleChange = this.handleChange.bind(this);
@@ -28,17 +29,16 @@ class App extends Component {
   }
   handleChange(event) {
     const { name, value } = event.target;
-    console.log("name is", name, "value is", value);
+    // console.log("name is", name, "value is", value);
     // if (name==="")
     this.setState({ [name]: value });
     // instead of [event.target.name] = event.target.value;
   }
   handleSubmit(event) {
-    // console.log("from App handleSubmit, event is", event);
+    console.log("from App handleSubmit, event.target is", event.target);
     event.preventDefault();
     for (let i = 0; i < this.state.targetLanguages.length; i++) {
       let currentTargetLanguage = this.state.targetLanguages[i];
-      console.log(currentTargetLanguage);
       this.fetchTranslation(currentTargetLanguage);
     }
   }
@@ -64,6 +64,10 @@ class App extends Component {
 
     console.log(response);
     let translatedText = response.data;
+    this.setState({
+      allTranslations: this.state.allTranslations.concat(translatedText)
+    });
+    console.log(this.state.allTranslations);
     this.setState({ translation: translatedText });
   }
 
