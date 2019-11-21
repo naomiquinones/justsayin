@@ -23,7 +23,9 @@ const FormContainer = ({
           className="form-input"
           name="textToTranslate"
           value={textToTranslate}
-          onChange={handleChange}
+          onChange={e => {
+            handleChange({ textToTranslate: e.target.value });
+          }}
           placeholder="Enter text to translate"
         />
       </div>
