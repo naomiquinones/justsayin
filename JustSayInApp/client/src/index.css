@@ -10,6 +10,7 @@ body {
   --app-blue: #43b1e5;
   --app-black: rgb(22, 29, 32);
   --app-grey: rgb(108, 129, 138);
+  --app-grey-light: rgb(168, 193, 204);
   --app-white: #fafafa;
 }
 *,

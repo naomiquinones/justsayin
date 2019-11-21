@@ -78,7 +78,7 @@ class App extends Component {
     const displayTranslations = this.state.allTranslations.map(
       (translation, index) => {
         return (
-          <p>
+          <p key={index} className="translation">
             Target language {index + 1}: {translation}
           </p>
         );
@@ -111,7 +111,7 @@ class App extends Component {
             />
           )}
           <section className="display">
-            {displayTranslations.length ? <p>Translations:</p> : null}
+            {displayTranslations.length ? <h2>Translations:</h2> : null}
 
             {displayTranslations.length ? displayTranslations : null}
           </section>
