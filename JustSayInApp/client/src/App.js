@@ -77,7 +77,6 @@ class App extends Component {
         [currentLanguageName]: translatedText
       })
     });
-    console.log("formattedTranslations:", this.state.formattedTranslations);
 
     this.setState({ translation: translatedText });
   }
@@ -91,15 +90,6 @@ class App extends Component {
       translation
     } = this.state;
 
-    // const displayTranslations = this.state.allTranslations.map(
-    //   (translation, index) => {
-    //     return (
-    //       <p key={index} className="translation">
-    //         Target language {index + 1}: {translation}
-    //       </p>
-    //     );
-    //   }
-    // );
     const displayTranslationsWithLanguages = this.state.formattedTranslations.map(
       translation => {
         return (
@@ -123,7 +113,6 @@ class App extends Component {
           </h1>
         </header>
         <main>
-          {/* <SavedTexts /> */}
           {isLoading ? (
             <Loading message="Getting available languages" />
           ) : (
@@ -136,10 +125,7 @@ class App extends Component {
               translation={translation}
             />
           )}
-          {/* <section className="display">
-            {displayTranslations.length ? <h2>Translations:</h2> : null}
-            {displayTranslations.length ? displayTranslations : null}
-          </section> */}
+
           <section className="display">
             {displayTranslationsWithLanguages.length ? (
               <h2>Translations:</h2>
