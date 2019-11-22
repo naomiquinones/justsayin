@@ -1,3 +1,6 @@
+a {
+  color: var(--app-blue);
+}
 ul {
   list-style-type: none;
   text-align: left;
@@ -10,13 +13,15 @@ ul {
 
 .page-header {
   background-color: var(--app-black);
-  min-height: 6vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+}
+.loading-message {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: var(--app-grey, #999);
 }
 
 .page-footer {
@@ -26,21 +31,18 @@ ul {
   color: #d8d3c5cb;
   letter-spacing: 0.5rem;
 }
+.page-nav {
+  width: 45%;
+  text-align: right;
+  padding: 0 5%;
+  font-size: 6vmin;
+}
+.page-nav a {
+  text-decoration: none;
+  color: var(--app-grey-light, #fafafa);
+}
 main {
 }
-@media (min-width: 768px) {
-  .JustSayIn-logo {
-  }
-  .page-header {
-    min-height: 2vh;
-    align-items: flex-start;
-    padding: 0 2.5%;
-    background-color: var(--app-grey-light, #ccc);
-  }
-}
-@media (min-width: 950px) {
-}
-
 /* ******************** */
 /*    FORM STYLES       */
 /* ******************** */
@@ -145,3 +147,16 @@ button {
 /* ******************** */
 /*    END FORM STYLES   */
 /* ******************** */
+
+/* more media queries */
+@media (min-width: 768px) {
+  .JustSayIn-logo {
+  }
+  .page-header {
+    min-height: 2vh;
+    align-items: flex-start;
+    padding: 0 2.5%;
+  }
+}
+@media (min-width: 950px) {
+}

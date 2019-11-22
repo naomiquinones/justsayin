@@ -15,7 +15,7 @@ class App extends Component {
     sourceLanguage: "en",
     targetLanguages: ["es", "ja"],
     textToTranslate: "",
-    allTranslations: [],
+    // allTranslations: [],
     formattedTranslations: [],
     translation: ""
   };
@@ -28,21 +28,19 @@ class App extends Component {
     this.setState(changes);
   };
 
-  // clearAllTranslations = () => {
-  //   console.log("cleared", this.state.allTranslations);
-  // };
+  clearAllTranslations = () => {
+    this.setState({ allTranslations: [], formattedTranslations: [] });
+  };
+
   handleSubmit = event => {
-    this.setState({ allTranslations: [] });
-    console.log(
-      "handleSubmit should have cleared previous translations",
-      this.state.allTranslations
-    );
     event.preventDefault();
+    this.clearAllTranslations();
     for (let i = 0; i < this.state.targetLanguages.length; i++) {
       let currentTargetLanguage = this.state.targetLanguages[i];
       this.fetchTranslation(currentTargetLanguage);
     }
   };
+
   async fetchLanguages() {
     if (this.state.availableLanguages.length < 80) {
       let response = await axios.get("http://localhost:1337/languages");
@@ -71,10 +69,20 @@ class App extends Component {
     let currentLanguageName = currentLanguage[0][1];
 
     let translatedText = response.data;
+    // this.setState({
+    // allTranslations: this.state.allTranslations.concat(translatedText)
+    // formattedTranslations: this.state.formattedTranslations.concat({
+    //   [currentLanguageName]: translatedText
+    // })
+    // });
+
+    // let test = { [currentLanguageName]: translatedText };
+    // console.log(test);
+
     this.setState({
-      allTranslations: this.state.allTranslations.concat(translatedText),
       formattedTranslations: this.state.formattedTranslations.concat({
-        [currentLanguageName]: translatedText
+        language: currentLanguageName,
+        message: translatedText
       })
     });
 
@@ -91,10 +99,10 @@ class App extends Component {
     } = this.state;
 
     const displayTranslationsWithLanguages = this.state.formattedTranslations.map(
-      translation => {
+      t => {
         return (
-          <p key={translation} className="translation">
-            {Object.keys(translation)}: {Object.values(translation)}
+          <p key={t.language}>
+            {t.language}: {t.message}
           </p>
         );
       }
@@ -111,6 +119,9 @@ class App extends Component {
               title="Just Say In"
             />
           </h1>
+          <nav className="page-nav">
+            <a href="/messages">Messages</a>
+          </nav>
         </header>
         <main>
           {isLoading ? (
