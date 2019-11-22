@@ -16,6 +16,7 @@ class App extends Component {
     targetLanguages: ["es", "ja"],
     textToTranslate: "",
     allTranslations: [],
+    formattedTranslations: [],
     translation: ""
   };
 
@@ -27,8 +28,15 @@ class App extends Component {
     this.setState(changes);
   };
 
+  // clearAllTranslations = () => {
+  //   console.log("cleared", this.state.allTranslations);
+  // };
   handleSubmit = event => {
     this.setState({ allTranslations: [] });
+    console.log(
+      "handleSubmit should have cleared previous translations",
+      this.state.allTranslations
+    );
     event.preventDefault();
     for (let i = 0; i < this.state.targetLanguages.length; i++) {
       let currentTargetLanguage = this.state.targetLanguages[i];
@@ -57,11 +65,19 @@ class App extends Component {
       target: currentTargetLanguage
     });
 
+    let currentLanguage = this.state.availableLanguages.filter(
+      lang => lang[0] === currentTargetLanguage
+    );
+    let currentLanguageName = currentLanguage[0][1];
+
     let translatedText = response.data;
     this.setState({
-      allTranslations: this.state.allTranslations.concat(translatedText)
+      allTranslations: this.state.allTranslations.concat(translatedText),
+      formattedTranslations: this.state.formattedTranslations.concat({
+        [currentLanguageName]: translatedText
+      })
     });
-    console.log(this.state.allTranslations);
+    console.log("formattedTranslations:", this.state.formattedTranslations);
 
     this.setState({ translation: translatedText });
   }
@@ -75,15 +91,25 @@ class App extends Component {
       translation
     } = this.state;
 
-    const displayTranslations = this.state.allTranslations.map(
-      (translation, index) => {
+    // const displayTranslations = this.state.allTranslations.map(
+    //   (translation, index) => {
+    //     return (
+    //       <p key={index} className="translation">
+    //         Target language {index + 1}: {translation}
+    //       </p>
+    //     );
+    //   }
+    // );
+    const displayTranslationsWithLanguages = this.state.formattedTranslations.map(
+      translation => {
         return (
-          <p key={index} className="translation">
-            Target language {index + 1}: {translation}
+          <p key={translation} className="translation">
+            {Object.keys(translation)}: {Object.values(translation)}
           </p>
         );
       }
     );
+
     return (
       <div className="App">
         <header className="page-header">
@@ -110,10 +136,17 @@ class App extends Component {
               translation={translation}
             />
           )}
-          <section className="display">
+          {/* <section className="display">
             {displayTranslations.length ? <h2>Translations:</h2> : null}
-
             {displayTranslations.length ? displayTranslations : null}
+          </section> */}
+          <section className="display">
+            {displayTranslationsWithLanguages.length ? (
+              <h2>Translations:</h2>
+            ) : null}
+            {displayTranslationsWithLanguages.length
+              ? displayTranslationsWithLanguages
+              : null}
           </section>
         </main>
         <footer className="page-footer">
