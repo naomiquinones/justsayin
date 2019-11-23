@@ -55,12 +55,12 @@ app.post("/translate", async (req, res) => {
 
 app.post("/message", (req, res) => {
   console.log(req.body);
-  const { recipient } = req.body;
+  const { recipients, message } = req.body;
 
   // Send a message
   let recipients = req.recipient || [process.env.TEST_RECIPIENT1];
 
-  let msg = "Special message from the Just Say In app";
+  let msg = message || "Special message from the Just Say In app";
   for (let recipient of recipients) {
     sendSMS.send(recipient, msg);
   }
