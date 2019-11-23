@@ -32,6 +32,14 @@ class App extends Component {
     this.setState({ allTranslations: [], formattedTranslations: [] });
   };
 
+  sendMessages = recipients => {
+    for (let recipient of recipients) {
+      let number = recipient.name;
+      let msg = recipient.msg;
+      axios.post("/messages", number, msg);
+    }
+  };
+
   handleSubmit = event => {
     event.preventDefault();
     this.clearAllTranslations();
@@ -69,15 +77,6 @@ class App extends Component {
     let currentLanguageName = currentLanguage[0][1];
 
     let translatedText = response.data;
-    // this.setState({
-    // allTranslations: this.state.allTranslations.concat(translatedText)
-    // formattedTranslations: this.state.formattedTranslations.concat({
-    //   [currentLanguageName]: translatedText
-    // })
-    // });
-
-    // let test = { [currentLanguageName]: translatedText };
-    // console.log(test);
 
     this.setState({
       formattedTranslations: this.state.formattedTranslations.concat({
@@ -120,7 +119,7 @@ class App extends Component {
             />
           </h1>
           <nav className="page-nav">
-            <a href="/messages">Messages</a>
+            <a href="">Messages</a>
           </nav>
         </header>
         <main>
@@ -145,6 +144,23 @@ class App extends Component {
               ? displayTranslationsWithLanguages
               : null}
           </section>
+
+          <form className="recipient-box">
+            <fieldset>
+              <legend>Recipients</legend>
+              <input id="3102547608" language="es" type="checkbox" />
+              <label htmlFor="15102258545">Naomi</label>
+              <br />
+              <input id="15102258545" type="checkbox" language="th" />
+              <label htmlFor="15102258545">Noi</label>
+            </fieldset>
+            <br />
+            <input
+              type="submit"
+              value="Send message"
+              onClick={this.sendMessages}
+            />
+          </form>
         </main>
         <footer className="page-footer">
           Copyright &copy; 2019 Naomi Quiñones
@@ -153,5 +169,4 @@ class App extends Component {
     );
   }
 }
-
 export default App;
