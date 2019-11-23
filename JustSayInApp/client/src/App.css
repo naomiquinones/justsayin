@@ -56,9 +56,11 @@ button,
 textarea {
   font-size: 1rem;
   color: var(--app-blue, #49f);
-  width: 100%;
 }
+select,
+button,
 textarea {
+  width: 100%;
 }
 input[type="submit"] {
   margin: 1em 0 0;
@@ -67,6 +69,23 @@ input[type="submit"] {
   display: block;
   width: 50%;
   margin: auto;
+}
+fieldset,
+legend {
+  background-color: var(--app-white);
+  border-radius: 5px;
+}
+fieldset {
+  border: 1px solid var(--app-grey-light);
+}
+legend {
+  font-size: 0.75em;
+  padding: 0.25rem 2.5%;
+}
+.recipient-box {
+  background-color: var(--app-grey-light);
+  padding: 1rem 5%;
+  border: 1px solid var(--app-grey);
 }
 .translated {
   border: var(--app-grey, #ccc);
@@ -149,6 +168,11 @@ button {
 /* ******************** */
 
 /* more media queries */
+@media (min-width: 600px) {
+  .page-nav {
+    font-size: 1.5rem;
+  }
+}
 @media (min-width: 768px) {
   .JustSayIn-logo {
   }
