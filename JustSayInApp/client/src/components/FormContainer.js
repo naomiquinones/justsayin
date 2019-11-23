@@ -11,11 +11,6 @@ const FormContainer = ({
   targetLanguages,
   translation
 }) => {
-  // const addTargetLanguageSelector = event => {
-  //   // add another drop-down menu here
-  //   event.preventDefault();
-  //   console.log("add another drop-down");
-  // };
   return (
     <form className="form-container" onSubmit={handleSubmit}>
       <div className="form-group textarea-container">
@@ -37,15 +32,6 @@ const FormContainer = ({
         handleChange={handleChange}
         translation={translation}
       />
-      {/* <button
-        className="add-button"
-        name="addLang"
-        type="button"
-        value="addLanguage"
-        onClick={addTargetLanguageSelector}
-      >
-        {"Add language"}
-      </button> */}
       <div className="form-group">
         <input
           className="form-input"
