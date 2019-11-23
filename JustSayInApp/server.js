@@ -53,17 +53,17 @@ app.post("/translate", async (req, res) => {
   res.status(200).json(translation);
 });
 
-app.post("/message", (req, res) => {
+app.post("/sendmessage", (req, res) => {
   console.log(req.body);
-  const { recipients, message } = req.body;
+  const { number, message } = req.body;
 
   // Send a message
-  let recipients = req.recipient || [process.env.TEST_RECIPIENT1];
+  let recipient = number; //|| [process.env.TEST_RECIPIENT1];
 
   let msg = message || "Special message from the Just Say In app";
-  for (let recipient of recipients) {
-    sendSMS.send(recipient, msg);
-  }
+  // for (let recipient of recipients) {
+  sendSMS.send(recipient, msg);
+  // }
   console.log(recipient);
   res.sendStatus(200);
 });
