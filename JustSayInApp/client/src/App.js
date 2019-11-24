@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";import "./App.css";
+import { Route, Link } from "react-router-dom";import "./App.css";
 import JustSayInlogo from "./images/JustSayIn-logo-wordmark.svg";
 import axios from "axios";
 
@@ -7,6 +7,8 @@ import axios from "axios";
 import FormContainer from "./components/FormContainer";
 
 import Loading from "./components/Loading";
+
+import Messages from "./components/Messages";
 
 class App extends Component {
   state = {
@@ -126,7 +128,7 @@ class App extends Component {
             />
           </h1>
           <nav className="page-nav">
-            <a href="/messages">Messages</a>
+            <Link to="/messages">Messages</Link>
           </nav>
         </header>
         <main>
@@ -151,7 +153,7 @@ class App extends Component {
               ? displayTranslationsWithLanguages
               : null}
           </section>
-
+          <Route path="/messages" component={Messages} />
           <form className="recipient-box">
             <fieldset>
               <legend>Recipients</legend>
