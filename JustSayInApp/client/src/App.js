@@ -33,6 +33,13 @@ class App extends Component {
   };
 
   sendMessages = recipients => {
+    // get list of unique recipients' target languages
+    
+    // get the necessary translations
+
+    // match translations with recipients
+
+    // send all recipients with their translations to endpoint
     for (let recipient of recipients) {
       let number = recipient.name;
       let msg = recipient.msg;
@@ -119,7 +126,7 @@ class App extends Component {
             />
           </h1>
           <nav className="page-nav">
-            <a href="">Messages</a>
+            <a href="/messages">Messages</a>
           </nav>
         </header>
         <main>
@@ -148,11 +155,11 @@ class App extends Component {
           <form className="recipient-box">
             <fieldset>
               <legend>Recipients</legend>
-              <input id="3102547608" language="es" type="checkbox" />
-              <label htmlFor="15102258545">Naomi</label>
+              <input id="1" language="es" type="checkbox" />
+              <label htmlFor="1">Naomi</label>
               <br />
-              <input id="15102258545" type="checkbox" language="th" />
-              <label htmlFor="15102258545">Noi</label>
+              <input id="2" type="checkbox" language="th" />
+              <label htmlFor="2">Noi</label>
             </fieldset>
             <br />
             <input
