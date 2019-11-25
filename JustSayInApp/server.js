@@ -58,14 +58,14 @@ app.post("/message", (req, res) => {
   const { recipients, message } = req.body;
 
   // Send a message
-  let recipients = req.recipient || [process.env.TEST_RECIPIENT1];
+  let recipient = req.recipient //|| [process.env.TEST_RECIPIENT1];
 
   let msg = message || "Special message from the Just Say In app";
   for (let recipient of recipients) {
     sendSMS.send(recipient, msg);
   }
   console.log(recipient);
-  res.send(200).json('Message sent');
+  res.send(200).json('Message sent to', recipient);
 });
 
 // Below post for twilio incoming
