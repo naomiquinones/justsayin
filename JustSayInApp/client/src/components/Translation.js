@@ -32,6 +32,9 @@ const Translation = () => {
   };
   const handleSubmit = event => {
     event.preventDefault();
+    if (!textToTranslate || textToTranslate === "") {
+      return alert("Please enter text to translate");
+    }
     clearAllTranslations();
     for (let i = 0; i < targetLanguages.length; i++) {
       let currentTargetLanguage = targetLanguages[i];
@@ -81,15 +84,14 @@ const Translation = () => {
         message: translatedText
       }
     ]);
+    // setFormattedTranslations(formattedTranslations => [
+    //   ...formattedTranslations,
+    //   {
+    //     [currentLanguageName]: translatedText
+    //   }
+    // ]);
 
     console.log("formattedTranslations", formattedTranslations);
-    // this.setState({
-    //   formattedTranslations: formattedTranslations.concat({
-    //     language: currentLanguageName,
-    //     message: translatedText
-    //   })
-    // });
-    // console.log(formattedTranslations);
 
     setTranslation(translatedText);
     // this.setState({ translation: translatedText });
@@ -102,6 +104,15 @@ const Translation = () => {
       </p>
     );
   });
+  // const showFormattedTranslations = Object.entries(formattedTranslations).map(
+  //   ([name, text]) => {
+  //     return (
+  //       <p key={name}>
+  //         {name}: {text}
+  //       </p>
+  //     );
+  //   }
+  // );
 
   return (
     <div>
