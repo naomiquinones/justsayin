@@ -29,10 +29,9 @@ const TargetLanguageSelector = ({
               .map(opt => opt.value);
 
             console.log("onChange values:", newValues);
-
-            handleChange({ targetLanguages: newValues });
+            handleChange(newValues)
+            // handleChange({ targetLanguages: newValues });
           }}
-          placeholder="Add target language"
         >
           {languageOptions}
         </select>

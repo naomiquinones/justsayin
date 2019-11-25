@@ -18,17 +18,17 @@ const Translation = () => {
   })
 
   // this is supposed to set the textToTranslate state to whatever the user types in
-  const handleTextToTranslateChange = event => {
-    console.log("handleTextToTranslate",event)
-    setTextToTranslate({ textToTranslate: event.target.value });
-  }
+  // const handleTextToTranslateChange = event => {
+  //   console.log("handleTextToTranslate",event)
+  //   setTextToTranslate({ textToTranslate: event.target.value });
+  // }
   const handleTargetLanguagesChange = event => {
     console.log("event.target.value",event.target)
     setTargetLanguages({...targetLanguages,targetLanguages: event.target})
   }
   
   const clearAllTranslations = () => {
-    this.setState({ allTranslations: [], formattedTranslations: [] });
+    setFormattedTranslations( [] );
   };
   const handleSubmit = event => {
     event.preventDefault();
@@ -72,17 +72,29 @@ const Translation = () => {
     let currentLanguageName = currentLanguage[0][1];
 
     let translatedText = response.data;
-    
-    setFormattedTranslations(formattedTranslations.concat({
-      language: currentLanguageName,
+
+
+
+    let oldFormattedTranslations = [...formattedTranslations];
+    oldFormattedTranslations.push({
+      language:currentLanguageName,
       message: translatedText
-    }));
+    })
+    setFormattedTranslations(oldFormattedTranslations)
+    // setFormattedTranslations(formattedTranslations.concat({
+    //   language: currentLanguageName,
+    //   message: translatedText
+    // }));
+    console.log(formattedTranslations)
     // this.setState({
     //   formattedTranslations: formattedTranslations.concat({
     //     language: currentLanguageName,
     //     message: translatedText
     //   })
     // });
+
+
+    
     setTranslation(translatedText)
     // this.setState({ translation: translatedText });
   }
