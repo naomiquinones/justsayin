@@ -2,7 +2,7 @@ import React from "react";
 
 import TargetLanguageSelector from "./TargetLanguageSelector";
 
-const FormContainer = ({
+const Translation = ({
   availableLanguages,
   // value,
   handleSubmit,
@@ -43,4 +43,4 @@ const FormContainer = ({
     </form>
   );
 };
-export default FormContainer;
+export default Translation;

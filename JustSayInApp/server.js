@@ -65,7 +65,7 @@ app.post("/sendmessage", (req, res) => {
   sendSMS.send(recipient, msg);
   // }
   console.log(recipient);
-  res.sendStatus(200);
+  res.send(200).json('Message sent');
 });
 
 // Below post for twilio incoming

@@ -1,12 +1,15 @@
 import React, { Component } from "react";
+// import { Route, Link } from "react-router-dom";
 import "./App.css";
 import JustSayInlogo from "./images/JustSayIn-logo-wordmark.svg";
 import axios from "axios";
 
 // import SavedTexts from './components/SavedTexts';
-import FormContainer from "./components/FormContainer";
+import Translation from "./components/Translation";
 
 import Loading from "./components/Loading";
+
+// import Messages from "./components/Messages";
 
 class App extends Component {
   state = {
@@ -33,6 +36,13 @@ class App extends Component {
   };
 
   sendMessages = recipients => {
+    // get list of unique recipients' target languages
+    
+    // get the necessary translations
+
+    // match translations with recipients
+
+    // send all recipients with their translations to endpoint
     for (let recipient of recipients) {
       let number = recipient.name;
       let msg = recipient.msg;
@@ -97,7 +107,7 @@ class App extends Component {
       translation
     } = this.state;
 
-    const displayTranslationsWithLanguages = this.state.formattedTranslations.map(
+    const showFormattedTranslations = this.state.formattedTranslations.map(
       t => {
         return (
           <p key={t.language}>
@@ -119,14 +129,18 @@ class App extends Component {
             />
           </h1>
           <nav className="page-nav">
+<<<<<<< HEAD
             <a href="/messaging">Messages</a>
+=======
+            <Link to="/messages">Messages</Link>
+>>>>>>> 8546814d9c2246bc2d2f116af1b55b72406a470f
           </nav>
         </header>
         <main>
           {isLoading ? (
             <Loading message="Getting available languages" />
           ) : (
-            <FormContainer
+            <Translation
               availableLanguages={availableLanguages}
               targetLanguages={targetLanguages}
               textToTranslate={textToTranslate}
@@ -137,14 +151,14 @@ class App extends Component {
           )}
 
           <section className="display">
-            {displayTranslationsWithLanguages.length ? (
+            {showFormattedTranslations.length ? (
               <h2>Translations:</h2>
             ) : null}
-            {displayTranslationsWithLanguages.length
-              ? displayTranslationsWithLanguages
+            {showFormattedTranslations.length
+              ? showFormattedTranslations
               : null}
           </section>
-
+          {/* <Route path="/messages" component={Messages} /> */}
           <form className="recipient-box">
             <fieldset>
               <legend>Recipients</legend>

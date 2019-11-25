@@ -4,9 +4,7 @@ const TargetLanguageSelector = ({
   availableLanguages,
   handleChange,
   name,
-  targetLanguages,
-  translation
-}) => {
+  targetLanguages}) => {
   const languageOptions = availableLanguages.map(language => {
     return (
       <option key={language[0]} value={language[0]}>

@@ -1,7 +1,12 @@
+CREATE TABLE languages (
+  iso_code VARCHAR(5) PRIMARY KEY,
+  languagename VARCHAR(25)
+)
 CREATE TABLE users (
  id serial PRIMARY KEY,
  oauth_id VARCHAR(150) UNIQUE,
- name VARCHAR(100),
+ firstname VARCHAR(100),
+ lastname VARCHAR(100),
  email VARCHAR(100),
  phone VARCHAR(15),
  target_lang_code VARCHAR REFERENCES languages (iso_code),
@@ -10,9 +15,9 @@ CREATE TABLE users (
 
 CREATE TABLE user_contacts (
  id serial PRIMARY KEY,
- owner INTEGER REFERENCES users (id),
- contact INTEGER REFERENCES users (id),
- block BOOLEAN,
+ owner_id INTEGER REFERENCES users (id),
+ contact_id INTEGER REFERENCES users (id),
+ block_ BOOLEAN,
  favorite BOOLEAN
 );
 
@@ -29,7 +34,7 @@ CREATE TABLE messages (
  sender INTEGER REFERENCES users (id),
  recipient INTEGER REFERENCES users (id),
  contact_group INTEGER REFERENCES groups (id),
- target_language INTEGER REFERENCES languages (id),
+ language_code INTEGER REFERENCES languages (id),
  created_at TIMESTAMP
 );
 
@@ -74,8 +79,9 @@ VALUES
 ;
 -- 
 -- 
-SELECT users.name,user_contacts.contact,users.target_lang_code
-FROM users
-INNER JOIN user_contacts
+SELECT users.name,user_contacts.contact_id,users.target_lang_code
+FROM user_contacts
+INNER JOIN users
 ON users.id = user_contacts.owner
+WHERE user_contacts.owner = --users id here
 ;
