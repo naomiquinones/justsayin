@@ -4,7 +4,7 @@ import JustSayInlogo from "./images/JustSayIn-logo-wordmark.svg";
 import axios from "axios";
 
 // import SavedTexts from './components/SavedTexts';
-import FormContainer from "./components/FormContainer";
+import Translation from "./components/Translation";
 
 import Loading from "./components/Loading";
 
@@ -135,7 +135,7 @@ class App extends Component {
           {isLoading ? (
             <Loading message="Getting available languages" />
           ) : (
-            <FormContainer
+            <Translation
               availableLanguages={availableLanguages}
               targetLanguages={targetLanguages}
               textToTranslate={textToTranslate}
