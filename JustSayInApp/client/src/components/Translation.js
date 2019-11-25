@@ -73,18 +73,7 @@ const Translation = () => {
 
     let translatedText = response.data;
     console.log("translatedText", translatedText);
-    // let oldFormattedTranslations = [...formattedTranslations];
-    // oldFormattedTranslations.push({
-    //   language:currentLanguageName,
-    //   message: translatedText
-    // })
-    // setFormattedTranslations(oldFormattedTranslations)
-    // setFormattedTranslations(
-    //   formattedTranslations.concat({
-    //     language: currentLanguageName,
-    //     message: translatedText
-    //   })
-    // );
+
     setFormattedTranslations(formattedTranslations => [
       ...formattedTranslations,
       {
@@ -116,6 +105,12 @@ const Translation = () => {
 
   return (
     <div>
+      {console.log(
+        "showFormattedTranslations",
+        showFormattedTranslations,
+        "formattedTranslations",
+        formattedTranslations
+      )}
       {isLoading ? (
         <Loading message="Getting available languages" />
       ) : (
