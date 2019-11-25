@@ -37,7 +37,7 @@ class App extends Component {
 
   sendMessages = recipients => {
     // get list of unique recipients' target languages
-    
+
     // get the necessary translations
 
     // match translations with recipients
@@ -129,11 +129,7 @@ class App extends Component {
             />
           </h1>
           <nav className="page-nav">
-<<<<<<< HEAD
-            <a href="/messaging">Messages</a>
-=======
             <Link to="/messages">Messages</Link>
->>>>>>> 8546814d9c2246bc2d2f116af1b55b72406a470f
           </nav>
         </header>
         <main>
@@ -151,9 +147,7 @@ class App extends Component {
           )}
 
           <section className="display">
-            {showFormattedTranslations.length ? (
-              <h2>Translations:</h2>
-            ) : null}
+            {showFormattedTranslations.length ? <h2>Translations:</h2> : null}
             {showFormattedTranslations.length
               ? showFormattedTranslations
               : null}
