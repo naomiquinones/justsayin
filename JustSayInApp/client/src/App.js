@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Link } from "react-router-dom";import "./App.css";
+// import { Route, Link } from "react-router-dom";import "./App.css";
 import JustSayInlogo from "./images/JustSayIn-logo-wordmark.svg";
 import axios from "axios";
 
@@ -8,7 +8,7 @@ import Translation from "./components/Translation";
 
 import Loading from "./components/Loading";
 
-import Messages from "./components/Messages";
+// import Messages from "./components/Messages";
 
 class App extends Component {
   state = {
@@ -106,7 +106,7 @@ class App extends Component {
       translation
     } = this.state;
 
-    const displayTranslationsWithLanguages = this.state.formattedTranslations.map(
+    const showFormattedTranslations = this.state.formattedTranslations.map(
       t => {
         return (
           <p key={t.language}>
@@ -146,14 +146,14 @@ class App extends Component {
           )}
 
           <section className="display">
-            {displayTranslationsWithLanguages.length ? (
+            {showFormattedTranslations.length ? (
               <h2>Translations:</h2>
             ) : null}
-            {displayTranslationsWithLanguages.length
-              ? displayTranslationsWithLanguages
+            {showFormattedTranslations.length
+              ? showFormattedTranslations
               : null}
           </section>
-          <Route path="/messages" component={Messages} />
+          {/* <Route path="/messages" component={Messages} /> */}
           <form className="recipient-box">
             <fieldset>
               <legend>Recipients</legend>
