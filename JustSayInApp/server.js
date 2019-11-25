@@ -58,11 +58,7 @@ app.post("/sendmessage", (req, res) => {
   const { number, message } = req.body;
 
   // Send a message
-<<<<<<< HEAD
-  let recipient = req.recipient //|| [process.env.TEST_RECIPIENT1];
-=======
   let recipient = number; //|| [process.env.TEST_RECIPIENT1];
->>>>>>> 039b4c90b5ab9946405a9a9b4884f96a5772f946
 
   let msg = message || "Special message from the Just Say In app";
   // for (let recipient of recipients) {
