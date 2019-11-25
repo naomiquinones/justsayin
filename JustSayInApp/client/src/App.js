@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, Link } from "react-router-dom";
+// import { Route, Link } from "react-router-dom";
 import "./App.css";
 import JustSayInlogo from "./images/JustSayIn-logo-wordmark.svg";
 import axios from "axios";
@@ -121,6 +122,8 @@ class App extends Component {
           </h1>
           <nav className="page-nav">
             {/* <Link to="/messages">Messages</Link> */}
+            <a href="/messaging">Messages</a>
+            <Link to="/messages">Messages</Link>
           </nav>
         </header>
         <main>
