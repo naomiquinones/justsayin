@@ -4,8 +4,7 @@ import axios from "axios";
 import Loading from "./Loading";
 import TargetLanguageSelector from "./TargetLanguageSelector";
 
-const Translation = ({
-  handleChange}) => {
+const Translation = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [availableLanguages, setAvailableLanguages] = React.useState([]);
   const sourceLanguage='en';
@@ -21,7 +20,7 @@ const Translation = ({
   // this is supposed to set the textToTranslate state to whatever the user types in
   const handleTextToTranslateChange = event => {
     console.log("handleTextToTranslate",event)
-    setTextToTranslate({ ...textToTranslate,textToTranslate: event.target.value });
+    setTextToTranslate({ textToTranslate: event.target.value });
   }
   const handleTargetLanguagesChange = event => {
     console.log("event.target.value",event.target)
@@ -110,7 +109,7 @@ const Translation = ({
               className="form-input"
               name="textToTranslate"
               value={textToTranslate}
-              onChange={ handleTextToTranslateChange }
+              onChange={ event => setTextToTranslate(event.currentTarget.value) }
               placeholder="Enter text to translate"
             />
           </div>
