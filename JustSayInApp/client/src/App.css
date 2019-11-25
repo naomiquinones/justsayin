@@ -32,14 +32,19 @@ ul {
   letter-spacing: 0.5rem;
 }
 .page-nav {
-  width: 45%;
+  width: 35%;
   text-align: right;
   padding: 0 5%;
   font-size: 6vmin;
+  display: flex;
+  justify-content: space-between;
 }
 .page-nav a {
   text-decoration: none;
   color: var(--app-grey-light, #fafafa);
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
 }
 main {
 }
@@ -85,7 +90,6 @@ legend {
 .recipient-box {
   background-color: var(--app-grey-light);
   padding: 1rem 5%;
-  border: 1px solid var(--app-grey);
 }
 .translated {
   border: var(--app-grey, #ccc);
@@ -95,6 +99,7 @@ legend {
 .textarea-container {
   padding: 2%;
   background-color: var(--app-blue, #49f);
+  border-radius: 3px;
 }
 textarea {
   min-height: 20vh;
@@ -143,9 +148,12 @@ button {
   }
   .textarea-container,
   .select-container {
-    width: 50%;
+    width: 47.25%;
     margin: 0;
     float: left;
+  }
+  .textarea-container {
+    margin-right:2.5%;
   }
   .select-container {
     width: 40%;
@@ -180,6 +188,10 @@ button {
     min-height: 2vh;
     align-items: flex-start;
     padding: 0 2.5%;
+  }
+  .page-nav {
+    padding-top: 2em;
+    font-size: 1.25rem;
   }
 }
 @media (min-width: 950px) {
