@@ -47,6 +47,7 @@ const App = () => {
           />
         </h1>
         <nav className="page-nav">
+          <Link to="/">Home</Link>
           <Link to="/messages">Messages</Link>
         </nav>
       </header>
