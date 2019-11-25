@@ -7,7 +7,6 @@ import axios from "axios";
 // import SavedTexts from './components/SavedTexts';
 import Translation from "./components/Translation";
 
-import Loading from "./components/Loading";
 
 // import Messages from "./components/Messages";
 
@@ -104,18 +103,10 @@ class App extends Component {
       isLoading,
       textToTranslate,
       targetLanguages,
-      translation
+      translation,
+      formattedTranslations
     } = this.state;
 
-    const showFormattedTranslations = this.state.formattedTranslations.map(
-      t => {
-        return (
-          <p key={t.language}>
-            {t.language}: {t.message}
-          </p>
-        );
-      }
-    );
 
     return (
       <div className="App">
@@ -133,9 +124,6 @@ class App extends Component {
           </nav>
         </header>
         <main>
-          {isLoading ? (
-            <Loading message="Getting available languages" />
-          ) : (
             <Translation
               availableLanguages={availableLanguages}
               targetLanguages={targetLanguages}
@@ -143,17 +131,10 @@ class App extends Component {
               handleChange={this.updateState}
               handleSubmit={this.handleSubmit}
               translation={translation}
+              formattedTranslations={formattedTranslations}
+              isLoading={isLoading}
             />
-          )}
 
-          <section className="display">
-            {showFormattedTranslations.length ? (
-              <h2>Translations:</h2>
-            ) : null}
-            {showFormattedTranslations.length
-              ? showFormattedTranslations
-              : null}
-          </section>
           {/* <Route path="/messages" component={Messages} /> */}
           <form className="recipient-box">
             <fieldset>

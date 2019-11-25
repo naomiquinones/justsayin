@@ -1,5 +1,6 @@
 import React from "react";
 
+import Loading from "./Loading";
 import TargetLanguageSelector from "./TargetLanguageSelector";
 
 const Translation = ({
@@ -10,7 +11,8 @@ const Translation = ({
   textToTranslate,
   targetLanguages,
   translation,
-  formattedTranslations
+  formattedTranslations,
+  isLoading
 }) => {
   const showFormattedTranslations = formattedTranslations.map(
     t => {
@@ -24,6 +26,9 @@ const Translation = ({
 
   return (
     <div>
+          {isLoading ? (
+            <Loading message="Getting available languages" />
+          ) : (
       <form className="form-container" onSubmit={handleSubmit}>
         <div className="form-group textarea-container">
           <textarea
@@ -53,7 +58,8 @@ const Translation = ({
           />
         </div>
       </form>
-      <section className="display">
+      )}
+    <section className="display">
         {showFormattedTranslations.length ? (
           <h2>Translations:</h2>
         ) : null}
