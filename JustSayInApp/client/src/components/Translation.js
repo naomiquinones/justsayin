@@ -1,5 +1,6 @@
 import React from "react";
 
+import Loading from "./Loading";
 import TargetLanguageSelector from "./TargetLanguageSelector";
 
 const Translation = ({
@@ -9,38 +10,64 @@ const Translation = ({
   handleChange,
   textToTranslate,
   targetLanguages,
-  translation
+  translation,
+  formattedTranslations,
+  isLoading
 }) => {
-  return (
-    <form className="form-container" onSubmit={handleSubmit}>
-      <div className="form-group textarea-container">
-        <textarea
-          className="form-input"
-          name="textToTranslate"
-          value={textToTranslate}
-          onChange={e => {
-            handleChange({ textToTranslate: e.target.value });
-          }}
-          placeholder="Enter text to translate"
-        />
-      </div>
+  const showFormattedTranslations = formattedTranslations.map(
+    t => {
+      return (
+        <p key={t.language}>
+          {t.language}: {t.message}
+        </p>
+      );
+    }
+  );
 
-      <TargetLanguageSelector
-        name={"targetLanguages"}
-        targetLanguages={targetLanguages}
-        availableLanguages={availableLanguages}
-        handleChange={handleChange}
-        translation={translation}
-      />
-      <div className="form-group">
-        <input
-          className="form-input"
-          id="submit"
-          type="submit"
-          value="Translate"
+  return (
+    <div>
+          {isLoading ? (
+            <Loading message="Getting available languages" />
+          ) : (
+      <form className="form-container" onSubmit={handleSubmit}>
+        <div className="form-group textarea-container">
+          <textarea
+            className="form-input"
+            name="textToTranslate"
+            value={textToTranslate}
+            onChange={e => {
+              handleChange({ textToTranslate: e.target.value });
+            }}
+            placeholder="Enter text to translate"
+          />
+        </div>
+
+        <TargetLanguageSelector
+          name={"targetLanguages"}
+          targetLanguages={targetLanguages}
+          availableLanguages={availableLanguages}
+          handleChange={handleChange}
+          translation={translation}
         />
-      </div>
-    </form>
+        <div className="form-group">
+          <input
+            className="form-input"
+            id="submit"
+            type="submit"
+            value="Translate"
+          />
+        </div>
+      </form>
+      )}
+    <section className="display">
+        {showFormattedTranslations.length ? (
+          <h2>Translations:</h2>
+        ) : null}
+        {showFormattedTranslations.length
+          ? showFormattedTranslations
+          : null}
+      </section>
+    </div>
   );
 };
 export default Translation;

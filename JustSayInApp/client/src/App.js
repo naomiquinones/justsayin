@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Route, Link } from "react-router-dom";
 // import { Route, Link } from "react-router-dom";
 import "./App.css";
 import JustSayInlogo from "./images/JustSayIn-logo-wordmark.svg";
@@ -7,7 +8,6 @@ import axios from "axios";
 // import SavedTexts from './components/SavedTexts';
 import Translation from "./components/Translation";
 
-import Loading from "./components/Loading";
 
 // import Messages from "./components/Messages";
 
@@ -104,18 +104,10 @@ class App extends Component {
       isLoading,
       textToTranslate,
       targetLanguages,
-      translation
+      translation,
+      formattedTranslations
     } = this.state;
 
-    const showFormattedTranslations = this.state.formattedTranslations.map(
-      t => {
-        return (
-          <p key={t.language}>
-            {t.language}: {t.message}
-          </p>
-        );
-      }
-    );
 
     return (
       <div className="App">
@@ -129,13 +121,15 @@ class App extends Component {
             />
           </h1>
           <nav className="page-nav">
+<<<<<<< HEAD
+=======
+            {/* <Link to="/messages">Messages</Link> */}
+            <a href="/messaging">Messages</a>
+>>>>>>> 6e93c1078a8cee0e9414598350d2196e22169658
             <Link to="/messages">Messages</Link>
           </nav>
         </header>
         <main>
-          {isLoading ? (
-            <Loading message="Getting available languages" />
-          ) : (
             <Translation
               availableLanguages={availableLanguages}
               targetLanguages={targetLanguages}
@@ -143,7 +137,10 @@ class App extends Component {
               handleChange={this.updateState}
               handleSubmit={this.handleSubmit}
               translation={translation}
+              formattedTranslations={formattedTranslations}
+              isLoading={isLoading}
             />
+<<<<<<< HEAD
           )}
 
           <section className="display">
@@ -152,6 +149,9 @@ class App extends Component {
               ? showFormattedTranslations
               : null}
           </section>
+=======
+
+>>>>>>> 6e93c1078a8cee0e9414598350d2196e22169658
           {/* <Route path="/messages" component={Messages} /> */}
           <form className="recipient-box">
             <fieldset>
