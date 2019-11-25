@@ -121,11 +121,8 @@ class App extends Component {
             />
           </h1>
           <nav className="page-nav">
-<<<<<<< HEAD
-=======
             {/* <Link to="/messages">Messages</Link> */}
             <a href="/messaging">Messages</a>
->>>>>>> 6e93c1078a8cee0e9414598350d2196e22169658
             <Link to="/messages">Messages</Link>
           </nav>
         </header>
@@ -140,18 +137,6 @@ class App extends Component {
               formattedTranslations={formattedTranslations}
               isLoading={isLoading}
             />
-<<<<<<< HEAD
-          )}
-
-          <section className="display">
-            {showFormattedTranslations.length ? <h2>Translations:</h2> : null}
-            {showFormattedTranslations.length
-              ? showFormattedTranslations
-              : null}
-          </section>
-=======
-
->>>>>>> 6e93c1078a8cee0e9414598350d2196e22169658
           {/* <Route path="/messages" component={Messages} /> */}
           <form className="recipient-box">
             <fieldset>
