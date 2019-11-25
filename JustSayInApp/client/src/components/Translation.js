@@ -17,12 +17,15 @@ const Translation = ({
   React.useEffect(()=>{
     fetchLanguages();
   })
+
+  // this is supposed to set the textToTranslate state to whatever the user types in
   const handleTextToTranslateChange = event => {
-    setTextToTranslate({ textToTranslate: event.target.value });
+    console.log("handleTextToTranslate",event)
+    setTextToTranslate({ ...textToTranslate,textToTranslate: event.target.value });
   }
   const handleTargetLanguagesChange = event => {
-    const {value} = event.target;
-    setTargetLanguages({...targetLanguages,[targetLanguages]: value})
+    console.log("event.target.value",event.target)
+    setTargetLanguages({...targetLanguages,targetLanguages: event.target})
   }
   
   const clearAllTranslations = () => {
@@ -98,36 +101,36 @@ const Translation = ({
 
   return (
     <div>
-          {isLoading ? (
-            <Loading message="Getting available languages" />
-          ) : (
-      <form className="form-container" onSubmit={handleSubmit}>
-        <div className="form-group textarea-container">
-          <textarea
-            className="form-input"
-            name="textToTranslate"
-            value={textToTranslate}
-            onChange={handleTextToTranslateChange}
-            placeholder="Enter text to translate"
-          />
-        </div>
+      {isLoading ? (
+        <Loading message="Getting available languages" />
+      ) : (
+        <form className="form-container" onSubmit={handleSubmit}>
+          <div className="form-group textarea-container">
+            <textarea
+              className="form-input"
+              name="textToTranslate"
+              value={textToTranslate}
+              onChange={ handleTextToTranslateChange }
+              placeholder="Enter text to translate"
+            />
+          </div>
 
-        <TargetLanguageSelector
-          name={"targetLanguages"}
-          targetLanguages={targetLanguages}
-          availableLanguages={availableLanguages}
-          handleChange={handleTargetLanguagesChange}
-          translation={translation}
-        />
-        <div className="form-group">
-          <input
-            className="form-input"
-            id="submit"
-            type="submit"
-            value="Translate"
+          <TargetLanguageSelector
+            name={"targetLanguages"}
+            targetLanguages={targetLanguages}
+            availableLanguages={availableLanguages}
+            handleChange={handleTargetLanguagesChange}
+            translation={translation}
           />
-        </div>
-      </form>
+          <div className="form-group">
+            <input
+              className="form-input"
+              id="submit"
+              type="submit"
+              value="Translate"
+            />
+          </div>
+        </form>
       )}
     <section className="display">
         {showFormattedTranslations.length ? (
