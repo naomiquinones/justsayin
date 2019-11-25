@@ -1,8 +1,25 @@
 import React from "react";
 
-const Messages = () => {
+const Messages = ({textToTranslate, handleChange}) => {
+  const [message, setMessage] = React.useState('');
+  const sendMessages = () => {
+    console.log('message sent');
+
+  }
   return (
     <form className="recipient-box">
+      <div className="form-group textarea-container">
+        <textarea
+          className="form-input"
+          name="textToTranslate"
+          value={message}
+          onChange={e => {
+            setMessage({ textToTranslate: e.target.value });
+          }}
+          placeholder="Enter text to send"
+        />
+      </div>
+
       <fieldset>
         <legend>Recipients</legend>
         <input id="1" language="es" type="checkbox" />
@@ -15,7 +32,7 @@ const Messages = () => {
       <input
         type="submit"
         value="Send message"
-        onClick={this.sendMessages}
+        onClick={sendMessages()}
       />
     </form>
   )
