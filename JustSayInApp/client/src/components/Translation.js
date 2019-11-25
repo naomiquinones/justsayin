@@ -17,20 +17,9 @@ const Translation = () => {
     fetchLanguages();
   });
 
-  // this is supposed to set the textToTranslate state to whatever the user types in
-  // const handleTextToTranslateChange = event => {
-  //   console.log("handleTextToTranslate",event)
-  //   setTextToTranslate({ textToTranslate: event.target.value });
-  // }
   const handleTargetLanguagesChange = data => {
     console.log("handleTargetLanguagesChange event", data);
-    setTargetLanguages(
-      //   targetLanguages => [
-      //   ...targetLanguages,
-      //   data.currentTarget
-      // ]
-      data
-    );
+    setTargetLanguages(data);
   };
 
   const clearAllTranslations = () => {
@@ -62,7 +51,6 @@ const Translation = () => {
       }
       setAvailableLanguages(langsArray);
       setIsLoading(false);
-      // this.setState({ availableLanguages: langsArray, isLoading: false });
     }
   };
 
@@ -104,22 +92,6 @@ const Translation = () => {
       </p>
     );
   });
-  // const showFormattedTranslations = Object.entries(formattedTranslations).map(
-  //   ([name, text]) => {
-  //     return (
-  //       <p key={name}>
-  //         {name}: {text}
-  //       </p>
-  //     );
-  //   }
-  // );
-  // const showFormattedTranslations = Object.entries(formattedTranslations).map(
-  //   ([k, v]) => (
-  //     <div key={k}>
-  //       {k}: {v}
-  //     </div>
-  //   )
-  // );
 
   return (
     <div>
