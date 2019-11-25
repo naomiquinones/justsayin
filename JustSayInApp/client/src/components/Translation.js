@@ -7,15 +7,15 @@ import TargetLanguageSelector from "./TargetLanguageSelector";
 const Translation = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [availableLanguages, setAvailableLanguages] = React.useState([]);
-  const sourceLanguage='en';
-  const [targetLanguages, setTargetLanguages] = React.useState(['es','ja']);
-  const [textToTranslate, setTextToTranslate] = React.useState('');
+  const sourceLanguage = "en";
+  const [targetLanguages, setTargetLanguages] = React.useState(["es", "ja"]);
+  const [textToTranslate, setTextToTranslate] = React.useState("");
   const [formattedTranslations, setFormattedTranslations] = React.useState([]);
-  const [translation, setTranslation] = React.useState('');
+  const [translation, setTranslation] = React.useState("");
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     fetchLanguages();
-  })
+  });
 
   // this is supposed to set the textToTranslate state to whatever the user types in
   // const handleTextToTranslateChange = event => {
@@ -23,12 +23,12 @@ const Translation = () => {
   //   setTextToTranslate({ textToTranslate: event.target.value });
   // }
   const handleTargetLanguagesChange = event => {
-    console.log("event.target.value",event.target)
-    setTargetLanguages({...targetLanguages,targetLanguages: event.target})
-  }
-  
+    console.log("event.target.value", event.target);
+    setTargetLanguages({ ...targetLanguages, targetLanguages: event.target });
+  };
+
   const clearAllTranslations = () => {
-    setFormattedTranslations( [] );
+    setFormattedTranslations([]);
   };
   const handleSubmit = event => {
     event.preventDefault();
@@ -57,9 +57,9 @@ const Translation = () => {
       setIsLoading(false);
       // this.setState({ availableLanguages: langsArray, isLoading: false });
     }
-  }
+  };
 
-  const fetchTranslation = async (currentTargetLanguage) => {
+  const fetchTranslation = async currentTargetLanguage => {
     let response = await axios.post("http://localhost:1337/translate", {
       text: textToTranslate,
       source: sourceLanguage,
@@ -72,43 +72,47 @@ const Translation = () => {
     let currentLanguageName = currentLanguage[0][1];
 
     let translatedText = response.data;
-
-
-
-    let oldFormattedTranslations = [...formattedTranslations];
-    oldFormattedTranslations.push({
-      language:currentLanguageName,
-      message: translatedText
-    })
-    setFormattedTranslations(oldFormattedTranslations)
-    // setFormattedTranslations(formattedTranslations.concat({
-    //   language: currentLanguageName,
+    console.log("translatedText", translatedText);
+    // let oldFormattedTranslations = [...formattedTranslations];
+    // oldFormattedTranslations.push({
+    //   language:currentLanguageName,
     //   message: translatedText
-    // }));
-    console.log(formattedTranslations)
+    // })
+    // setFormattedTranslations(oldFormattedTranslations)
+    // setFormattedTranslations(
+    //   formattedTranslations.concat({
+    //     language: currentLanguageName,
+    //     message: translatedText
+    //   })
+    // );
+    setFormattedTranslations(formattedTranslations => [
+      ...formattedTranslations,
+      {
+        language: currentLanguageName,
+        message: translatedText
+      }
+    ]);
+
+    console.log("formattedTranslations", formattedTranslations);
     // this.setState({
     //   formattedTranslations: formattedTranslations.concat({
     //     language: currentLanguageName,
     //     message: translatedText
     //   })
     // });
+    // console.log(formattedTranslations);
 
-
-    
-    setTranslation(translatedText)
+    setTranslation(translatedText);
     // this.setState({ translation: translatedText });
-  }
+  };
 
-
-  const showFormattedTranslations = formattedTranslations.map(
-    t => {
-      return (
-        <p key={t.language}>
-          {t.language}: {t.message}
-        </p>
-      );
-    }
-  );
+  const showFormattedTranslations = formattedTranslations.map(t => {
+    return (
+      <p key={t.language}>
+        {t.language}: {t.message}
+      </p>
+    );
+  });
 
   return (
     <div>
@@ -121,7 +125,7 @@ const Translation = () => {
               className="form-input"
               name="textToTranslate"
               value={textToTranslate}
-              onChange={ event => setTextToTranslate(event.currentTarget.value) }
+              onChange={event => setTextToTranslate(event.currentTarget.value)}
               placeholder="Enter text to translate"
             />
           </div>
@@ -143,13 +147,9 @@ const Translation = () => {
           </div>
         </form>
       )}
-    <section className="display">
-        {showFormattedTranslations.length ? (
-          <h2>Translations:</h2>
-        ) : null}
-        {showFormattedTranslations.length
-          ? showFormattedTranslations
-          : null}
+      <section className="display">
+        {showFormattedTranslations.length ? <h2>Translations:</h2> : null}
+        {showFormattedTranslations.length ? showFormattedTranslations : null}
       </section>
     </div>
   );
