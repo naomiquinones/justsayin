@@ -22,9 +22,15 @@ const Translation = () => {
   //   console.log("handleTextToTranslate",event)
   //   setTextToTranslate({ textToTranslate: event.target.value });
   // }
-  const handleTargetLanguagesChange = event => {
-    console.log("event.target.value", event.target);
-    setTargetLanguages({ ...targetLanguages, targetLanguages: event.target });
+  const handleTargetLanguagesChange = data => {
+    console.log("handleTargetLanguagesChange event", data);
+    setTargetLanguages(
+      //   targetLanguages => [
+      //   ...targetLanguages,
+      //   data.currentTarget
+      // ]
+      data
+    );
   };
 
   const clearAllTranslations = () => {
@@ -36,14 +42,12 @@ const Translation = () => {
       return alert("Please enter text to translate");
     }
     clearAllTranslations();
+    console.log("cleared", formattedTranslations);
     for (let i = 0; i < targetLanguages.length; i++) {
       let currentTargetLanguage = targetLanguages[i];
       fetchTranslation(currentTargetLanguage);
     }
   };
-  // const updateState = changes => {
-  //   this.setState(changes);
-  // };
 
   const fetchLanguages = async () => {
     if (availableLanguages.length < 80) {
@@ -73,9 +77,7 @@ const Translation = () => {
       lang => lang[0] === currentTargetLanguage
     );
     let currentLanguageName = currentLanguage[0][1];
-
     let translatedText = response.data;
-    console.log("translatedText", translatedText);
 
     setFormattedTranslations(formattedTranslations => [
       ...formattedTranslations,
@@ -86,9 +88,7 @@ const Translation = () => {
     ]);
     // setFormattedTranslations(formattedTranslations => [
     //   ...formattedTranslations,
-    //   {
-    //     [currentLanguageName]: translatedText
-    //   }
+    //   ([currentLanguageName]: translatedText)
     // ]);
 
     console.log("formattedTranslations", formattedTranslations);
@@ -113,15 +113,16 @@ const Translation = () => {
   //     );
   //   }
   // );
+  // const showFormattedTranslations = Object.entries(formattedTranslations).map(
+  //   ([k, v]) => (
+  //     <div key={k}>
+  //       {k}: {v}
+  //     </div>
+  //   )
+  // );
 
   return (
     <div>
-      {console.log(
-        "showFormattedTranslations",
-        showFormattedTranslations,
-        "formattedTranslations",
-        formattedTranslations
-      )}
       {isLoading ? (
         <Loading message="Getting available languages" />
       ) : (

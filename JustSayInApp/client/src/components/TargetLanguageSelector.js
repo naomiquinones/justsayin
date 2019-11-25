@@ -4,7 +4,8 @@ const TargetLanguageSelector = ({
   availableLanguages,
   handleChange,
   name,
-  targetLanguages}) => {
+  targetLanguages
+}) => {
   const languageOptions = availableLanguages.map(language => {
     return (
       <option key={language[0]} value={language[0]}>
@@ -24,13 +25,11 @@ const TargetLanguageSelector = ({
           name={name}
           value={targetLanguages}
           onChange={e => {
-            const newValues = Array.apply(null, e.currentTarget.options)
-              .filter(opt => opt.selected)
-              .map(opt => opt.value);
-
-            console.log("onChange values:", newValues);
-            handleChange(newValues)
-            // handleChange({ targetLanguages: newValues });
+            handleChange(
+              Array.apply(null, e.currentTarget.options)
+                .filter(opt => opt.selected)
+                .map(opt => opt.value)
+            );
           }}
         >
           {languageOptions}
