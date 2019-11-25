@@ -25,7 +25,7 @@ const Translation = () => {
   const clearAllTranslations = () => {
     setFormattedTranslations([]);
   };
-  const handleSubmit = event => {
+  const handleTranslation = event => {
     event.preventDefault();
     if (!textToTranslate || textToTranslate === "") {
       return alert("Please enter text to translate");
@@ -98,7 +98,7 @@ const Translation = () => {
       {isLoading ? (
         <Loading message="Getting available languages" />
       ) : (
-        <form className="form-container" onSubmit={handleSubmit}>
+        <form className="form-container" onSubmit={handleTranslation}>
           <div className="form-group textarea-container">
             <textarea
               className="form-input"
