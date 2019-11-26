@@ -6,6 +6,7 @@ const port = process.env.PORT;
 
 const express = require("express");
 const cors = require("cors");
+const { pool } = require("./config");
 const app = express();
 
 const MessagingResponse = require("twilio").twiml.MessagingResponse;
@@ -22,6 +23,74 @@ const sendSMS = require("./messaging/send_sms");
 
 // bring in translation file
 const translator = require("./translate/translate");
+
+// database
+// get contacts
+const getContacts = (async (request, response) => {
+  // const { owner_id } = request.body;
+  const owner_id = 1;
+
+  const client = await pool.connect();
+  try {
+    const {
+      results
+    } = await pool.query(
+      "SELECT id, first_name, phone, target_lang_code FROM users WHERE id IN (SELECT contact_id FROM user_contacts WHERE owner_id=$1)",
+      [owner_id]
+    );
+    response.status(200).json(results.rows);
+  } finally {
+    // Make sure to release the client before any error handling,
+    // just in case the error handling itself throws an error.
+    client.release();
+  }
+})().catch(e => console.log(e.stack));
+
+// add contact
+const addContact = (async (request, response) => {
+  const {
+    owner_id,
+    contact_first_name,
+    contact_last_name,
+    contact_email,
+    contact_phone,
+    contact_target_lang
+  } = request.body;
+
+  const client = await pool.connect();
+  try {
+    await client.query("BEGIN");
+    const queryText =
+      "INSERT INTO users(first_name, phone, user_password, target_lang_code) VALUES($1,$2,$3,$4,$5) RETURNING id";
+    const res = await client.query(queryText, [
+      contact_first_name,
+      contact_last_name,
+      contact_email,
+      contact_phone,
+      contact_target_lang
+    ]);
+    const insertContactText =
+      "INSERT INTO user_contacts(owner_id, contact_id) VALUES ($1, $2)";
+    const insertContactValues = [owner_id, res.rows[0].id];
+    await client.query(insertContactText, insertContactValues);
+    await client.query("COMMIT");
+    response.status(200).json("Contact inserted");
+  } catch (e) {
+    await client.query("ROLLBACK");
+    response.status(500).json("Problem inserting contact");
+    throw e;
+  } finally {
+    client.release();
+  }
+})().catch(e => console.log(e.stack));
+
+//
+app
+  .route("/contacts")
+  // get contacts endpoint
+  .get(getContacts)
+  // add contacts endpoint
+  .post(addContact);
 
 // language list endpoint
 app.get("/languages", async (req, res) => {
@@ -53,6 +122,7 @@ app.post("/translate", async (req, res) => {
   res.status(200).json(translation);
 });
 
+// send SMS message
 app.post("/sendmessage", (req, res) => {
   console.log(req.body);
   const { number, message } = req.body;
@@ -65,7 +135,7 @@ app.post("/sendmessage", (req, res) => {
   sendSMS.send(recipient, msg);
   // }
   console.log(recipient);
-  res.send(200).json('Message sent to', recipient);
+  res.send(200).json("Message sent to", recipient);
 });
 
 // Below post for twilio incoming

@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "A translation and messaging app",
   "main": "index.js",
+  "engines": {
+    "node": "12.x",
+    "npm": "6.13.x"
+  },
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js"
@@ -24,7 +28,6 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "google-translate": "^3.0.0",
-    "knex": "^0.20.2",
     "pg": "^7.14.0",
     "twilio": "^3.37.1"
   },
