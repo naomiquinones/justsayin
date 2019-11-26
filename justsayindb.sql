@@ -91,3 +91,9 @@ INNER JOIN (
   WHERE a.id = 1--users id here
 ) AS subquery ON users.id = subquery.contact_id
 ;
+
+SELECT id, first_name, phone, target_lang_code 
+FROM users 
+WHERE id INTEGER
+ (SELECT contact_id FROM user_contacts WHERE owner_id=1)
+ ;
