@@ -12,6 +12,10 @@ Just Say In is a translation and communication app that lets the user translate 
 
 Just Say In is a multiple language translator and communication app, like Google Translate with SMS
 
+![gif animation from Giphy.com](https://media.giphy.com/media/L2U4zPYoT7mKsLuOff/giphy.gif)
+
+![gif animation from Giphy.com](https://media.giphy.com/media/L18x7FDgvpBwHvCRnz/giphy.gif)
+
 # Features
 
 ## Milestone 1- MVP (minimum viable product)
