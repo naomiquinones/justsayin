@@ -2,13 +2,23 @@ import React from "react";
 
 const Messages = ({ textToTranslate, handleChange }) => {
   const [message, setMessage] = React.useState("");
+  const [contacts, setContacts] = React.useState([]);
+
+  React.useEffect(() => {
+    // getContacts();
+  }, []);
+
   const sendMessages = event => {
     event.preventDefault();
-    if (!message || message === "") {
+    if (!message || message === "" || message === " ") {
       return alert("Please enter message text");
     }
 
     console.log("submitted");
+  };
+  const getContacts = () => {
+    const fakeContactsArray = ["Amber", "Bonnie", "Clara"];
+    setContacts(fakeContactsArray);
   };
   return (
     <form className="recipient-box" onSubmit={sendMessages}>
