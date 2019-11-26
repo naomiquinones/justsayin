@@ -26,28 +26,30 @@ const translator = require("./translate/translate");
 
 // database
 // get contacts
-const getContacts = (async (request, response) => {
+const getContacts = async (request, response) => {
   // const { owner_id } = request.body;
   const owner_id = 1;
 
   const client = await pool.connect();
   try {
-    const {
-      results
-    } = await pool.query(
+    const results = await pool.query(
       "SELECT id, first_name, phone, target_lang_code FROM users WHERE id IN (SELECT contact_id FROM user_contacts WHERE owner_id=$1)",
       [owner_id]
     );
+    console.log(results);
     response.status(200).json(results.rows);
+  } catch (e) {
+    response.status(500).json("Problem getting contacts");
+    throw e;
   } finally {
     // Make sure to release the client before any error handling,
     // just in case the error handling itself throws an error.
     client.release();
   }
-})().catch(e => console.log(e.stack));
+};
 
 // add contact
-const addContact = (async (request, response) => {
+const addContact = async (request, response) => {
   const {
     owner_id,
     contact_first_name,
@@ -82,7 +84,7 @@ const addContact = (async (request, response) => {
   } finally {
     client.release();
   }
-})().catch(e => console.log(e.stack));
+};
 
 //
 app
