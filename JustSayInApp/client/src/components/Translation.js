@@ -27,7 +27,7 @@ const Translation = () => {
   };
   const handleTranslationRequest = event => {
     event.preventDefault();
-    if (!textToTranslate || textToTranslate === "") {
+    if (!textToTranslate || textToTranslate === "" || textToTranslate === " ") {
       return alert("Please enter text to translate");
     }
     clearAllTranslations();
@@ -74,15 +74,8 @@ const Translation = () => {
         message: translatedText
       }
     ]);
-    // setFormattedTranslations(formattedTranslations => [
-    //   ...formattedTranslations,
-    //   ([currentLanguageName]: translatedText)
-    // ]);
-
-    console.log("formattedTranslations", formattedTranslations);
 
     setTranslation(translatedText);
-    // this.setState({ translation: translatedText });
   };
 
   const showFormattedTranslations = formattedTranslations.map(t => {
@@ -92,6 +85,10 @@ const Translation = () => {
       </p>
     );
   });
+
+  React.useEffect(() => {
+    console.log("formattedTranslations", formattedTranslations);
+  }, [formattedTranslations]);
 
   return (
     <div>
