@@ -10,6 +10,6 @@ INNER JOIN (
 
 SELECT id, first_name, phone, target_lang_code 
 FROM users 
-WHERE id INTEGER
+WHERE id IN
  (SELECT contact_id FROM user_contacts WHERE owner_id=1)
  ;
