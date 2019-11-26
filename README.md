@@ -6,7 +6,7 @@
 
 ## What is Just Say In?
 
-Just Say In is a translation and communication app that lets the user translate words and phrases into multiple languages at once, and also send out messages to one or more contacts. It will start off as a web app, and eventually will have a mobile app counterpart.
+Just Say In is a translation and communication app that lets the user translate words and phrases into multiple languages at once, and also send out translated messages to one or more contacts. It will start off as a web app, and eventually will have a mobile app counterpart.
 
 ## One Sentence Pitch :
 
@@ -65,7 +65,8 @@ Just Say In is a multiple language translator and communication app, like Google
 
 ### List of API’s to use :
 
-- Amazon Translate/ Google Translate/Amazon Polly Text to Speech/IBM Watson Speech to Text/Mozilla DeepSpeech APIs
+- Google Translate
+  - Later versions to use Amazon Translate, Amazon Polly Text to Speech, IBM Watson Speech to Text, and/or Mozilla DeepSpeech APIs
 - AuthO login with Facebook and Google
 - Twilio API (messaging)
 
