@@ -20,7 +20,8 @@ body {
 }
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Ubuntu",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--app-white);
@@ -44,14 +45,21 @@ ul {
   width: 90%;
   margin: auto;
 }
+h1 {
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  font-size: 3px;
+}
 .JustSayIn-logo {
   height: 8vmin;
+  margin: 2px 0 5px;
 }
 
 .page-header {
   background-color: var(--app-black);
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -68,13 +76,19 @@ ul {
   color: #d8d3c5cb;
   letter-spacing: 0.5rem;
 }
+.page-header,
+.page-nav,
+.page-footer {
+  transition: 0.5s;
+}
 .page-nav {
-  width: 35%;
+  width: 100%;
   text-align: right;
   padding: 0 5%;
-  font-size: 6vmin;
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
+  font-size: 0.9rem;
 }
 .page-nav a {
   text-decoration: none;
@@ -82,6 +96,21 @@ ul {
   flex-grow: 0;
   flex-shrink: 1;
   flex-basis: auto;
+  transition: 0.5s;
+}
+
+/* ******************** */
+/* TRANSLATIONS STYLES  */
+/* ******************** */
+.translations-display {
+  /* display: inline-block; */
+  padding: 0.125rem 0.5%;
+}
+.translations-display h2 {
+  color: var(--app-blue, #49f);
+}
+.translations-display p {
+  border-bottom: var(--app-grey, #ccc);
 }
 /* ******************** */
 /*    FORM STYLES       */
@@ -89,63 +118,13 @@ ul {
 form {
   font-size: 1.5rem;
 }
-label,
-input,
-select,
-button,
-textarea {
-  font-size: 1rem;
-  color: var(--app-blue, #49f);
-}
-select,
-button,
-textarea {
-  width: 100%;
-}
-input[type="submit"] {
-  margin: 1em 0 0;
-  border-radius: 5px;
-  outline: none;
-  display: block;
-  width: 50%;
-  margin: auto;
-}
 fieldset,
-legend {
-  background-color: var(--app-white);
-  border-radius: 5px;
-}
-fieldset {
-  border: 1px solid var(--app-grey-light);
-}
-legend {
-  font-size: 0.75em;
-  padding: 0.25rem 2.5%;
-}
-.recipient-box {
-  background-color: var(--app-grey-light);
-  padding: 1rem 5%;
-}
-.translated {
-  border: var(--app-grey, #ccc);
-  padding: 0.125rem 0.5%;
-  display: inline-block;
-}
-.textarea-container {
-  padding: 2%;
-  background-color: var(--app-blue, #49f);
-  border-radius: 3px;
-}
-textarea {
-  min-height: 20vh;
-}
-textarea:focus {
-  outline-color: var(--app-white);
-}
+legend,
+button,
+input,
+optgroup,
 select {
-  width: 80%;
-  margin-left: 2%;
-  color: var(--app-grey, #ccc);
+  border-radius: 5px;
 }
 button,
 input,
@@ -153,9 +132,20 @@ optgroup,
 select,
 textarea {
   font-family: inherit;
-  font-size: 100%;
   line-height: 1.15;
   margin: 0;
+}
+label,
+input,
+select,
+button,
+textarea {
+  font-size: 0.9rem;
+  color: var(--app-blue, #49f);
+}
+select,
+textarea {
+  width: 100%;
 }
 button,
 input {
@@ -166,10 +156,53 @@ button,
 [type="reset"],
 [type="submit"] {
   -webkit-appearance: button;
-}
-button {
-  width: 20%;
   border-radius: 5px;
+  margin: 1em 0 0;
+  padding: 0.5em 1%;
+  outline: none;
+  display: block;
+  width: 90%;
+  margin: auto;
+}
+button:hover,
+[type="button"]:hover,
+[type="reset"]:hover,
+[type="submit"]:hover {
+  background-color: linear-gradient(
+    var(--app-blue),
+    var(--app-grey),
+    var(--app-black)
+  );
+}
+
+fieldset,
+legend {
+  background-color: var(--app-white);
+}
+fieldset {
+  border: 1px solid var(--app-grey-light);
+}
+legend {
+  font-size: 0.75em;
+  padding: 0.25rem 2.5%;
+}
+textarea {
+  min-height: 20vh;
+}
+textarea:focus {
+  outline-color: var(--app-white);
+}
+.recipient-box {
+  background-color: var(--app-grey-light);
+  padding: 1rem 5%;
+}
+.textarea-container {
+  margin-bottom: 1rem;
+  padding: 2%;
+  background-color: var(--app-blue, #49f);
+}
+select {
+  color: var(--app-grey, #ccc);
 }
 .target-lang-selector {
   padding: 0.125rem 2.5% 1rem;
@@ -194,10 +227,25 @@ button {
   border-bottom-style: solid;
   padding: 0 1.25% 0.25rem;
 }
+.contact-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.contact-info label {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.phone {
+  display: inline-block;
+  font-size: 0.8em;
+  font-style: italic;
+  color: var(--app-grey, #888);
+}
 /* responsive */
-@media (min-width: 768px) {
-  form {
-  }
+@media (min-width: 600px) {
   input[type="submit"] {
     width: auto;
   }
@@ -208,10 +256,10 @@ button {
     float: left;
   }
   .textarea-container {
-    margin-right:2.5%;
+    margin-right: 2.5%;
   }
   .select-container {
-    width: 40%;
+    width: 45%;
     margin-left: 5%;
   }
   input[type="submit"] {
@@ -230,25 +278,73 @@ button {
 /*    END FORM STYLES   */
 /* ******************** */
 
-/* more media queries */
-@media (min-width: 600px) {
+/* ******************** */
+/*   nav media queries  */
+/* ******************** */
+@media (min-width: 12rem) {
   .page-nav {
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
 }
+@media (min-width: 15rem) {
+  .page-nav {
+    font-size: 1.25rem;
+    transition: ;
+  }
+}
+@media (min-width: 16rem) {
+  .page-nav {
+    font-size: 1.35rem;
+  }
+}
+@media (min-width: 18rem) {
+  .page-nav {
+    width: 90%;
+  }
+}
+@media (min-width: 20rem) {
+  .page-nav {
+    width: 80%;
+  }
+}
+@media (min-width: 26rem) {
+  .page-header {
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .page-nav {
+    width: 60%;
+    align-items: center;
+  }
+}
+@media (min-width: 30rem) {
+  .page-nav {
+    width: 55%;
+  }
+}
+@media (min-width: 40rem) {
+  .page-nav {
+    width: 50%;
+  }
+}
+
 @media (min-width: 768px) {
   .JustSayIn-logo {
   }
   .page-header {
     min-height: 2vh;
-    align-items: flex-start;
+    /* align-items: flex-start; */
     padding: 0 2.5%;
   }
   .page-nav {
     padding-top: 2em;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    width: 45%;
   }
 }
 @media (min-width: 950px) {
+  .page-nav {
+    width: 35%;
+  }
 }
-
