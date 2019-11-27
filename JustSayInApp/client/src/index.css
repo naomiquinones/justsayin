@@ -78,7 +78,9 @@ h1 {
 }
 .page-header,
 .page-nav,
-.page-footer {
+.page-footer,
+.contact-info,
+.contact-info label {
   transition: 0.5s;
 }
 .page-nav {
@@ -107,10 +109,23 @@ h1 {
   padding: 0.125rem 0.5%;
 }
 .translations-display h2 {
-  color: var(--app-blue, #49f);
+  font-size: 1.125rem;
+  color: var(--app-black, #49f);
+  margin-bottom: 0.25em;
 }
-.translations-display p {
-  border-bottom: var(--app-grey, #ccc);
+.translation {
+  border-bottom: var(--app-grey-light, #ccc);
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  padding: 0.125rem 1.25% 0.75rem;
+  line-height: 1.5;
+}
+.translation span {
+  display: block;
+  text-indent: 1em;
+  color: var(--app-grey, #999);
+  font-weight: bold;
+  font-size: 0.9em;
 }
 /* ******************** */
 /*    FORM STYLES       */
@@ -135,11 +150,9 @@ textarea {
   line-height: 1.15;
   margin: 0;
 }
-label,
 input,
 select,
-button,
-textarea {
+button {
   font-size: 0.9rem;
   color: var(--app-blue, #49f);
 }
@@ -174,7 +187,14 @@ button:hover,
     var(--app-black)
   );
 }
-
+[type="checkbox"] {
+  box-shadow: inset 0 2px 5px var(--app-blue, #49f);
+  border: 1px solid var(--app-blue);
+}
+[type="checkbox"]:checked {
+  box-shadow: inset 0 2px 5px var(--app-blue, #49f);
+  color: var(--app-black);
+}
 fieldset,
 legend {
   background-color: var(--app-white);
@@ -188,6 +208,8 @@ legend {
 }
 textarea {
   min-height: 20vh;
+  color: var(--app-black);
+  font-size: 1.1rem;
 }
 textarea:focus {
   outline-color: var(--app-white);
@@ -197,7 +219,7 @@ textarea:focus {
   padding: 1rem 5%;
 }
 .textarea-container {
-  margin-bottom: 1rem;
+  margin-bottom: 0.25rem;
   padding: 2%;
   background-color: var(--app-blue, #49f);
 }
@@ -215,18 +237,7 @@ select {
   float: right;
   margin: 0.5rem 2.5% 0.25rem 5%;
 }
-.display {
-  padding: 0 2.5% 0.5rem;
-}
-.display h2 {
-  font-size: 1.125rem;
-}
-.translation {
-  border-bottom-color: var(--app-grey-light, #ccc);
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  padding: 0 1.25% 0.25rem;
-}
+
 .contact-info {
   display: flex;
   flex-direction: row;
@@ -235,16 +246,32 @@ select {
 }
 .contact-info label {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  font-size: 1rem;
+  color: var(--app-grey, #999);
 }
-.phone {
-  display: inline-block;
+[type="checkbox"]:checked + label {
+  color: var(--app-blue, #49f);
+  font-weight: bold;
+}
+.contact-name {
+  margin: 0 1em 0 0.25em;
+}
+.contact-phone {
   font-size: 0.8em;
   font-style: italic;
-  color: var(--app-grey, #888);
 }
-/* responsive */
+/* ******************** */
+/*   RESPONSIVE FORM    */
+/* ******************** */
+@media (min-width: 360px) {
+  .contact-info label {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
 @media (min-width: 600px) {
   input[type="submit"] {
     width: auto;
@@ -253,6 +280,7 @@ select {
   .select-container {
     width: 47.25%;
     margin: 0;
+    margin-bottom: 0.5em;
     float: left;
   }
   .textarea-container {
@@ -267,19 +295,26 @@ select {
     margin: 1em 4%;
     color: var(--app-blue);
   }
-  .target-lang-selector {
+  select {
+    min-height: 20vh;
   }
   .select-instruction {
     font-size: 0.75rem;
     margin: 0 1.25% 0.5rem 3.75%;
   }
+  .contact-info label {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+@media (min-width: 860px) {
+  .contact-info label {
+    flex-direction: row;
+    align-items: flex-end;
+  }
 }
 /* ******************** */
-/*    END FORM STYLES   */
-/* ******************** */
-
-/* ******************** */
-/*   nav media queries  */
+/*    RESPONSIVE NAV    */
 /* ******************** */
 @media (min-width: 12rem) {
   .page-nav {
@@ -289,7 +324,6 @@ select {
 @media (min-width: 15rem) {
   .page-nav {
     font-size: 1.25rem;
-    transition: ;
   }
 }
 @media (min-width: 16rem) {
@@ -326,6 +360,7 @@ select {
 @media (min-width: 40rem) {
   .page-nav {
     width: 50%;
+    padding-bottom: 0.25rem;
   }
 }
 
@@ -346,5 +381,15 @@ select {
 @media (min-width: 950px) {
   .page-nav {
     width: 35%;
+  }
+}
+/* ******************** */
+/* OTHER MEDIA QUERIES  */
+/* ******************** */
+@media (min-width: 30rem) {
+  .translation span {
+    color: var(--app-blue, #49f);
+    display: inline-block;
+    margin-right: 0.75em;
   }
 }
