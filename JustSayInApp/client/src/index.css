@@ -37,6 +37,120 @@ a {
 img {
   border-style: none;
 }
+a {
+  color: var(--app-blue);
+}
+ul {
+  list-style-type: none;
+  text-align: left;
+  width: 90%;
+  margin: auto;
+}
+.JustSayIn-logo {
+  height: 8vmin;
+}
+
+.page-header {
+  background-color: var(--app-black);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.loading-message {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: var(--app-grey, #999);
+}
+
+.page-footer {
+  padding: 2rem 0 0.5rem;
+  text-align: center;
+  font-size: 0.5rem;
+  color: #d8d3c5cb;
+  letter-spacing: 0.5rem;
+}
+.page-nav {
+  width: 35%;
+  text-align: right;
+  padding: 0 5%;
+  font-size: 6vmin;
+  display: flex;
+  justify-content: space-between;
+}
+.page-nav a {
+  text-decoration: none;
+  color: var(--app-grey-light, #fafafa);
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+}
+main {
+}
+/* ******************** */
+/*    FORM STYLES       */
+/* ******************** */
+form {
+  font-size: 1.5rem;
+}
+label,
+input,
+select,
+button,
+textarea {
+  font-size: 1rem;
+  color: var(--app-blue, #49f);
+}
+select,
+button,
+textarea {
+  width: 100%;
+}
+input[type="submit"] {
+  margin: 1em 0 0;
+  border-radius: 5px;
+  outline: none;
+  display: block;
+  width: 50%;
+  margin: auto;
+}
+fieldset,
+legend {
+  background-color: var(--app-white);
+  border-radius: 5px;
+}
+fieldset {
+  border: 1px solid var(--app-grey-light);
+}
+legend {
+  font-size: 0.75em;
+  padding: 0.25rem 2.5%;
+}
+.recipient-box {
+  background-color: var(--app-grey-light);
+  padding: 1rem 5%;
+}
+.translated {
+  border: var(--app-grey, #ccc);
+  padding: 0.125rem 0.5%;
+  display: inline-block;
+}
+.textarea-container {
+  padding: 2%;
+  background-color: var(--app-blue, #49f);
+  border-radius: 3px;
+}
+textarea {
+  min-height: 20vh;
+}
+textarea:focus {
+  outline-color: var(--app-white);
+}
+select {
+  width: 80%;
+  margin-left: 2%;
+  color: var(--app-grey, #ccc);
+}
 button,
 input,
 optgroup,
@@ -57,3 +171,88 @@ button,
 [type="submit"] {
   -webkit-appearance: button;
 }
+button {
+  width: 20%;
+  border-radius: 5px;
+}
+.target-lang-selector {
+  padding: 0.125rem 2.5% 1rem;
+  color: var(--app-grey, #999);
+}
+.select-instruction {
+  font-size: 0.75rem;
+}
+.add-button {
+  float: right;
+  margin: 0.5rem 2.5% 0.25rem 5%;
+}
+.display {
+  padding: 0 2.5% 0.5rem;
+}
+.display h2 {
+  font-size: 1.125rem;
+}
+.translation {
+  border-bottom-color: var(--app-grey-light, #ccc);
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  padding: 0 1.25% 0.25rem;
+}
+/* responsive */
+@media (min-width: 768px) {
+  form {
+  }
+  input[type="submit"] {
+    width: auto;
+  }
+  .textarea-container,
+  .select-container {
+    width: 47.25%;
+    margin: 0;
+    float: left;
+  }
+  .textarea-container {
+    margin-right:2.5%;
+  }
+  .select-container {
+    width: 40%;
+    margin-left: 5%;
+  }
+  input[type="submit"] {
+    width: 92%;
+    margin: 1em 4%;
+    color: var(--app-blue);
+  }
+  .target-lang-selector {
+  }
+  .select-instruction {
+    font-size: 0.75rem;
+    margin: 0 1.25% 0.5rem 3.75%;
+  }
+}
+/* ******************** */
+/*    END FORM STYLES   */
+/* ******************** */
+
+/* more media queries */
+@media (min-width: 600px) {
+  .page-nav {
+    font-size: 1.5rem;
+  }
+}
+@media (min-width: 768px) {
+  .JustSayIn-logo {
+  }
+  .page-header {
+    min-height: 2vh;
+    align-items: flex-start;
+    padding: 0 2.5%;
+  }
+  .page-nav {
+    padding-top: 2em;
+    font-size: 1.25rem;
+  }
+}
+@media (min-width: 950px) {
+}
+
