@@ -16,13 +16,43 @@ const Messages = ({ textToTranslate, handleChange }) => {
     getContacts();
   }, []);
 
+  // check if it needs to be async/await
+  const translate = async (message, targetLanguages) => {
+    // translations will be in form of {"es": "Hola", "jp": "こんにちは"}
+    const translations = await Object.fromEntries(
+      targetLanguages.map(targetLang => [
+        targetLang,
+        axios.post("http://localhost:1337/translate", {
+          text: message,
+          source: "en",
+          target: targetLang
+        })
+      ])
+    );
+    return translations;
+  };
+
+  const sendMessage = (message, group) => {
+    const targetLangs = [
+      ...new Set(group.map(currentContact => currentContact.language))
+    ];
+    const translations = translate(message, targetLangs);
+    // const response = group.map(currentContact => {
+    //   return axios.post("http://localhost:1337/sendmessage", {
+    //     group,
+    //     message
+    //   });
+    // });
+    const response = group.map(currentContact => {});
+  };
+
   const sendMessages = event => {
     event.preventDefault();
     if (!message || message === "" || message === " ") {
       return alert("Please enter message text");
     }
     const group = contacts.filter(c => recipients.includes(c.phone));
-    setSendMessageResult(sendMessageResult(message, group));
+    setSendMessageResult(sendMessage(message, group));
     // send a phone number and message to endpoint
     console.log("submitted");
   };
