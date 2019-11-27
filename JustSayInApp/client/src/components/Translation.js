@@ -91,7 +91,7 @@ const Translation = () => {
   }, [formattedTranslations]);
 
   return (
-    <div>
+    <React.Fragment>
       {isLoading ? (
         <Loading message="Getting available languages" />
       ) : (
@@ -123,11 +123,11 @@ const Translation = () => {
           </div>
         </form>
       )}
-      <section className="display">
+      <section className="translations-display">
         {showFormattedTranslations.length ? <h2>Translations:</h2> : null}
         {showFormattedTranslations.length ? showFormattedTranslations : null}
       </section>
-    </div>
+    </React.Fragment>
   );
 };
 export default Translation;

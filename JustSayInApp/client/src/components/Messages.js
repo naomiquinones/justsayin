@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import axios from "axios";
 
 const Messages = ({ textToTranslate, handleChange }) => {
@@ -46,16 +46,6 @@ const Messages = ({ textToTranslate, handleChange }) => {
     const response = group.map(currentContact => {});
   };
 
-  const sendMessages = event => {
-    event.preventDefault();
-    if (!message || message === "" || message === " ") {
-      return alert("Please enter message text");
-    }
-    const group = contacts.filter(c => recipients.includes(c.phone));
-    setSendMessageResult(sendMessage(message, group));
-    // send a phone number and message to endpoint
-    console.log("submitted");
-  };
   const getContacts = async () => {
     let owner_id = 1;
     let response = await axios.get("http://localhost:1337/contacts", {
@@ -68,7 +58,7 @@ const Messages = ({ textToTranslate, handleChange }) => {
 
   const showContacts = contacts.map((c, index) => {
     return (
-      <Fragment key={index}>
+      <div key={index} className="contact-info">
         <input
           id={c.id}
           language={c.target_language_code}
@@ -78,12 +68,36 @@ const Messages = ({ textToTranslate, handleChange }) => {
           onChange={e => toggleRecipient(e.currentTarget.name)}
         />
         <label htmlFor={c.id}>
-          {c.first_name} <span>{c.phone}</span>
+          {c.first_name} <span className="phone">{c.phone}</span>
         </label>
         <br />
-      </Fragment>
+      </div>
     );
   });
+  // const sendMessages = recipients => {
+
+  //   // get the necessary translations
+
+  //   // match translations with recipients
+
+  //   // send all recipients with their translations to endpoint
+  //   for (let recipient of recipients) {
+  //     let number = recipient.name;
+  //     let msg = recipient.msg;
+  //     axios.post("/messages", number, msg);
+  //   }
+  // };
+  const sendMessages = event => {
+    event.preventDefault();
+    if (!message || message === "" || message === " ") {
+      return alert("Please enter message text");
+    }
+    //   // get list of unique recipients' target languages
+    const group = contacts.filter(c => recipients.includes(c.phone));
+    setSendMessageResult(sendMessage(message, group));
+    // send a phone number and message to endpoint
+    console.log("submitted");
+  };
 
   return (
     <>
