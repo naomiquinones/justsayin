@@ -80,8 +80,8 @@ const Translation = () => {
 
   const showFormattedTranslations = formattedTranslations.map(t => {
     return (
-      <p key={t.language}>
-        {t.language}: {t.message}
+      <p key={t.language} className="translation">
+        <span>{t.language}:</span> {t.message}
       </p>
     );
   });

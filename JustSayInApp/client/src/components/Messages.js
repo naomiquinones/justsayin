@@ -68,7 +68,8 @@ const Messages = ({ textToTranslate, handleChange }) => {
           onChange={e => toggleRecipient(e.currentTarget.name)}
         />
         <label htmlFor={c.id}>
-          {c.first_name} <span className="phone">{c.phone}</span>
+          <span className="contact-name">{c.first_name}</span>
+          <span className="contact-phone">{c.phone}</span>
         </label>
         <br />
       </div>
