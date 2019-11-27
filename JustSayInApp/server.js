@@ -27,9 +27,9 @@ const translator = require("./translate/translate");
 // database
 // get contacts
 const getContacts = async (request, response) => {
-  // const { owner_id } = request.body;
-  const owner_id = 1;
-
+  console.log(request.query.owner_id);
+  const { owner_id } = request.query;
+  console.log(owner_id);
   const client = await pool.connect();
   try {
     const results = await pool.query(
@@ -127,15 +127,17 @@ app.post("/translate", async (req, res) => {
 // send SMS message
 app.post("/sendmessage", (req, res) => {
   console.log(req.body);
-  const { number, message } = req.body;
-
-  // Send a message
-  let recipient = number; //|| [process.env.TEST_RECIPIENT1];
+  const { numbers, message } = req.body;
 
   let msg = message || "Special message from the Just Say In app";
-  // for (let recipient of recipients) {
-  sendSMS.send(recipient, msg);
-  // }
+  for (number of numbers) {
+    // get one recipient
+    let recipient = number; //|| [process.env.TEST_RECIPIENT1];
+
+    // for (let recipient of recipients) {
+    // Send a message
+    sendSMS.send(recipient, msg);
+  }
   console.log(recipient);
   res.send(200).json("Message sent to", recipient);
 });
