@@ -26,3 +26,4 @@ yarn-error.log*
 
 newServer.js
 JustSayInApp/client/src/App-old.js
+extra.sql

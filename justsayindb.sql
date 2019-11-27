@@ -56,18 +56,6 @@ VALUES
 ('pt','Portuguese'),
 ('ru','Russian')
 ;
-INSERT INTO users (
-  first_name,
-  phone,
-  user_password,
-  target_lang_code
-)
-VALUES
-('Naomi','13102547608','test','en'),
-('Yuki','13109486677','test','es'),
-('Noi','15102258545','test', 'th'),
-('Mega','17076068321','test','id')
-;
 
 -- 
 INSERT INTO user_contacts (
@@ -77,5 +65,6 @@ INSERT INTO user_contacts (
 VALUES
 (1,4),
 (1,3),
-(1,2)
+(1,2),
+(3,4)
 ;
