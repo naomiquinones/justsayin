@@ -101,8 +101,8 @@ const Messages = ({ textToTranslate, handleChange }) => {
   };
 
   return (
-    <>
-      <form className="recipient-box" onSubmit={sendMessages}>
+    <React.Fragment>
+      <form className="form-container recipient-box" onSubmit={sendMessages}>
         <div className="form-group textarea-container">
           <textarea
             className="form-input"
@@ -130,7 +130,7 @@ const Messages = ({ textToTranslate, handleChange }) => {
           ))}
         </>
       )}
-    </>
+    </React.Fragment>
   );
 };
 export default Messages;
