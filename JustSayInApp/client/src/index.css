@@ -8,8 +8,10 @@ body {
 }
 :root {
   --app-blue: #43b1e5;
+  --app-blue-translucent: #43b2e579;
   --app-black: rgb(22, 29, 32);
   --app-grey: rgb(108, 129, 138);
+  --app-grey-translucent: rgba(108, 129, 138, 0.85);
   --app-grey-light: rgb(168, 193, 204);
   --app-white: #fafafa;
 }
@@ -24,8 +26,14 @@ body {
     "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--app-white);
   color: var(--app-black);
+  background: linear-gradient(
+      217deg,
+      rgba(255, 220, 220, 0.8),
+      rgba(255, 0, 0, 0) 70.71%
+    ),
+    linear-gradient(127deg, rgba(220, 255, 220, 0.8), rgba(0, 255, 0, 0) 70.71%),
+    linear-gradient(336deg, rgba(220, 220, 255, 0.8), rgba(0, 0, 255, 0) 70.71%);
 }
 
 main {
@@ -62,6 +70,12 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(
+    0.35turn,
+    var(--app-black) 15%,
+    var(--app-grey-translucent) 55%,
+    var(--app-black) 85%
+  );
 }
 .loading-message {
   font-size: 1.5em;
@@ -80,7 +94,9 @@ h1 {
 .page-nav,
 .page-footer,
 .contact-info,
-.contact-info label {
+.contact-info label,
+.textarea-container,
+.select-container {
   transition: 0.5s;
 }
 .page-nav {
@@ -181,11 +197,8 @@ button:hover,
 [type="button"]:hover,
 [type="reset"]:hover,
 [type="submit"]:hover {
-  background-color: linear-gradient(
-    var(--app-blue),
-    var(--app-grey),
-    var(--app-black)
-  );
+  background-color: var(--app-blue);
+  color: var(--app-white, #fff);
 }
 [type="checkbox"] {
   box-shadow: inset 0 2px 5px var(--app-blue, #49f);
@@ -198,33 +211,40 @@ button:hover,
 fieldset,
 legend {
   background-color: var(--app-white);
-}
-fieldset {
   border: 1px solid var(--app-grey-light);
 }
+fieldset {
+  padding: 0.125rem 2.5%;
+}
 legend {
-  font-size: 0.75em;
+  font-size: 0.9rem;
   padding: 0.25rem 2.5%;
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 textarea {
   min-height: 20vh;
   color: var(--app-black);
   font-size: 1.1rem;
 }
-textarea:focus {
+:focus {
   outline-color: var(--app-white);
-}
-.recipient-box {
-  background-color: var(--app-grey-light);
-  padding: 1rem 5%;
 }
 .textarea-container {
   margin-bottom: 0.25rem;
+  width: 100%;
   padding: 2%;
-  background-color: var(--app-blue, #49f);
+  background: linear-gradient(
+    var(--app-blue, #49f),
+    var(--app-blue-translucent, #49f)
+  );
 }
 select {
   color: var(--app-grey, #ccc);
+}
+option:active {
+  background-color: var(--app-blue-translucent, #49f);
 }
 .target-lang-selector {
   padding: 0.125rem 2.5% 1rem;
@@ -248,9 +268,10 @@ select {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: stretch;
+  /* align-items: stretch; */
   font-size: 1rem;
   color: var(--app-grey, #999);
+  margin-left: 0.5rem;
 }
 [type="checkbox"]:checked + label {
   color: var(--app-blue, #49f);
@@ -283,6 +304,10 @@ select {
     margin-bottom: 0.5em;
     float: left;
   }
+  .recipient-box {
+    padding: 0 1rem 5% 0;
+  }
+
   .textarea-container {
     margin-right: 2.5%;
   }
@@ -290,23 +315,47 @@ select {
     width: 45%;
     margin-left: 5%;
   }
+  .select-instruction {
+    font-size: 0.75rem;
+    margin: 0 1.25% 0.5rem 3.75%;
+  }
+  select {
+    min-height: 20vh;
+  }
+  fieldset {
+    min-height: 22vh;
+  }
+  legend {
+    margin-top: 0.5rem;
+  }
+  .contact-info label {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+  }
   input[type="submit"] {
     width: 92%;
     margin: 1em 4%;
     color: var(--app-blue);
   }
-  select {
-    min-height: 20vh;
+}
+@media (min-width: 740px) {
+  .textarea-container {
+    width: 55%;
   }
-  .select-instruction {
-    font-size: 0.75rem;
-    margin: 0 1.25% 0.5rem 3.75%;
-  }
-  .contact-info label {
-    flex-direction: column;
-    align-items: stretch;
+  .select-container {
+    width: 35%;
   }
 }
+@media (min-width: 800px) {
+  .textarea-container {
+    width: 60%;
+  }
+  .select-container {
+    width: 30%;
+  }
+}
+
 @media (min-width: 860px) {
   .contact-info label {
     flex-direction: row;
@@ -344,7 +393,7 @@ select {
 @media (min-width: 26rem) {
   .page-header {
     flex-direction: row;
-    align-items: stretch;
+    align-items: flex-end;
     justify-content: space-between;
   }
   .page-nav {
@@ -365,8 +414,6 @@ select {
 }
 
 @media (min-width: 768px) {
-  .JustSayIn-logo {
-  }
   .page-header {
     min-height: 2vh;
     /* align-items: flex-start; */
