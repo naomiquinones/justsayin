@@ -8,7 +8,12 @@ const Translation = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [availableLanguages, setAvailableLanguages] = React.useState([]);
   const sourceLanguage = "en";
-  const [targetLanguages, setTargetLanguages] = React.useState(["es", "ja", "ar", "zh"]);
+  const [targetLanguages, setTargetLanguages] = React.useState([
+    "es",
+    "ja",
+    "ar",
+    "zh"
+  ]);
   const [textToTranslate, setTextToTranslate] = React.useState("");
   const [formattedTranslations, setFormattedTranslations] = React.useState([]);
   const [translation, setTranslation] = React.useState("");
@@ -40,7 +45,7 @@ const Translation = () => {
 
   const fetchLanguages = async () => {
     if (availableLanguages.length < 80) {
-      let response = await axios.get("http://localhost:1337/languages");
+      let response = await axios.get("/languages");
 
       let languages = response.data;
 
@@ -55,7 +60,7 @@ const Translation = () => {
   };
 
   const fetchTranslation = async currentTargetLanguage => {
-    let response = await axios.post("http://localhost:1337/translate", {
+    let response = await axios.post("/translate", {
       text: textToTranslate,
       source: sourceLanguage,
       target: currentTargetLanguage
