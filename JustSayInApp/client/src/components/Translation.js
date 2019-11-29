@@ -8,7 +8,7 @@ const Translation = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [availableLanguages, setAvailableLanguages] = React.useState([]);
   const sourceLanguage = "en";
-  const [targetLanguages, setTargetLanguages] = React.useState(["es", "ja"]);
+  const [targetLanguages, setTargetLanguages] = React.useState(["es", "ja", "ar", "zh"]);
   const [textToTranslate, setTextToTranslate] = React.useState("");
   const [formattedTranslations, setFormattedTranslations] = React.useState([]);
   const [translation, setTranslation] = React.useState("");
@@ -81,7 +81,7 @@ const Translation = () => {
   const showFormattedTranslations = formattedTranslations.map(t => {
     return (
       <p key={t.language} className="translation">
-        <span>{t.language}:</span> {t.message}
+        <span className="lang">{t.language}:</span> {t.message}
       </p>
     );
   });
@@ -123,7 +123,7 @@ const Translation = () => {
           </div>
         </form>
       )}
-      <section className="translations-display">
+      <section className="results translations-display">
         {showFormattedTranslations.length ? <h2>Translations:</h2> : null}
         {showFormattedTranslations.length ? showFormattedTranslations : null}
       </section>

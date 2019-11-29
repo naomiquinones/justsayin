@@ -13,6 +13,7 @@ body {
   --app-grey: rgb(108, 129, 138);
   --app-grey-translucent: rgba(108, 129, 138, 0.85);
   --app-grey-light: rgb(168, 193, 204);
+  --app-grey-light-translucent: rgb(168, 193, 204,0.25);
   --app-white: #fafafa;
 }
 *,
@@ -28,12 +29,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: var(--app-black);
   background: linear-gradient(
-      217deg,
-      rgba(255, 220, 220, 0.8),
-      rgba(255, 0, 0, 0) 70.71%
-    ),
-    linear-gradient(127deg, rgba(220, 255, 220, 0.8), rgba(0, 255, 0, 0) 70.71%),
-    linear-gradient(336deg, rgba(220, 220, 255, 0.8), rgba(0, 0, 255, 0) 70.71%);
+    217deg, rgba(255, 220, 220, 0.8),  rgba(255, 0, 0, 0) 70.71%),
+    linear-gradient(336deg, rgba(220, 255, 220, 0.8), rgba(0, 255, 0, 0) 70.71%),
+    linear-gradient(127deg, rgba(220, 230, 245, 0.8), rgba(0, 0, 255, 0) 70.71%);
 }
 
 main {
@@ -82,12 +80,11 @@ h1 {
   font-weight: bold;
   color: var(--app-grey, #999);
 }
-
 .page-footer {
   padding: 2rem 0 0.5rem;
   text-align: center;
   font-size: 0.5rem;
-  color: #d8d3c5cb;
+  color: #d8d3c5eb;
   letter-spacing: 0.5rem;
 }
 .page-header,
@@ -103,20 +100,25 @@ h1 {
   width: 100%;
   text-align: right;
   padding: 0 5%;
+  font-size: 0.7rem;
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
-  font-size: 0.9rem;
 }
 .page-nav a {
   text-decoration: none;
-  color: var(--app-grey-light, #fafafa);
-  flex-grow: 0;
-  flex-shrink: 1;
-  flex-basis: auto;
-  transition: 0.5s;
+  color: var(--app-grey-white, #fafafa);
+  font-weight: bold;
+  text-shadow: 0 1px 2px var(--app-grey);
+  border: 2px solid var(--app-blue);
+  border-radius: 3px;
+  padding: 1px 2.5%;
+  margin-bottom: 1px;
+  background-color: var(--app-grey-light-translucent);
+  transition: 0.3s;
 }
-
+.page-nav a:hover {
+  background-color: var(--app-blue,#49f);
+}
 /* ******************** */
 /* TRANSLATIONS STYLES  */
 /* ******************** */
@@ -130,15 +132,13 @@ h1 {
   margin-bottom: 0.25em;
 }
 .translation {
-  border-bottom: var(--app-grey-light, #ccc);
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
+  background-color: var(--app-white, #fefefe);
   padding: 0.125rem 1.25% 0.75rem;
   line-height: 1.5;
 }
-.translation span {
+.translation .lang {
   display: block;
-  text-indent: 1em;
+  text-indent: .5em;
   color: var(--app-grey, #999);
   font-weight: bold;
   font-size: 0.9em;
@@ -154,8 +154,9 @@ legend,
 button,
 input,
 optgroup,
-select {
-  border-radius: 5px;
+select,
+.translation {
+  border-radius: 3px;
 }
 button,
 input,
@@ -167,7 +168,6 @@ textarea {
   margin: 0;
 }
 input,
-select,
 button {
   font-size: 0.9rem;
   color: var(--app-blue, #49f);
@@ -185,20 +185,29 @@ button,
 [type="reset"],
 [type="submit"] {
   -webkit-appearance: button;
-  border-radius: 5px;
+  border-radius: 3px;
   margin: 1em 0 0;
   padding: 0.5em 1%;
   outline: none;
   display: block;
   width: 90%;
   margin: auto;
+  background-color: var(--app-blue);
+  color: var(--app-white, #fff);
+  font-weight: bold;
+  letter-spacing: 2px;
 }
 button:hover,
 [type="button"]:hover,
 [type="reset"]:hover,
 [type="submit"]:hover {
-  background-color: var(--app-blue);
-  color: var(--app-white, #fff);
+  background: linear-gradient(
+    0.35turn,
+    var(--app-blue) 15%,
+    var(--app-white) 55%,
+    var(--app-blue) 85%
+  );
+  color:var(--app-blue)
 }
 [type="checkbox"] {
   box-shadow: inset 0 2px 5px var(--app-blue, #49f);
@@ -217,7 +226,9 @@ fieldset {
   padding: 0.125rem 2.5%;
 }
 legend {
-  font-size: 0.9rem;
+  font-size: 0.6rem;
+  font-weight: bold;
+  color: var(--app-grey);
   padding: 0.25rem 2.5%;
   border-bottom: none;
   border-bottom-left-radius: 0;
@@ -231,6 +242,10 @@ textarea {
 :focus {
   outline-color: var(--app-white);
 }
+fieldset, .textarea-container, select,.translation {
+  box-shadow: 0 6px 15px var(--app-grey-translucent);
+
+}
 .textarea-container {
   margin-bottom: 0.25rem;
   width: 100%;
@@ -242,6 +257,11 @@ textarea {
 }
 select {
   color: var(--app-grey, #ccc);
+}
+option {
+  font-size: 1rem;
+  padding: .25rem 1.25% .25rem 3.75%;
+  margin: .125rem 0;
 }
 option:active {
   background-color: var(--app-blue-translucent, #49f);
@@ -294,8 +314,8 @@ option:active {
   }
 }
 @media (min-width: 600px) {
-  input[type="submit"] {
-    width: auto;
+  button, input[type="submit"] {
+    width: 85%;
   }
   .textarea-container,
   .select-container {
@@ -312,7 +332,7 @@ option:active {
     margin-right: 2.5%;
   }
   .select-container {
-    width: 45%;
+    width: 43%;
     margin-left: 5%;
   }
   .select-instruction {
@@ -322,6 +342,11 @@ option:active {
   select {
     min-height: 20vh;
   }
+  option {
+    font-size: .9rem;
+    margin: 0;
+    padding: .125rem 0 .25rem 2.5%;
+  }  
   fieldset {
     min-height: 22vh;
   }
@@ -336,12 +361,13 @@ option:active {
   input[type="submit"] {
     width: 92%;
     margin: 1em 4%;
-    color: var(--app-blue);
   }
 }
 @media (min-width: 740px) {
   .textarea-container {
     width: 55%;
+    padding:1.5%;
+    margin-right: 2%;
   }
   .select-container {
     width: 35%;
@@ -350,6 +376,7 @@ option:active {
 @media (min-width: 800px) {
   .textarea-container {
     width: 60%;
+    padding: 1.25%;
   }
   .select-container {
     width: 30%;
@@ -360,6 +387,12 @@ option:active {
   .contact-info label {
     flex-direction: row;
     align-items: flex-end;
+  }
+}
+@media (min-width: 1200px) {
+  .textarea-container {
+    width: 60%;
+    padding: 1%;
   }
 }
 /* ******************** */
@@ -373,9 +406,10 @@ option:active {
 @media (min-width: 15rem) {
   .page-nav {
     font-size: 1.25rem;
+    padding-right: 5%;
   }
 }
-@media (min-width: 16rem) {
+@media (min-width: 17rem) {
   .page-nav {
     font-size: 1.35rem;
   }
@@ -383,6 +417,13 @@ option:active {
 @media (min-width: 18rem) {
   .page-nav {
     width: 90%;
+    align-items: flex-start;
+  }
+  .page-nav a {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    text-align: center;
   }
 }
 @media (min-width: 20rem) {
@@ -397,8 +438,9 @@ option:active {
     justify-content: space-between;
   }
   .page-nav {
-    width: 60%;
+    width: 65%;
     align-items: center;
+    justify-content: space-between;
   }
 }
 @media (min-width: 30rem) {
@@ -414,27 +456,22 @@ option:active {
 }
 
 @media (min-width: 768px) {
-  .page-header {
-    min-height: 2vh;
-    /* align-items: flex-start; */
-    padding: 0 2.5%;
-  }
   .page-nav {
-    padding-top: 2em;
+    padding-top: 1em;
     font-size: 1.5rem;
     width: 45%;
   }
 }
 @media (min-width: 950px) {
   .page-nav {
-    width: 35%;
+    width: 40%;
   }
 }
 /* ******************** */
 /* OTHER MEDIA QUERIES  */
 /* ******************** */
 @media (min-width: 30rem) {
-  .translation span {
+  .translation .lang {
     color: var(--app-blue, #49f);
     display: inline-block;
     margin-right: 0.75em;

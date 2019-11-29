@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Just Say In</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      height: 100vh;
+      display: flex;
+      background:rgba(108, 129, 138, 0.85);
+      flex-direction: column;
+    }
+    section {
+      height: 100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex:1;
+      transition: .5s;
+    }
+    section.translate {
+      background-color: #43b1e5;
+    }
+    section:hover {
+      flex:3;
+    }
+    section a {
+      color: white;
+      width: 100%;
+      height: 100%;
+      /* display:flex;
+      align-items:center;
+      justify-content:center; */
+      text-decoration: none;
+    }
+    h1 {
+      text-align: center;
+      /* min-height: 15vh; */
+      margin:0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(108, 129, 138, 0.25);
+    }
+  </style>
+</head>
+<body>
+  <h1>Just Say In</h1>
+  <div class="container">
+    <section class="translate">
+        <a href="">Translate</a>
+    </section>
+    <section class="message">
+      <a href="">Message</a>
+    </section>
+  </div>
+</body>
+</html>

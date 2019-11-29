@@ -19,7 +19,7 @@ const App = () => {
           title="Just Say In"
         />
         <nav className="page-nav">
-          <Link to="/">Home</Link>
+          <Link to="/">Translate</Link>
           <Link to="/messages">Messages</Link>
         </nav>
       </header>
