@@ -34,7 +34,7 @@ const getContacts = async (request, response) => {
       "SELECT id, first_name, phone, target_lang_code FROM users WHERE id IN (SELECT contact_id FROM user_contacts WHERE owner_id=$1)",
       [owner_id]
     );
-    console.log(results);
+    console.log("getContacts", results);
     response.status(200).json(results.rows);
   } catch (e) {
     response.status(500).json("Problem getting contacts");
@@ -124,20 +124,20 @@ app.post("/translate", async (req, res) => {
 
 // send SMS message
 app.post("/sendmessage", (req, res) => {
-  console.log(req.body);
-  const { numbers, message } = req.body;
+  console.log("/sendmessage", req.body);
+  const { number, message } = req.body;
 
   let msg = message || "Special message from the Just Say In app";
-  for (number of numbers) {
-    // get one recipient
-    let recipient = number; //|| [process.env.TEST_RECIPIENT1];
+  // for (number of numbers) {
+  // get one recipient
+  let recipient = number; //|| [process.env.TEST_RECIPIENT1];
 
-    // for (let recipient of recipients) {
-    // Send a message
-    sendSMS.send(recipient, msg);
-  }
-  console.log(recipient);
-  res.send(200).json("Message sent to", recipient);
+  // for (let recipient of recipients) {
+  // Send a message
+  // sendSMS.send(recipient, msg);
+  // }
+  console.log(recipient, msg);
+  res.status(200).json("Message sent to", recipient, msg);
 });
 
 // Below post for twilio incoming
