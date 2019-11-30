@@ -32,23 +32,9 @@ const Messages = ({ textToTranslate, handleChange }) => {
     return translations;
   };
 
-  const sendMessage = (message, group) => {
-    const targetLangs = [
-      ...new Set(group.map(currentContact => currentContact.language))
-    ];
-    const translations = translate(message, targetLangs);
-    // const response = group.map(currentContact => {
-    //   return axios.post("http://localhost:1337/sendmessage", {
-    //     group,
-    //     message
-    //   });
-    // });
-    const response = group.map(currentContact => {});
-  };
-
   const getContacts = async () => {
     let owner_id = 1;
-    let response = await axios.get("http://localhost:1337/contacts", {
+    let response = await axios.get("/contacts", {
       params: {
         owner_id: owner_id
       }
@@ -56,25 +42,6 @@ const Messages = ({ textToTranslate, handleChange }) => {
     setContacts(response.data);
   };
 
-  const showContacts = contacts.map((c, index) => {
-    return (
-      <div key={index} className="contact-info">
-        <input
-          id={c.id}
-          language={c.target_language_code}
-          type="checkbox"
-          name={c.phone}
-          checked={recipients.includes(c.phone)}
-          onChange={e => toggleRecipient(e.currentTarget.name)}
-        />
-        <label htmlFor={c.id}>
-          <span className="contact-name">{c.first_name}</span>
-          <span className="contact-phone">{c.phone}</span>
-        </label>
-        <br />
-      </div>
-    );
-  });
   // const sendMessages = recipients => {
 
   //   // get the necessary translations
@@ -99,6 +66,39 @@ const Messages = ({ textToTranslate, handleChange }) => {
     // send a phone number and message to endpoint
     console.log("submitted");
   };
+  const sendMessage = (message, group) => {
+    const targetLangs = [
+      ...new Set(group.map(currentContact => currentContact.language))
+    ];
+    const translations = translate(message, targetLangs);
+    // const response = group.map(currentContact => {
+    //   return axios.post("http://localhost:1337/sendmessage", {
+    //     group,
+    //     message
+    //   });
+    // });
+    const response = group.map(currentContact => {});
+  };
+
+  const showContacts = contacts.map((c, index) => {
+    return (
+      <div key={index} className="contact-info">
+        <input
+          id={c.id}
+          language={c.target_language_code}
+          type="checkbox"
+          name={c.phone}
+          checked={recipients.includes(c.phone)}
+          onChange={e => toggleRecipient(e.currentTarget.name)}
+        />
+        <label htmlFor={c.id}>
+          <span className="contact-name">{c.first_name}</span>
+          <span className="contact-phone">{c.phone}</span>
+        </label>
+        <br />
+      </div>
+    );
+  });
 
   return (
     <React.Fragment>
