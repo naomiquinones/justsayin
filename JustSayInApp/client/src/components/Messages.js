@@ -42,7 +42,7 @@ const Messages = ({ textToTranslate, handleChange }) => {
   //     axios.post("/messages", number, msg);
   //   }
   // };
-  const sendMessages = event => {
+  const sendMessages = async event => {
     event.preventDefault();
     if (!message || message === "" || message === " ") {
       return alert("Please enter message text");
@@ -52,17 +52,20 @@ const Messages = ({ textToTranslate, handleChange }) => {
 
     // populate the list of results for messages sent
     // based on what gets returned from the sendMessage fxn
-    setSendMessageResult(sendMessage(message, group));
+    await setSendMessageResult(sendMessage(message, group));
     // send a phone number and message to endpoint
     console.log("submitted");
   };
-  const sendMessage = (message, group) => {
+
+  const sendMessage = async (message, group) => {
     // get list of recipients' unique target languages
     const targetLangs = [
       ...new Set(group.map(currentContact => currentContact.language))
     ];
-    const translatedMessages = translate(message, sourceLanguage, targetLangs);
-    const response = group.map(currentContact => {
+    console.log("sendMessage targetLangs", targetLangs)
+    const translatedMessages = await translate(message, sourceLanguage, targetLangs);
+    console.log("sendMessage translatedMessages",translatedMessages)
+    const response = await group.map(currentContact => {
       return axios.post("/sendmessage", {
         number: currentContact.phone,
         message: translatedMessages[currentContact.language]
@@ -73,16 +76,35 @@ const Messages = ({ textToTranslate, handleChange }) => {
   //
   const translate = async (message, sourceLang, targetLanguages) => {
     // translations will be in form of {"es": "Hola", "jp": "こんにちは"}
-    const translations = await Object.fromEntries(
-      targetLanguages.map(targetLang => [
-        targetLang,
-        axios.post("/translate", {
-          text: message,
-          source: sourceLang,
-          target: targetLang
-        })
-      ])
-    );
+
+    /**return new Promise((resolve, reject) => {
+      Promise.all(targetLanguages.map(targetLang => {
+        return axios.post(....);
+      })).then(result => {
+        // array of the results 
+        resolve(result)
+      })
+    })
+    */
+  const translations = await Promise.all(targetLanguages.map(async targetLang => 
+        {
+          const result = await axios.post("/translate", {
+            text: message,
+            source: sourceLang,
+            target: targetLang
+          })
+
+          return [
+            targetLang, result
+          ]          
+
+        }))
+
+        console.log("TS", translations)
+
+    // const translations = await Object.fromEntries(
+      
+    // );
     console.log("Messages translate function:", translations);
     return translations;
   };
@@ -129,13 +151,13 @@ const Messages = ({ textToTranslate, handleChange }) => {
       </form>
 
       {sendMessageResult.length > 0 && (
-        <>
+        <React.Fragment>
           <hr />
           <h2>Results</h2>
           {sendMessageResult.map((r, i) => (
             <p key={i}>{r}</p>
           ))}
-        </>
+        </React.Fragment>
       )}
     </React.Fragment>
   );
