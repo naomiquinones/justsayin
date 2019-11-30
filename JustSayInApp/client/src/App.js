@@ -1,4 +1,4 @@
-import React /* , { Component } */ from "react";
+import React from "react";
 import { Route, Link } from "react-router-dom";
 import JustSayInlogo from "./images/JustSayIn-logo-wordmark.svg";
 // import axios from "axios";
