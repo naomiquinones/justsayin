@@ -27,9 +27,7 @@ const translator = require("./translate/translate");
 // database
 // get contacts
 const getContacts = async (request, response) => {
-  console.log(request.query.owner_id);
   const { owner_id } = request.query;
-  console.log(owner_id);
   const client = await pool.connect();
   try {
     const results = await pool.query(
