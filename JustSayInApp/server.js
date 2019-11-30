@@ -40,8 +40,6 @@ const getContacts = async (request, response) => {
     response.status(500).json("Problem getting contacts");
     throw e;
   } finally {
-    // Make sure to release the client before any error handling,
-    // just in case the error handling itself throws an error.
     client.release();
   }
 };
@@ -61,11 +59,9 @@ const addContact = async (request, response) => {
   try {
     await client.query("BEGIN");
     const queryText =
-      "INSERT INTO users(first_name, phone, user_password, target_lang_code) VALUES($1,$2,$3,$4,$5) RETURNING id";
+      "INSERT INTO users(first_name, phone, target_lang_code) VALUES($1,$2,$3) RETURNING id";
     const res = await client.query(queryText, [
       contact_first_name,
-      contact_last_name,
-      contact_email,
       contact_phone,
       contact_target_lang
     ]);
@@ -124,7 +120,7 @@ app.post("/translate", async (req, res) => {
 
 // send SMS message
 app.post("/sendmessage", (req, res) => {
-  console.log("/sendmessage", req.body);
+  console.log("\n-*-*-*-*\n/sendmessage\n", req.body);
   const { number, message } = req.body;
 
   let msg = message || "Special message from the Just Say In app";
@@ -137,7 +133,8 @@ app.post("/sendmessage", (req, res) => {
   // sendSMS.send(recipient, msg);
   // }
   console.log(recipient, msg);
-  res.status(200).json("Message sent to", recipient, msg);
+  let response = `Message sent to ${ recipient}: ${msg}`;
+  res.status(200).json(response);
 });
 
 // Below post for twilio incoming
