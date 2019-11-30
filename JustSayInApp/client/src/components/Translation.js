@@ -22,6 +22,7 @@ const Translation = () => {
     fetchLanguages();
   });
 
+  // When the user selects another target language:
   const handleTargetLanguagesChange = data => {
     console.log("handleTargetLanguagesChange event", data);
     setTargetLanguages(data);
@@ -29,14 +30,19 @@ const Translation = () => {
 
   const clearAllTranslations = () => {
     setFormattedTranslations([]);
+    console.log("cleared", formattedTranslations);
   };
+
+  // When user clicks the Translate button
   const handleTranslationRequest = event => {
     event.preventDefault();
+    // some validation, alert user if no text submitted
     if (!textToTranslate || textToTranslate === "" || textToTranslate === " ") {
       return alert("Please enter text to translate");
     }
+    // clear any previous translations out of the formattedTranslations array
     clearAllTranslations();
-    console.log("cleared", formattedTranslations);
+
     for (let i = 0; i < targetLanguages.length; i++) {
       let currentTargetLanguage = targetLanguages[i];
       fetchTranslation(currentTargetLanguage);
@@ -59,19 +65,23 @@ const Translation = () => {
     }
   };
 
-  const fetchTranslation = async currentTargetLanguage => {
+  const fetchTranslation = async currentTargetLanguageCode => {
     let response = await axios.post("/translate", {
       text: textToTranslate,
       source: sourceLanguage,
-      target: currentTargetLanguage
+      target: currentTargetLanguageCode
     });
-
-    let currentLanguage = availableLanguages.filter(
-      lang => lang[0] === currentTargetLanguage
-    );
-    let currentLanguageName = currentLanguage[0][1];
+    // set variable to hold the text that came back
     let translatedText = response.data;
 
+    // get the name associated with the language code
+    let currentLanguage = availableLanguages.filter(
+      lang => lang[0] === currentTargetLanguageCode
+    );
+    let currentLanguageName = currentLanguage[0][1];
+
+    // take what's currently in formattedTranslations
+    // add the current translation with its language
     setFormattedTranslations(formattedTranslations => [
       ...formattedTranslations,
       {
