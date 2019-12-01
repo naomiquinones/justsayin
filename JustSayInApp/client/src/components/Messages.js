@@ -77,7 +77,7 @@ const Messages = ({ textToTranslate, handleChange }) => {
       // send a phone number and message to endpoint
       return axios.post("/sendmessage", {
         number: currentContact.phone,
-        message: translatedMessages[currentContact.language]
+        message: translatedMessages[currentContact.target_lang_code]
       });
     });
     return response;
@@ -116,11 +116,17 @@ const Messages = ({ textToTranslate, handleChange }) => {
 
     console.log("TS", translations);
 
-    // const translations = await Object.fromEntries(
+    const translationsObject = Object.fromEntries(translations);
 
+    // const translations = Object.fromEntries(
+    //   targetLanguages.map(l => [l, axios.post("/translate", {
+        //   text: message,
+        //   source: sourceLang,
+        //   target: targetLang
+        // })]),
     // );
-    console.log("Messages translate function:", translations);
-    return translations;
+    console.log("Messages translate function",translationsObject)
+    return translationsObject;
   };
 
   const showContacts = contacts.map((c, index) => {
