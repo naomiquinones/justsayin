@@ -384,7 +384,7 @@ option:active {
   }
   input[type="submit"] {
     width: 92%;
-    margin: 1em 4%;
+    margin: 1em 4% .5em;
   }
 }
 @media (min-width: 740px) {
@@ -499,5 +499,11 @@ option:active {
     color: var(--app-blue, #49f);
     display: inline-block;
     margin-right: 0.75em;
+  }
+}
+@media (min-width: 600px) {
+  .sent-messages-display {
+    margin-top: 0;
+    font-size: 1em;
   }
 }
