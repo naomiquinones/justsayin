@@ -120,15 +120,14 @@ app.post("/translate", async (req, res) => {
 
 // send SMS message
 app.post("/sendmessage", (req, res) => {
-  console.log("\n-*-*-*-*\n/sendmessage\n", req.body);
   const { number, message } = req.body;
 
-  let msg = message || "Special message from the Just Say In app";
-  // for (number of numbers) {
-  // get one recipient
-  let recipient = number; //|| [process.env.TEST_RECIPIENT1];
+  let msg = message;
+  let recipient = number;
 
-  // for (let recipient of recipients) {
+  if(!msg || !recipient) {
+    res.status(500).json("Missing message text or recipients")
+  }
   // Send a message
   sendSMS.send(recipient, msg);
   // }

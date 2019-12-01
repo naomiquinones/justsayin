@@ -84,31 +84,22 @@ const Messages = ({ textToTranslate, handleChange }) => {
   };
   //
   const translate = async (message, sourceLang, targetLanguages) => {
-    // translations will be in form of {"es": "Hola", "jp": "こんにちは"}
-
     const translations = await Promise.all(
+      // get an array of arrays
       targetLanguages.map(async targetLang => {
         const result = await axios.post("/translate", {
           text: message,
           source: sourceLang,
           target: targetLang
         });
-
+        // return an array of language and translation
         return [targetLang, result.data];
       })
     );
 
-    console.log("TS", translations);
-
+    // convert the array of arrays to an object {"es": "Hola", "ja": "こんにちは"}
     const translationsObject = Object.fromEntries(translations);
 
-    // const translations = Object.fromEntries(
-    //   targetLanguages.map(l => [l, axios.post("/translate", {
-        //   text: message,
-        //   source: sourceLang,
-        //   target: targetLang
-        // })]),
-    // );
     console.log("Messages translate function",translationsObject)
     return translationsObject;
   };
