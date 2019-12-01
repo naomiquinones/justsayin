@@ -86,24 +86,8 @@ const Messages = ({ textToTranslate, handleChange }) => {
   const translate = async (message, sourceLang, targetLanguages) => {
     // translations will be in form of {"es": "Hola", "jp": "こんにちは"}
 
-    /**return new Promise((resolve, reject) => {
-      Promise.all(targetLanguages.map(targetLang => {
-        return axios.post(....);
-      })).then(result => {
-        // array of the results 
-        resolve(result)
-      })
-    })
-    */
     const translations = await Promise.all(
       targetLanguages.map(async targetLang => {
-        console.log(
-          "\n-*-*-\n\ntranslate.translations.map",
-          message,
-          sourceLang,
-          targetLanguages,
-          "\n\n\n"
-        );
         const result = await axios.post("/translate", {
           text: message,
           source: sourceLang,

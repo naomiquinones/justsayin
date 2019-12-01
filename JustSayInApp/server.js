@@ -130,9 +130,9 @@ app.post("/sendmessage", (req, res) => {
 
   // for (let recipient of recipients) {
   // Send a message
-  // sendSMS.send(recipient, msg);
+  sendSMS.send(recipient, msg);
   // }
-  console.log(recipient, msg);
+  console.log(`Message sent to ${ recipient}: ${msg} from server`);
   let response = `Message sent to ${ recipient}: ${msg}`;
   res.status(200).json(response);
 });
