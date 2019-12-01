@@ -4,28 +4,33 @@ CREATE TABLE languages (
 );
 CREATE TABLE users (
   id serial PRIMARY KEY,
-  oauth_id VARCHAR(150) UNIQUE,
   first_name VARCHAR(100),
   last_name VARCHAR(100),
   email VARCHAR(100),
   phone VARCHAR(15),
-  target_lang_code VARCHAR REFERENCES languages (iso_code),
-  user_password VARCHAR(50)
+  source_lang_code VARCHAR REFERENCES languages (iso_code),
+  oauth_id VARCHAR(150) UNIQUE
 );
 
-CREATE TABLE user_contacts (
+CREATE TABLE contacts (
   id serial PRIMARY KEY,
   owner_id INTEGER REFERENCES users (id),
-  contact_id INTEGER REFERENCES users (id),
-  block_ BOOLEAN,
-  favorite BOOLEAN
+  first_name VARCHAR(100),
+  last_name VARCHAR(100),
+  phone VARCHAR(15),
+  target_lang_code VARCHAR REFERENCES languages (iso_code),
+  isFavorite BOOLEAN
+);
+
+CREATE TABLE user_auth_tokens (
+  owner_id INTEGER REFERENCES users (id),
+  auth_token VARCHAR(255)
 );
 
 CREATE TABLE groups (
   id serial PRIMARY KEY,
   group_name VARCHAR(150),
-  group_owner INTEGER REFERENCES users (id),
-  group_member INTEGER REFERENCES users (id)
+  group_member INTEGER REFERENCES contacts (id)
 );
 
 CREATE TABLE messages (
@@ -55,16 +60,4 @@ VALUES
 ('nl','Dutch'),
 ('pt','Portuguese'),
 ('ru','Russian')
-;
-
--- 
-INSERT INTO user_contacts (
-  owner_id,
-  contact_id
-)
-VALUES
-(1,4),
-(1,3),
-(1,2),
-(3,4)
 ;

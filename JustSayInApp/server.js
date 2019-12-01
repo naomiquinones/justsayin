@@ -28,16 +28,16 @@ const translator = require("./translate/translate");
 // get contacts
 const getContacts = async (request, response) => {
   const { owner_id } = request.query;
+  console.log("owner_id is",owner_id)
   const client = await pool.connect();
   try {
     const results = await pool.query(
-      "SELECT id, first_name, phone, target_lang_code FROM users WHERE id IN (SELECT contact_id FROM user_contacts WHERE owner_id=$1)",
-      [owner_id]
+      "SELECT id, first_name, last_name, phone, target_lang_code FROM contacts WHERE owner_id=$1)",[owner_id]
     );
-    console.log("get contacts");
+    console.log("get contacts", results);
     response.status(200).json(results.rows);
   } catch (e) {
-    response.status(500).json("Problem getting contacts");
+    response.status(500).json(`Problem getting contacts. The error is:\n-*-*-*-*\n${e}`);
     throw e;
   } finally {
     client.release();
@@ -48,26 +48,18 @@ const getContacts = async (request, response) => {
 const addContact = async (request, response) => {
   const {
     owner_id,
-    contact_first_name,
-    contact_last_name,
-    contact_email,
-    contact_phone,
-    contact_target_lang
+    first_name,
+    last_name,
+    phone,
+    target_lang_code
   } = request.body;
 
   const client = await pool.connect();
   try {
     await client.query("BEGIN");
-    const queryText =
-      "INSERT INTO users(first_name, phone, target_lang_code) VALUES($1,$2,$3) RETURNING id";
-    const res = await client.query(queryText, [
-      contact_first_name,
-      contact_phone,
-      contact_target_lang
-    ]);
     const insertContactText =
-      "INSERT INTO user_contacts(owner_id, contact_id) VALUES ($1, $2)";
-    const insertContactValues = [owner_id, res.rows[0].id];
+      "INSERT INTO contacts(owner_id, first_name, last_name, phone, target_lang_code) VALUES ($1, $2, $3, $4, $5)";
+    const insertContactValues = [owner_id, first_name, last_name, phone, target_lang_code];
     await client.query(insertContactText, insertContactValues);
     await client.query("COMMIT");
     response.status(200).json("Contact inserted");
