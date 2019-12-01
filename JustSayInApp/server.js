@@ -28,16 +28,19 @@ const translator = require("./translate/translate");
 // get contacts
 const getContacts = async (request, response) => {
   const { owner_id } = request.query;
-  console.log("owner_id is",owner_id)
+  console.log("owner_id is", owner_id);
   const client = await pool.connect();
   try {
     const results = await pool.query(
-      "SELECT id, first_name, last_name, phone, target_lang_code FROM contacts WHERE owner_id=$1)",[owner_id]
+      "SELECT id, first_name, last_name, phone, target_lang_code FROM contacts WHERE owner_id=$1",
+      [owner_id]
     );
     console.log("get contacts", results);
     response.status(200).json(results.rows);
   } catch (e) {
-    response.status(500).json(`Problem getting contacts. The error is:\n-*-*-*-*\n${e}`);
+    response
+      .status(500)
+      .json(`Problem getting contacts. The error is:\n-*-*-*-*\n${e}`);
     throw e;
   } finally {
     client.release();
@@ -59,7 +62,13 @@ const addContact = async (request, response) => {
     await client.query("BEGIN");
     const insertContactText =
       "INSERT INTO contacts(owner_id, first_name, last_name, phone, target_lang_code) VALUES ($1, $2, $3, $4, $5)";
-    const insertContactValues = [owner_id, first_name, last_name, phone, target_lang_code];
+    const insertContactValues = [
+      owner_id,
+      first_name,
+      last_name,
+      phone,
+      target_lang_code
+    ];
     await client.query(insertContactText, insertContactValues);
     await client.query("COMMIT");
     response.status(200).json("Contact inserted");
@@ -117,13 +126,13 @@ app.post("/sendmessage", (req, res) => {
   let msg = message;
   let recipient = number;
 
-  if(!msg || !recipient) {
-    res.status(500).json("Missing message text or recipients")
+  if (!msg || !recipient) {
+    res.status(500).json("Missing message text or recipients");
   }
   // Send a message
   sendSMS.send(recipient, msg);
 
-  let confirmation = `Message sent to ${ recipient}: ${msg}`;
+  let confirmation = `Message sent to ${recipient}: ${msg}`;
 
   res.status(200).json(confirmation);
 });
