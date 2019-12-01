@@ -34,7 +34,7 @@ const getContacts = async (request, response) => {
       "SELECT id, first_name, phone, target_lang_code FROM users WHERE id IN (SELECT contact_id FROM user_contacts WHERE owner_id=$1)",
       [owner_id]
     );
-    console.log("getContacts", results);
+    console.log("get contacts");
     response.status(200).json(results.rows);
   } catch (e) {
     response.status(500).json("Problem getting contacts");
@@ -130,10 +130,10 @@ app.post("/sendmessage", (req, res) => {
   }
   // Send a message
   sendSMS.send(recipient, msg);
-  // }
-  console.log(`Message sent to ${ recipient}: ${msg} from server`);
-  let response = `Message sent to ${ recipient}: ${msg}`;
-  res.status(200).json(response);
+
+  let confirmation = `Message sent to ${ recipient}: ${msg}`;
+
+  res.status(200).json(confirmation);
 });
 
 // Below post for twilio incoming

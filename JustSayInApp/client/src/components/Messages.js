@@ -29,27 +29,18 @@ const Messages = ({ textToTranslate, handleChange }) => {
     setContacts(response.data);
   };
 
-  // const sendMessages = recipients => {
-
-  //   // send all recipients with their translations to endpoint
-  //   for (let recipient of recipients) {
-  //     let number = recipient.name;
-  //     let msg = recipient.msg;
-  //     axios.post("/messages", number, msg);
-  //   }
-  // };
   const sendMessages = async event => {
     event.preventDefault();
     if (!message || message === "" || message === " ") {
       return alert("Please enter message text");
     }
     // make a list of the recipients' phone numbers
-    const group = contacts.filter(c => recipients.includes(c.phone));
-
+    const recipientList = contacts.filter(c => recipients.includes(c.phone));
+    
+    // collect what gets returned from the sendMessage fxn
+    const messageResults = await sendMessage(message, recipientList);
     // populate the list of results for messages sent
-    // based on what gets returned from the sendMessage fxn
-    await setSendMessageResult(sendMessage(message, group));
-    console.log("submitted send message requests");
+    setSendMessageResult(messageResults);
   };
 
   const sendMessage = async (message, group) => {
@@ -59,7 +50,6 @@ const Messages = ({ textToTranslate, handleChange }) => {
       // Here, map pulls out all the recipients' languages
       ...new Set(group.map(currentContact => currentContact.target_lang_code))
     ];
-    console.log("sendMessage targetLangs", targetLangs);
 
     // get the necessary translations
     const translatedMessages = await translate(
@@ -67,22 +57,23 @@ const Messages = ({ textToTranslate, handleChange }) => {
       sourceLanguage,
       targetLangs
     );
-    console.log(
-      "\n*-*-sendMessage fxn translatedMessages:",
-      translatedMessages,
-      "\n*-*-*"
-    );
-    // match translations with recipients
-    const response = await group.map(currentContact => {
-      // send a phone number and message to endpoint
-      return axios.post("/sendmessage", {
-        number: currentContact.phone,
-        message: translatedMessages[currentContact.target_lang_code]
-      });
-    });
-    return response;
-  };
-  //
+    
+    // important: wrap in Promise.all
+    const responses = await Promise.all(
+      group.map(async currentRecipient => {
+        // return result of posting phone number and message to endpoint
+        const msgResponse = await axios.post("/sendmessage", {
+          number: currentRecipient.phone,
+          // match translation language with recipient's target language
+          // to get the corresponding translation
+          message: translatedMessages[currentRecipient.target_lang_code]
+        });
+          return msgResponse.data;
+      }) 
+    )
+    return responses;
+  }; //end sendMessage function
+
   const translate = async (message, sourceLang, targetLanguages) => {
     const translations = await Promise.all(
       // get an array of arrays
@@ -99,10 +90,8 @@ const Messages = ({ textToTranslate, handleChange }) => {
 
     // convert the array of arrays to an object {"es": "Hola", "ja": "こんにちは"}
     const translationsObject = Object.fromEntries(translations);
-
-    console.log("Messages translate function",translationsObject)
     return translationsObject;
-  };
+  }; //end translate function
 
   const showContacts = contacts.map((c, index) => {
     return (
@@ -146,13 +135,12 @@ const Messages = ({ textToTranslate, handleChange }) => {
       </form>
 
       {sendMessageResult.length > 0 && (
-        <React.Fragment>
-          <hr />
-          <h2>Results</h2>
-          {sendMessageResult.map((r, i) => (
-            <p key={i}>{r}</p>
-          ))}
-        </React.Fragment>
+          <section className="sent-messages-display">
+            <h2>Results</h2>
+            {sendMessageResult.map((r, i) => (
+              <p key={i}>{r}</p>
+            ))}
+          </section>
       )}
     </React.Fragment>
   );
