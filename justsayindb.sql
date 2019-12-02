@@ -57,4 +57,6 @@ VALUES
 ('pt','Portuguese'),
 ('ru','Russian'),
 ('ja','Japanese')
+('ko','Korean'),
+('de','German')
 ;
