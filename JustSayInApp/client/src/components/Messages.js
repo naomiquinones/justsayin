@@ -46,6 +46,7 @@ const Messages = ({match}) => {
     const messageResults = await sendMessage(message, recipientList);
     // populate the list of results for messages sent
     setSendMessageResult(messageResults);
+    setMessage("")
   };
 
   const sendMessage = async (message, group) => {
@@ -110,7 +111,7 @@ const Messages = ({match}) => {
           onChange={e => toggleRecipient(e.currentTarget.name)}
         />
         <label htmlFor={c.id}>
-          <span className="contact-name">{c.first_name}</span>
+          <span className="contact-name">{c.first_name} {c.last_name}</span>
           <span className="contact-phone">{c.phone}</span>
         </label>
         <br />
