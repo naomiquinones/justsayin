@@ -36,6 +36,9 @@ body {
     ),
     linear-gradient(336deg, rgba(220, 255, 220, 0.8), rgba(0, 255, 0, 0) 70.71%),
     linear-gradient(127deg, rgba(220, 230, 245, 0.8), rgba(0, 0, 255, 0) 70.71%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 main {
@@ -328,6 +331,7 @@ option:active {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  border-bottom: 1px solid var(--app-grey-light,#ccc);
 }
 .contact-info label {
   display: flex;
