@@ -1,11 +1,16 @@
 import React from "react";
 import axios from "axios";
+import { Route, Link, useRouteMatch } from "react-router-dom";
+import AddContacts from "./AddContacts";
 
-const Messages = ({ textToTranslate, handleChange }) => {
+const Messages = ({match}) => {
   const [message, setMessage] = React.useState("");
   const [contacts, setContacts] = React.useState([]);
   const [recipients, setRecipients] = React.useState([]);
   const [sendMessageResult, setSendMessageResult] = React.useState([]);
+
+  const { path, url } = useRouteMatch();
+  console.log("\n-----path",path,"\n-----url",url);
 
   const sourceLanguage = "en";
 
@@ -125,6 +130,15 @@ const Messages = ({ textToTranslate, handleChange }) => {
             placeholder="Enter text to send"
           />
         </div>
+        {/* <Link
+          to={{
+            pathname: '/modal/1',
+            state: { modal: true }
+          }}
+        >
+          Open Modal
+        </Link> */}
+        <Link to={`${url}/addcontacts`} className="add-contact-link">Add Contacts</Link>
 
         <fieldset>
           <legend>Recipients</legend>
@@ -133,6 +147,9 @@ const Messages = ({ textToTranslate, handleChange }) => {
         <br />
         <input type="submit" value="Send message" />
       </form>
+      <Route exact path={`${path}/addcontacts`}>
+          <AddContacts />
+        </Route>
 
       {sendMessageResult.length > 0 && (
           <section className="sent-messages-display">
