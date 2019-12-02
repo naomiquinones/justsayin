@@ -146,6 +146,8 @@ app.post("/sms", (req, res) => {
 
 // viewSMS.viewAll();
 
+// make catchall endpoint
+
 // Set app to listen on the server
 app.listen(port, hostname, () =>
   console.log(`Using CORS. Server started on ${hostname} at port ${port}`)
