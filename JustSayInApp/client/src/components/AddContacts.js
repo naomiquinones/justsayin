@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 
 import axios from "axios";
 
@@ -7,6 +7,7 @@ import Loading from "./Loading";
 
 const AddContacts = (props) => {
   const [isLoading, setIsLoading] = React.useState(true);
+  const [goBack, setGoBack] = React.useState(false);
   const [availableLanguages, setAvailableLanguages] = React.useState([]);
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
@@ -34,12 +35,6 @@ const AddContacts = (props) => {
     }
   };
 
-  // const handleTargetLanguagesChange = data => {
-  //   console.log("handleTargetLanguagesChange event", data);
-  //   ;
-  // };
-
-
   const handleAddRequest = async event =>{
     event.preventDefault();
 
@@ -56,9 +51,8 @@ const AddContacts = (props) => {
           phone: phone,
           target_lang_code: targetLanguage
       });
+      setGoBack(true);
     }
-
-    props.history.push('/messages')
   }
 
   const languageOptions = availableLanguages.map(language => {
@@ -71,6 +65,7 @@ const AddContacts = (props) => {
 
   return (
     <React.Fragment>
+    {goBack && <Redirect to="/messages" />}
     {isLoading ? (
       <Loading message="Getting available languages" />
     ) : (
