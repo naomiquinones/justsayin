@@ -29,13 +29,14 @@ const translator = require("./translate/translate");
 const getContacts = async (request, response) => {
   const { owner_id } = request.query;
   console.log("owner_id is", owner_id);
+  
   const client = await pool.connect();
   try {
     const results = await pool.query(
-      "SELECT id, first_name, last_name, phone, target_lang_code FROM contacts WHERE owner_id=$1",
+      "SELECT id, first_name, last_name, phone, target_lang_code FROM users WHERE id IN (SELECT contact_id FROM contacts WHERE owner_id=$1)",
       [owner_id]
     );
-    console.log("get contacts", results);
+    console.log("get contacts", results.rows);
     response.status(200).json(results.rows);
   } catch (e) {
     response
@@ -53,6 +54,7 @@ const addContact = async (request, response) => {
     owner_id,
     first_name,
     last_name,
+    email,
     phone,
     target_lang_code
   } = request.body;
@@ -60,15 +62,11 @@ const addContact = async (request, response) => {
   const client = await pool.connect();
   try {
     await client.query("BEGIN");
+    const insertUserText = "INSERT INTO users (first_name, last_name, email, phone, target_lang_code) VALUES ($1,$2,$3,$4,$5) RETURNING id";
+    const res = await client.query(insertUserText,[first_name, last_name, email, phone, target_lang_code]);
     const insertContactText =
-      "INSERT INTO contacts(owner_id, first_name, last_name, phone, target_lang_code) VALUES ($1, $2, $3, $4, $5)";
-    const insertContactValues = [
-      owner_id,
-      first_name,
-      last_name,
-      phone,
-      target_lang_code
-    ];
+      "INSERT INTO contacts(owner_id, contact_id) VALUES ($1, $2)";
+    const insertContactValues = [owner_id,res.rows[0].id];
     await client.query(insertContactText, insertContactValues);
     await client.query("COMMIT");
     response.status(200).json("Contact inserted");

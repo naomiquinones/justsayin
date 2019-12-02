@@ -8,17 +8,14 @@ CREATE TABLE users (
   last_name VARCHAR(100),
   email VARCHAR(100),
   phone VARCHAR(15),
-  source_lang_code VARCHAR REFERENCES languages (iso_code),
+  target_lang_code VARCHAR REFERENCES languages (iso_code),
   oauth_id VARCHAR(150) UNIQUE
 );
 
 CREATE TABLE contacts (
   id serial PRIMARY KEY,
   owner_id INTEGER REFERENCES users (id),
-  first_name VARCHAR(100),
-  last_name VARCHAR(100),
-  phone VARCHAR(15),
-  target_lang_code VARCHAR REFERENCES languages (iso_code),
+  contact_id INTEGER REFERENCES users (id),
   isFavorite BOOLEAN
 );
 
@@ -30,7 +27,8 @@ CREATE TABLE user_auth_tokens (
 CREATE TABLE groups (
   id serial PRIMARY KEY,
   group_name VARCHAR(150),
-  group_member INTEGER REFERENCES contacts (id)
+  group_owner INTEGER REFERENCES users (id),
+  group_member INTEGER REFERENCES users (id)
 );
 
 CREATE TABLE messages (
@@ -43,8 +41,6 @@ CREATE TABLE messages (
   created_at TIMESTAMP
 );
 
--- 
--- 
 INSERT INTO languages (
   iso_code,
   language_name
@@ -59,5 +55,6 @@ VALUES
 ('fr','French'),
 ('nl','Dutch'),
 ('pt','Portuguese'),
-('ru','Russian')
+('ru','Russian'),
+('ja','Japanese')
 ;
