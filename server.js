@@ -1,9 +1,10 @@
 require("dotenv").config();
-require("path");
 
 // Read the host address and port from the environment
 const hostname = process.env.HOST;
 const port = process.env.PORT;
+
+const path = require("path");
 
 const express = require("express");
 const cors = require("cors");
