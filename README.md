@@ -21,8 +21,11 @@ Just Say In is a multiple language translator and communication app, like Google
 1. Web app with multiple languages as target languages
 2. Google/Facebook Login
 3. Add contacts for messaging
+
    ![gif animation from Giphy.com](https://media.giphy.com/media/YocjNPr2fLCoQ9Fl1O/giphy.gif)
+
 4. Message contacts
+
    ![gif animation from Giphy.com](https://media.giphy.com/media/Q7e997geab5EfC5Mlp/giphy.gif)
 
 ## Future milestones
