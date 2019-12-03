@@ -14,7 +14,7 @@ Just Say In is a multiple language translator and communication app, like Google
 
 ![gif animation from Giphy.com](https://media.giphy.com/media/d7BJkUCIRjXLuj6lX6/giphy.gif)
 
-![gif animation from Giphy.com](https://media.giphy.com/media/L18x7FDgvpBwHvCRnz/giphy.gif)
+![gif animation from Giphy.com](https://media.giphy.com/media/Q7e997geab5EfC5Mlp/giphy.gif)
 
 # Features
 
