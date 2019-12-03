@@ -3,14 +3,13 @@ import axios from "axios";
 import { Route, Link, useRouteMatch } from "react-router-dom";
 import AddContacts from "./AddContacts";
 
-const Messages = ({match}) => {
+const Messages = ({ match }) => {
   const [message, setMessage] = React.useState("");
   const [contacts, setContacts] = React.useState([]);
   const [recipients, setRecipients] = React.useState([]);
   const [sendMessageResult, setSendMessageResult] = React.useState([]);
 
   const { path, url } = useRouteMatch();
-  console.log("\n-----path",path,"\n-----url",url);
 
   const sourceLanguage = "en";
 
@@ -41,12 +40,12 @@ const Messages = ({match}) => {
     }
     // make a list of the recipients' phone numbers
     const recipientList = contacts.filter(c => recipients.includes(c.phone));
-    
+
     // collect what gets returned from the sendMessage fxn
     const messageResults = await sendMessage(message, recipientList);
     // populate the list of results for messages sent
     setSendMessageResult(messageResults);
-    setMessage("")
+    setMessage("");
   };
 
   const sendMessage = async (message, group) => {
@@ -63,7 +62,7 @@ const Messages = ({match}) => {
       sourceLanguage,
       targetLangs
     );
-    
+
     // important: wrap in Promise.all
     const responses = await Promise.all(
       group.map(async currentRecipient => {
@@ -74,9 +73,9 @@ const Messages = ({match}) => {
           // to get the corresponding translation
           message: translatedMessages[currentRecipient.target_lang_code]
         });
-          return msgResponse.data;
-      }) 
-    )
+        return msgResponse.data;
+      })
+    );
     return responses;
   }; //end sendMessage function
 
@@ -111,7 +110,9 @@ const Messages = ({match}) => {
           onChange={e => toggleRecipient(e.currentTarget.name)}
         />
         <label htmlFor={c.id}>
-          <span className="contact-name">{c.first_name} {c.last_name}</span>
+          <span className="contact-name">
+            {c.first_name} {c.last_name}
+          </span>
           <span className="contact-phone">{c.phone}</span>
         </label>
         <br />
@@ -139,7 +140,9 @@ const Messages = ({match}) => {
         >
           Open Modal
         </Link> */}
-        <Link to={`${url}/addcontacts`} className="add-contact-link">Add Contacts</Link>
+        <Link to={`${url}/addcontacts`} className="add-contact-link">
+          Add Contacts
+        </Link>
 
         <fieldset>
           <legend>Recipients</legend>
@@ -149,16 +152,16 @@ const Messages = ({match}) => {
         <input type="submit" value="Send message" />
       </form>
       <Route exact path={`${path}/addcontacts`}>
-          <AddContacts />
-        </Route>
+        <AddContacts />
+      </Route>
 
       {sendMessageResult.length > 0 && (
-          <section className="sent-messages-display">
-            <h2>Results</h2>
-            {sendMessageResult.map((r, i) => (
-              <p key={i}>{r}</p>
-            ))}
-          </section>
+        <section className="sent-messages-display">
+          <h2>Results</h2>
+          {sendMessageResult.map((r, i) => (
+            <p key={i}>{r}</p>
+          ))}
+        </section>
       )}
     </React.Fragment>
   );

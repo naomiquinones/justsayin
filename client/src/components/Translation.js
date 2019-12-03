@@ -9,7 +9,10 @@ const Translation = () => {
   const [availableLanguages, setAvailableLanguages] = React.useState([]);
   const sourceLanguage = "en";
   const [targetLanguages, setTargetLanguages] = React.useState([
-    "pt", "ja", "ar","es"
+    "pt",
+    "ja",
+    "ar",
+    "es"
   ]);
   const [textToTranslate, setTextToTranslate] = React.useState("");
   const [formattedTranslations, setFormattedTranslations] = React.useState([]);
@@ -114,7 +117,7 @@ const Translation = () => {
               name="textToTranslate"
               value={textToTranslate}
               onChange={event => setTextToTranslate(event.currentTarget.value)}
-              placeholder="Enter text to translate"
+              placeholder="Enter text to translate (currently supports only English as the source language)"
             />
           </div>
 

@@ -9,18 +9,19 @@ module.exports = {
     sourceLanguage = "es",
     targetLanguage = "ja"
   ) => {
-    const translated = new Promise((resolve,reject) => {
+    const translated = new Promise((resolve, reject) => {
       google.translate(
         textToTranslate,
         sourceLanguage,
         targetLanguage,
         (err, translation) => {
-          if(err) {
+          if (err) {
             reject("Problem with translation.", err);
           } else {
             resolve(translation.translatedText);
           }
-        });
+        }
+      );
     });
 
     return translated;
@@ -30,7 +31,7 @@ module.exports = {
     const languageList = new Promise((resolve, reject) => {
       google.getSupportedLanguages(sourceLanguage, (err, langs) => {
         if (err) {
-          reject("Problem with getting supported languages.",err);
+          reject("Problem with getting supported languages.", err);
         } else {
           resolve(langs);
         }
@@ -38,5 +39,9 @@ module.exports = {
     });
 
     return languageList;
+  }
+
+  detectLanguage: ()=> {
+    console.log('detecting language')
   }
 };
