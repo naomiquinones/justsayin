@@ -5,7 +5,7 @@ import axios from "axios";
 
 import Loading from "./Loading";
 
-const AddContacts = (props) => {
+const AddContacts = props => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [goBack, setGoBack] = React.useState(false);
   const [availableLanguages, setAvailableLanguages] = React.useState([]);
@@ -35,25 +35,26 @@ const AddContacts = (props) => {
     }
   };
 
-  const handleAddRequest = async event =>{
+  const handleAddRequest = async event => {
     event.preventDefault();
 
+    // change the owner_id to pull from the logged-in user
     const owner_id = 1;
 
     // minimal validation, if these three, can send to db
-    if(firstName && phone && targetLanguage) {
-      console.log("have three, can send",firstName,phone,targetLanguage)
-      await axios.post("/contacts",{  
-          owner_id: owner_id,
-          first_name:firstName,
-          last_name: lastName,
-          email: email,
-          phone: phone,
-          target_lang_code: targetLanguage
+    if (firstName && phone && targetLanguage) {
+      console.log("have three, can send", firstName, phone, targetLanguage);
+      await axios.post("/contacts", {
+        owner_id: owner_id,
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        phone: phone,
+        target_lang_code: targetLanguage
       });
       setGoBack(true);
     }
-  }
+  };
 
   const languageOptions = availableLanguages.map(language => {
     return (
@@ -65,54 +66,81 @@ const AddContacts = (props) => {
 
   return (
     <React.Fragment>
-    {goBack && <Redirect to="/messages" />}
-    {isLoading ? (
-      <Loading message="Getting available languages" />
-    ) : (
-      <form className="form-container add-contact-box" onSubmit={handleAddRequest}>
-        <fieldset>
-          <legend>Add Contacts</legend>
-          <label htmlFor="fname">First name: <span className="notice">(required)</span></label>
-          <input id="fname" name="fname" type="text" required value={firstName}
-            onChange={ event => setFirstName(event.target.value)}
-          />
+      {goBack && <Redirect to="/messages" />}
+      {isLoading ? (
+        <Loading message="Getting available languages" />
+      ) : (
+        <form
+          className="form-container add-contact-box"
+          onSubmit={handleAddRequest}
+        >
+          <fieldset>
+            <legend>Add Contacts</legend>
+            <label htmlFor="fname">
+              First name: <span className="notice">(required)</span>
+            </label>
+            <input
+              id="fname"
+              name="fname"
+              type="text"
+              required
+              value={firstName}
+              onChange={event => setFirstName(event.target.value)}
+            />
 
-          <label htmlFor="lname">Last name:</label>
-          <input id="lname" name="lname" type="text" value={lastName}
-            onChange={ event => setLastName(event.target.value)} />
-           
+            <label htmlFor="lname">Last name:</label>
+            <input
+              id="lname"
+              name="lname"
+              type="text"
+              value={lastName}
+              onChange={event => setLastName(event.target.value)}
+            />
 
-          <label htmlFor="email">Email address:</label>
-          <input id="email" name="email" type="email" value={email}
-            onChange={ event => setEmail(event.target.value)} />
+            <label htmlFor="email">Email address:</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              value={email}
+              onChange={event => setEmail(event.target.value)}
+            />
 
-          <label htmlFor="phone">Phone number: <span className="notice">(required)</span></label>
-          <input id="phone" name="phone" required value={phone}
-            onChange={ event => setPhone(event.target.value)} />
+            <label htmlFor="phone">
+              Phone number: <span className="notice">(required)</span>
+            </label>
+            <input
+              id="phone"
+              name="phone"
+              required
+              value={phone}
+              onChange={event => setPhone(event.target.value)}
+            />
 
-
-          <br />
-          <label htmlFor="languages-list">Set the contact's target language <span className="notice">(required)</span></label>
-          <select
-            required
-            className="language-list add-contact select-container"
-            id="languages-list"
-            value={targetLanguage}
-            onChange={e => {
-              const selectedLang = Array.apply(null, e.currentTarget.options)
-                .filter(opt => opt.selected)
-                .map(opt => opt.value)
-              setTargetLanguage(selectedLang[0])}
-            }
-          >
-            {languageOptions}
-          </select>
-        </fieldset>
-        <input type="submit" value="Add contact" />
-      </form>
-    )}
+            <br />
+            <label htmlFor="languages-list">
+              Set the contact's target language{" "}
+              <span className="notice">(required)</span>
+            </label>
+            <select
+              required
+              className="language-list add-contact select-container"
+              id="languages-list"
+              value={targetLanguage}
+              onChange={e => {
+                const selectedLang = Array.apply(null, e.currentTarget.options)
+                  .filter(opt => opt.selected)
+                  .map(opt => opt.value);
+                setTargetLanguage(selectedLang[0]);
+              }}
+            >
+              {languageOptions}
+            </select>
+          </fieldset>
+          <input type="submit" value="Add contact" />
+        </form>
+      )}
     </React.Fragment>
-
   );
 };
 export default withRouter(AddContacts);
