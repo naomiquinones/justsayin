@@ -1,4 +1,5 @@
 require("dotenv").config();
+require("path");
 
 // Read the host address and port from the environment
 const hostname = process.env.HOST;
@@ -17,6 +18,13 @@ app.use(express.json());
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
+  });
+}
+
 // bring in messaging files
 const viewSMS = require("./messaging/view_sms");
 const sendSMS = require("./messaging/send_sms");
@@ -29,7 +37,7 @@ const translator = require("./translate/translate");
 const getContacts = async (request, response) => {
   const { owner_id } = request.query;
   console.log("owner_id is", owner_id);
-  
+
   const client = await pool.connect();
   try {
     const results = await pool.query(
@@ -62,11 +70,18 @@ const addContact = async (request, response) => {
   const client = await pool.connect();
   try {
     await client.query("BEGIN");
-    const insertUserText = "INSERT INTO users (first_name, last_name, email, phone, target_lang_code) VALUES ($1,$2,$3,$4,$5) RETURNING id";
-    const res = await client.query(insertUserText,[first_name, last_name, email, phone, target_lang_code]);
+    const insertUserText =
+      "INSERT INTO users (first_name, last_name, email, phone, target_lang_code) VALUES ($1,$2,$3,$4,$5) RETURNING id";
+    const res = await client.query(insertUserText, [
+      first_name,
+      last_name,
+      email,
+      phone,
+      target_lang_code
+    ]);
     const insertContactText =
       "INSERT INTO contacts(owner_id, contact_id) VALUES ($1, $2)";
-    const insertContactValues = [owner_id,res.rows[0].id];
+    const insertContactValues = [owner_id, res.rows[0].id];
     await client.query(insertContactText, insertContactValues);
     await client.query("COMMIT");
     response.status(200).json("Contact inserted");

@@ -2,7 +2,7 @@
   "name": "justsayin",
   "version": "1.0.0",
   "description": "A translation and messaging app",
-  "main": "index.js",
+  "main": "server.js",
   "engines": {
     "node": "12.x",
     "npm": "6.13.x"
@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/naomiquinones/justsayin/issues"
   },
-  "homepage": "https://github.com/naomiquinones/justsayin#readme",
+  "homepage": "https://justsayin-app.heroku.com",
   "dependencies": {
     "axios": "^0.19.0",
     "bcrypt": "^3.0.7",
