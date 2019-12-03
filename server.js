@@ -19,13 +19,6 @@ app.use(express.json());
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "client/build")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client/build", "index.html"));
-  });
-}
-
 // bring in messaging files
 const viewSMS = require("./messaging/view_sms");
 const sendSMS = require("./messaging/send_sms");
@@ -163,6 +156,12 @@ app.post("/sms", (req, res) => {
 // viewSMS.viewAll();
 
 // make catchall endpoint
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client/build", "index.html"));
+  });
+}
 
 // Set app to listen on the server
 app.listen(port, hostname, () =>
