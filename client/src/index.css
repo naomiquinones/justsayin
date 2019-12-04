@@ -14,7 +14,7 @@ body {
   --app-grey-translucent: rgba(108, 129, 138, 0.85);
   --app-grey-light: rgb(168, 193, 204);
   --app-grey-light-translucent: rgb(168, 193, 204, 0.25);
-  --app-white: #fafafa;
+  --app-white: #fcfcfc;
   --rounded-corners: 4px;
 }
 *,
@@ -36,9 +36,9 @@ body {
     ),
     linear-gradient(336deg, rgba(220, 255, 220, 0.8), rgba(0, 255, 0, 0) 70.71%),
     linear-gradient(127deg, rgba(220, 230, 245, 0.8), rgba(0, 0, 255, 0) 70.71%);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 main {
@@ -48,7 +48,7 @@ main {
 a {
   background-color: transparent;
   color: var(--app-blue);
-  font-size: .7em;
+  font-size: 0.7em;
 }
 img {
   border-style: none;
@@ -130,10 +130,10 @@ h1 {
 }
 .add-contact-link {
   display: block;
-  padding-top: .5rem;
+  padding-top: 0.5rem;
   text-align: right;
   width: auto;
-  color: var(--app-grey, #999)
+  color: var(--app-grey, #999);
 }
 /* ******************** */
 /* TRANSLATIONS STYLES  */
@@ -162,20 +162,20 @@ h1 {
 .sent-messages-display {
   background-color: var(--app-white, #fefefe);
   box-shadow: 0 6px 15px var(--app-grey-translucent);
-  color: var(--app-grey,#999);
-  border: 1px solid var(--app-grey-light,#ccc);
+  color: var(--app-grey, #999);
+  border: 1px solid var(--app-grey-light, #ccc);
   border-radius: var(--rounded-corners);
-  margin:1em 2%;
-  padding:.125rem 2% .0125rem;
-  font-size: .8em;
+  margin: 1em 2%;
+  padding: 0.125rem 2% 0.0125rem;
+  font-size: 0.8em;
 }
 .sent-messages-display h2 {
   color: var(--app-blue, #49f);
-  margin-top:.5rem;
+  margin-top: 0.5rem;
 }
 .sent-messages-display p {
   border-bottom: 1px dashed var(--app-grey);
-  padding-bottom: .5rem;
+  padding-bottom: 0.5rem;
 }
 /* ******************** */
 /*    MODAL STYLES      */
@@ -331,7 +331,7 @@ option:active {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  border-bottom: 1px solid var(--app-grey-light,#ccc);
+  border-bottom: 1px solid var(--app-grey-light, #ccc);
 }
 .contact-info label {
   display: flex;
@@ -352,7 +352,6 @@ option:active {
 .contact-phone {
   font-size: 0.8em;
   font-style: italic;
-
 }
 .add-contact-box {
   width: 80%;
@@ -362,7 +361,7 @@ option:active {
   display: block;
   font-weight: bold;
   color: var(--app-grey-light);
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 /* ******************** */
 /*   RESPONSIVE FORM    */
@@ -388,11 +387,11 @@ option:active {
 
   .add-contact.select-container {
     float: none;
-    margin:2em 2.5%;
-    height:3em;
+    margin: 2em 2.5%;
+    height: 3em;
   }
   .notice {
-    font-size: .6em;
+    font-size: 0.6em;
     color: #931;
     font-weight: normal;
     font-style: italic;
@@ -436,7 +435,7 @@ option:active {
   }
   input[type="submit"] {
     width: 92%;
-    margin: 1em 4% .5em;
+    margin: 1em 4% 0.5em;
   }
 }
 @media (min-width: 740px) {
@@ -450,9 +449,8 @@ option:active {
   }
   .add-contact-box {
     width: 60%;
-    padding:2rem 5%;
+    padding: 2rem 5%;
   }
-
 }
 @media (min-width: 800px) {
   .textarea-container {
