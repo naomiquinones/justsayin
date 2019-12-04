@@ -40,8 +40,4 @@ module.exports = {
 
     return languageList;
   }
-
-  detectLanguage: ()=> {
-    console.log('detecting language')
-  }
 };
