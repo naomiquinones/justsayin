@@ -411,7 +411,8 @@ option:active {
     font-size: 0.8rem;
   }
   .contact-name label {
-    padding-left: 0;
+    display: block;
+    padding-left: 1em;
     text-indent: -1em;
     margin: 0;
   }
