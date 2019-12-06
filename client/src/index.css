@@ -29,16 +29,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--app-black);
-  background: linear-gradient(
-      217deg,
-      rgba(255, 220, 220, 0.8),
-      rgba(255, 0, 0, 0) 70.71%
-    ),
-    linear-gradient(336deg, rgba(220, 255, 220, 0.8), rgba(0, 255, 0, 0) 70.71%),
-    linear-gradient(127deg, rgba(220, 230, 245, 0.8), rgba(0, 0, 255, 0) 70.71%);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
 }
 
 main {
@@ -71,16 +61,15 @@ h1 {
 }
 
 .page-header {
-  background-color: var(--app-black);
+  background-color: var(--app-grey);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: linear-gradient(
-    0.35turn,
-    var(--app-black) 15%,
-    var(--app-grey-translucent) 55%,
-    var(--app-black) 85%
+    0.5turn,
+    var(--app-white) 85%,
+    var(--app-grey) 95%
   );
 }
 .loading-message {
@@ -118,8 +107,6 @@ h1 {
   font-weight: bold;
   font-size: 1em;
   text-shadow: 0 1px 2px var(--app-grey);
-  border: 2px solid var(--app-blue);
-  border-radius: var(--rounded-corners);
   padding: 1px 2.5%;
   margin-bottom: 1px;
   background-color: var(--app-grey-light-translucent);
@@ -327,27 +314,22 @@ option:active {
 }
 
 .contact-info {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  border-bottom: 1px solid var(--app-grey-light, #ccc);
+  font-size: 1rem;
+  color: var(--app-grey-light, #ccc);
 }
 .contact-info label {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  /* align-items: stretch; */
-  font-size: 1rem;
   color: var(--app-grey, #999);
-  margin-left: 0.5rem;
+  margin-left: 0.25rem;
+}
+.contact-info td {
+  /* background-color: #49f; */
 }
 [type="checkbox"]:checked + label {
   color: var(--app-blue, #49f);
   font-weight: bold;
 }
 .contact-name {
-  margin: 0 1em 0 0.25em;
+  padding: 0 1em 0 0.25em;
 }
 .contact-phone {
   font-size: 0.8em;
@@ -425,10 +407,13 @@ option:active {
   legend {
     margin-top: 0.5rem;
   }
-  .contact-info label {
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: space-between;
+  .contact-name {
+    font-size: 0.8rem;
+  }
+  .contact-name label {
+    padding-left: 0;
+    text-indent: -1em;
+    margin: 0;
   }
   .add-contact-box {
     width: 70%;
