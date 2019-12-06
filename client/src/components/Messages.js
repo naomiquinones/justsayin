@@ -100,23 +100,24 @@ const Messages = ({ match }) => {
 
   const showContacts = contacts.map((c, index) => {
     return (
-      <div key={index} className="contact-info">
-        <input
-          id={c.id}
-          language={c.target_language_code}
-          type="checkbox"
-          name={c.phone}
-          checked={recipients.includes(c.phone)}
-          onChange={e => toggleRecipient(e.currentTarget.name)}
-        />
-        <label htmlFor={c.id}>
-          <span className="contact-name">
+      <tr key={index}>
+        <td>
+          <input
+            id={c.id}
+            language={c.target_language_code}
+            type="checkbox"
+            name={c.phone}
+            checked={recipients.includes(c.phone)}
+            onChange={e => toggleRecipient(e.currentTarget.name)}
+          />
+        </td>
+        <td className="contact-name">
+          <label htmlFor={c.id}>
             {c.first_name} {c.last_name}
-          </span>
-          <span className="contact-phone">{c.phone}</span>
-        </label>
-        <br />
-      </div>
+          </label>
+        </td>
+        <td className="contact-phone">{c.phone}</td>
+      </tr>
     );
   });
 
@@ -132,21 +133,19 @@ const Messages = ({ match }) => {
             placeholder="Enter text to send"
           />
         </div>
-        {/* <Link
-          to={{
-            pathname: '/modal/1',
-            state: { modal: true }
-          }}
-        >
-          Open Modal
-        </Link> */}
-        <Link to={`${url}/addcontacts`} className="add-contact-link">
-          Add Contacts
-        </Link>
 
         <fieldset>
           <legend>Recipients</legend>
-          {showContacts}
+          <table className="contact-info">
+            <tr>
+              <th colSpan="2">Name</th>
+              <th>Phone number</th>
+            </tr>
+            {showContacts}
+          </table>
+          <Link to={`${url}/addcontacts`} className="add-contact-link">
+            Add Contacts
+          </Link>
         </fieldset>
         <br />
         <input type="submit" value="Send message" />
