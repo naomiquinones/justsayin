@@ -308,14 +308,16 @@ option:active {
 .select-instruction {
   font-size: 0.75rem;
 }
-.add-button {
+.add-contacts-button {
   float: right;
+  width: 10em;
   margin: 0.5rem 2.5% 0.25rem 5%;
 }
 
 .contact-info {
   font-size: 1rem;
   color: var(--app-grey-light, #ccc);
+  margin: 0;
 }
 .contact-info label {
   color: var(--app-grey, #999);
@@ -323,6 +325,7 @@ option:active {
 }
 .contact-info td {
   /* background-color: #49f; */
+  /* vertical-align: middle; */
 }
 [type="checkbox"]:checked + label {
   color: var(--app-blue, #49f);
@@ -403,12 +406,13 @@ option:active {
   }
   fieldset {
     min-height: 22vh;
+    padding: 0 1.25%;
   }
   legend {
     margin-top: 0.5rem;
   }
   .contact-name {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
   .contact-name label {
     display: block;

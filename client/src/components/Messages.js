@@ -143,16 +143,19 @@ const Messages = ({ match }) => {
             </tr>
             {showContacts}
           </table>
-          <Link to={`${url}/addcontacts`} className="add-contact-link">
+          <button
+            className="add-contacts-button"
+            type="button"
+            onClick={() => {
+              alert("add contacts");
+            }}
+          >
             Add Contacts
-          </Link>
+          </button>
         </fieldset>
         <br />
-        <input type="submit" value="Send message" />
+        <button type="submit">Send message</button>
       </form>
-      <Route exact path={`${path}/addcontacts`}>
-        <AddContacts />
-      </Route>
 
       {sendMessageResult.length > 0 && (
         <section className="sent-messages-display">
