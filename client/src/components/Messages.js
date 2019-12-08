@@ -1,22 +1,23 @@
 import React from "react";
 import axios from "axios";
 import { Route, Link, useRouteMatch } from "react-router-dom";
-import AddContacts from "./AddContacts";
+import AddContactsForm from "./AddContactsForm";
 
 const Messages = ({ match }) => {
-  const [message, setMessage] = React.useState("");
+  const [messageToSend, setMessageToSend] = React.useState("");
   const [contacts, setContacts] = React.useState([]);
   const [recipients, setRecipients] = React.useState([]);
   const [sendMessageResult, setSendMessageResult] = React.useState([]);
+  const [showAddContacts, setShowAddContacts] = React.useState(false);
 
   const { path, url } = useRouteMatch();
 
   const sourceLanguage = "en";
 
-  const toggleRecipient = recipient =>
-    recipients.includes(recipient)
-      ? setRecipients(recipients.filter(r => r !== recipient))
-      : setRecipients([...recipients, recipient]);
+  const toggleRecipient = contact =>
+    recipients.includes(contact)
+      ? setRecipients(recipients.filter(r => r !== contact))
+      : setRecipients([...recipients, contact]);
 
   React.useEffect(() => {
     getContacts();
@@ -33,19 +34,22 @@ const Messages = ({ match }) => {
     setContacts(response.data);
   };
 
+  // 
   const sendMessages = async event => {
     event.preventDefault();
-    if (!message || message === "" || message === " ") {
+    if (!messageToSend || messageToSend === "" || messageToSend === " ") {
       return alert("Please enter message text");
     }
     // make a list of the recipients' phone numbers
     const recipientList = contacts.filter(c => recipients.includes(c.phone));
 
     // collect what gets returned from the sendMessage fxn
-    const messageResults = await sendMessage(message, recipientList);
+    const messageResults = await sendMessage(messageToSend, recipientList);
     // populate the list of results for messages sent
     setSendMessageResult(messageResults);
-    setMessage("");
+    setMessageToSend("");
+
+    // insert original message in the confirmation of results
   };
 
   const sendMessage = async (message, group) => {
@@ -128,8 +132,8 @@ const Messages = ({ match }) => {
           <textarea
             className="form-input"
             name="textToTranslate"
-            value={message}
-            onChange={event => setMessage(event.target.value)}
+            value={messageToSend}
+            onChange={event => setMessageToSend(event.target.value)}
             placeholder="Enter text to send"
           />
         </div>
