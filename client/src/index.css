@@ -9,6 +9,7 @@ body {
 :root {
   --app-blue: #43b1e5;
   --app-blue-translucent: #43b1e579;
+  --app-blue-dark: #006898;
   --app-black: rgb(22, 29, 32);
   --app-grey: rgb(108, 129, 138);
   --app-grey-translucent: rgba(108, 129, 138, 0.85);
@@ -34,6 +35,17 @@ body {
 main {
   display: block;
 }
+p,
+ol,
+ul,
+dl,
+table {
+  margin: 0 0 1.5rem 0; 
+}
+
+ul li ul, ol li ol, ol li ul, ul li ol {
+  margin-bottom: 0; 
+}
 
 a {
   background-color: transparent;
@@ -54,6 +66,15 @@ h1 {
   text-indent: 100%;
   white-space: nowrap;
   font-size: 3px;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  max-width: 100%;
+}
+thead {
+  border-bottom: var(--app-grey-light);
 }
 .JustSayIn-logo {
   height: 8vmin;
@@ -205,14 +226,11 @@ input,
 button {
   font-size: 0.9rem;
   color: var(--app-blue, #49f);
+  overflow: visible;
 }
 select,
 textarea {
   width: 100%;
-}
-button,
-input {
-  overflow: visible;
 }
 button,
 [type="button"],
@@ -222,10 +240,14 @@ button,
   margin: 1em 0 0;
   padding: 0.5em 1%;
   outline: none;
+  border: none;
   display: block;
   width: 90%;
   margin: auto;
   background-color: var(--app-blue);
+  background:linear-gradient(135deg, var(--app-blue) 60%, var(--app-blue-dark));
+  background-size: 150%;
+  box-shadow: 0 3px 0 0 var(--app-grey);
   color: var(--app-white, #fff);
   font-weight: bold;
   letter-spacing: 2px;
@@ -240,6 +262,20 @@ button:hover,
     var(--app-white) 55%,
     var(--app-blue) 85%
   );
+  box-shadow: 0 1px 0 0 var(--app-grey);
+  color: var(--app-blue);
+}
+button:active,
+[type="button"]:active,
+[type="reset"]:active,
+[type="submit"]:active {
+  background: linear-gradient(
+    0.35turn,
+    var(--app-blue) 15%,
+    var(--app-white) 55%,
+    var(--app-blue) 85%
+  );
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.25), 0 1px 2px rgba(0,0,0,0.05);
   color: var(--app-blue);
 }
 [type="checkbox"] {
@@ -326,6 +362,7 @@ option:active {
 .contact-info td {
   /* background-color: #49f; */
   /* vertical-align: middle; */
+  border-bottom: 1px solid var(--app-grey-light-translucent);
 }
 [type="checkbox"]:checked + label {
   color: var(--app-blue, #49f);
@@ -342,11 +379,22 @@ option:active {
   width: 80%;
   margin: auto;
 }
+
 .add-contact-box label {
-  display: block;
-  font-weight: bold;
+  display: inline-block;
+  width: 10em;
+  font-size: .7em;
   color: var(--app-grey-light);
   margin-top: 0.5rem;
+}
+.ud-buttons button {
+  font-size: .75em;
+  letter-spacing: 0;
+  padding:1px .125em;
+  margin-bottom: 4px;
+  border-radius:2px;
+}
+.edit-button {
 }
 /* ******************** */
 /*   RESPONSIVE FORM    */
