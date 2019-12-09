@@ -40,11 +40,14 @@ ol,
 ul,
 dl,
 table {
-  margin: 0 0 1.5rem 0; 
+  margin: 0 0 1.5rem 0;
 }
 
-ul li ul, ol li ol, ol li ul, ul li ol {
-  margin-bottom: 0; 
+ul li ul,
+ol li ol,
+ol li ul,
+ul li ol {
+  margin-bottom: 0;
 }
 
 a {
@@ -245,7 +248,11 @@ button,
   width: 90%;
   margin: auto;
   background-color: var(--app-blue);
-  background:linear-gradient(135deg, var(--app-blue) 60%, var(--app-blue-dark));
+  background: linear-gradient(
+    135deg,
+    var(--app-blue) 60%,
+    var(--app-blue-dark)
+  );
   background-size: 150%;
   box-shadow: 0 3px 0 0 var(--app-grey);
   color: var(--app-white, #fff);
@@ -253,9 +260,13 @@ button,
   letter-spacing: 2px;
 }
 button:hover,
+button:focus,
 [type="button"]:hover,
+[type="button"]:focus,
 [type="reset"]:hover,
-[type="submit"]:hover {
+[type="reset"]:focus,
+[type="submit"]:hover,
+[type="submit"]:focus {
   background: linear-gradient(
     0.35turn,
     var(--app-blue) 15%,
@@ -264,6 +275,10 @@ button:hover,
   );
   box-shadow: 0 1px 0 0 var(--app-grey);
   color: var(--app-blue);
+}
+button:focus {
+  outline: 1px solid rgba(255, 255, 255, 0.75);
+  outline-offset: -4px;
 }
 button:active,
 [type="button"]:active,
@@ -275,7 +290,7 @@ button:active,
     var(--app-white) 55%,
     var(--app-blue) 85%
   );
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.25), 0 1px 2px rgba(0,0,0,0.05);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.05);
   color: var(--app-blue);
 }
 [type="checkbox"] {
@@ -383,18 +398,34 @@ option:active {
 .add-contact-box label {
   display: inline-block;
   width: 10em;
-  font-size: .7em;
+  font-size: 0.7em;
   color: var(--app-grey-light);
   margin-top: 0.5rem;
 }
+
 .ud-buttons button {
-  font-size: .75em;
+  font-size: 0.15em;
   letter-spacing: 0;
-  padding:1px .125em;
+  padding: 1px 0.25em;
   margin-bottom: 4px;
-  border-radius:2px;
+  border-radius: 2px;
+  font-weight: normal;
+  display: inline-block;
+  color: var(--app-grey);
+  border: 1px solid var(--app-grey-light);
+  background: var(--app-white);
+  box-shadow: 0 2px 0 0 var(--app-blue-translucent);
 }
-.edit-button {
+.ud-buttons button:hover,
+.ud-buttons button:focus {
+  background-color: var(--app-blue-translucent);
+  background: linear-gradient(0.25turn var(--app-grey, var(--app-grey-light)));
+  box-shadow: 0 1px 0 0 var(--app-blue-translucent);
+}
+.ud-buttons button:active {
+  box-shadow: inset 0 1px 1px var(--app-grey-translucent);
+}
+.delete-button {
 }
 /* ******************** */
 /*   RESPONSIVE FORM    */
