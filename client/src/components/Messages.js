@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import { Route, Link, useRouteMatch } from "react-router-dom";
 import AddContactsForm from "./AddContactsForm";
 
 const Messages = ({ match }) => {
@@ -8,20 +7,25 @@ const Messages = ({ match }) => {
   const [contacts, setContacts] = React.useState([]);
   const [recipients, setRecipients] = React.useState([]);
   const [sendMessageResult, setSendMessageResult] = React.useState([]);
-  const [showAddContacts, setShowAddContacts] = React.useState(false);
-
-  const { path, url } = useRouteMatch();
+  const [sentMessage,setSentMessage] = React.useState('');
+  const [addContacts, setAddContacts] = React.useState(false);
 
   const sourceLanguage = "en";
 
-  const toggleRecipient = contact =>
+  const toggleRecipient = contact => {
     recipients.includes(contact)
       ? setRecipients(recipients.filter(r => r !== contact))
       : setRecipients([...recipients, contact]);
+  }
 
   React.useEffect(() => {
     getContacts();
   }, []);
+
+  // user CRUD operations
+  const showAddContacts = () => {
+    setAddContacts(true);
+  }
 
   // get initial list of contacts to display
   const getContacts = async () => {
@@ -34,7 +38,12 @@ const Messages = ({ match }) => {
     setContacts(response.data);
   };
 
-  // 
+  // delete user
+  const deleteContact = async () => {
+    let response = await axios.get("/contacts",)
+  }
+
+  // messaging functions
   const sendMessages = async event => {
     event.preventDefault();
     if (!messageToSend || messageToSend === "" || messageToSend === " ") {
@@ -47,9 +56,9 @@ const Messages = ({ match }) => {
     const messageResults = await sendMessage(messageToSend, recipientList);
     // populate the list of results for messages sent
     setSendMessageResult(messageResults);
-    setMessageToSend("");
-
     // insert original message in the confirmation of results
+    setSentMessage(messageToSend);
+    setMessageToSend("");
   };
 
   const sendMessage = async (message, group) => {
@@ -121,6 +130,10 @@ const Messages = ({ match }) => {
           </label>
         </td>
         <td className="contact-phone">{c.phone}</td>
+        <td className="ud-buttons">
+          <button className="edit-button muted-button">Edit</button>
+          <button className="delete-button muted-button">Delete</button>
+        </td>
       </tr>
     );
   });
@@ -141,18 +154,20 @@ const Messages = ({ match }) => {
         <fieldset>
           <legend>Recipients</legend>
           <table className="contact-info">
-            <tr>
-              <th colSpan="2">Name</th>
-              <th>Phone number</th>
-            </tr>
-            {showContacts}
+            <thead>
+              <tr>
+                <th colSpan="2">Name</th>
+                <th colSpan="2">Phone number</th>
+              </tr>
+            </thead>
+            <tbody>  
+              {showContacts}
+            </tbody>
           </table>
           <button
             className="add-contacts-button"
             type="button"
-            onClick={() => {
-              alert("add contacts");
-            }}
+            onClick={() => showAddContacts()}
           >
             Add Contacts
           </button>
@@ -160,9 +175,12 @@ const Messages = ({ match }) => {
         <br />
         <button type="submit">Send message</button>
       </form>
+          {addContacts && <AddContactsForm setAddContacts={setAddContacts} />}
 
       {sendMessageResult.length > 0 && (
         <section className="sent-messages-display">
+          <h2>Original message:</h2>
+          <p>{sentMessage}</p>
           <h2>Results</h2>
           {sendMessageResult.map((r, i) => (
             <p key={i}>{r}</p>
