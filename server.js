@@ -34,7 +34,7 @@ const getContacts = async (request, response) => {
 
   const client = await pool.connect();
   try {
-    const results = await pool.query(
+    const results = await client.query(
       "SELECT id, first_name, last_name, phone, target_lang_code FROM users WHERE id IN (SELECT contact_id FROM contacts WHERE owner_id=$1)",
       [owner_id]
     );
@@ -88,13 +88,78 @@ const addContact = async (request, response) => {
   }
 };
 
-//
+// update contact
+const updateContact = async (request, response) => {
+  const id = parseInt(request.params.id);
+  const {     
+    owner_id,
+    first_name,
+    last_name,
+    email,
+    phone,
+    target_lang_code
+  } = request.body;
+
+  const client = await pool.connect();
+  try {
+    await client.query("BEGIN");
+    const updateContactText = 
+    'UPDATE users SET first_name = $1, last_name = $2, email = $3, phone = $4, target_lang_code = $5 WHERE id IN (SELECT * FROM contacts WHERE owner_id = $6 AND contact_id = $7)';
+    const updateContactValues = [
+      first_name,
+      last_name,
+      email,
+      phone,
+      target_lang_code,
+      owner_id,
+      id
+    ];
+    await client.query(updateContactText,updateContactValues);
+    await client.query("COMMIT"); 
+    response.status(200).send(`Modified contact with ID: ${id}`);
+  } catch (e) {
+    await client.query("ROLLBACK");
+    response.status(500).json("Problem updating contact");
+    throw e;
+  } finally {
+    client.release();
+  }
+};
+// delete contact
+const deleteContact = async (request, response) => {
+  const id = parseInt(request.params.id);
+  const { owner_id } = request.body;
+
+  const client = await pool.connect();
+  try {
+    await client.query("BEGIN");
+    await client.query("DELETE FROM contacts WHERE owner_id = $1 AND contact_id = $2",[owner_id,id]);
+    await client.query("COMMIT");
+    response.status(200).json(`Deleted contact with id: ${id}`)
+  } catch (e) {
+    await client.query("ROLLBACK");
+    response.status(500).json("Problem deleting contact");
+    throw e;
+  } finally {
+    client.release();
+  }
+}
+
+// Contact create and read endpoints
 app
   .route("/contacts")
   // get contacts endpoint
   .get(getContacts)
   // add contacts endpoint
   .post(addContact);
+
+// Contact update and delete endpoints
+app
+  .route("/contacts/:id")
+  // update contact endpoint
+  .put(updateContact)
+  // delete contact endpoint
+  .delete(deleteContact);
 
 // language list endpoint
 app.get("/languages", async (req, res) => {
