@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 import axios from "axios";
 
@@ -7,7 +7,7 @@ import Loading from "./Loading";
 
 const AddContactsForm = props => {
   const [isLoading, setIsLoading] = React.useState(true);
-  const [goBack, setGoBack] = React.useState(false);
+  // const [goBack, setGoBack] = React.useState(false);
   const [availableLanguages, setAvailableLanguages] = React.useState([]);
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
@@ -51,8 +51,11 @@ const AddContactsForm = props => {
         email: email,
         phone: phone,
         target_lang_code: targetLanguage
-      });
-      setGoBack(true);
+      })
+        .catch( e => {console.log(e)})
+        .finally( () => {
+          props.setAddContacts(false)
+        })
     }
   };
 
@@ -66,7 +69,6 @@ const AddContactsForm = props => {
 
   return (
     <React.Fragment>
-      {goBack && <Redirect to="/messages" />}
       {isLoading ? (
         <Loading message="Getting available languages" />
       ) : (
@@ -74,70 +76,67 @@ const AddContactsForm = props => {
           className="form-container add-contact-box"
           onSubmit={handleAddRequest}
         >
-          <fieldset>
-            <legend>Add Contacts</legend>
-            <label htmlFor="fname">
-              First name: <span className="notice">(required)</span>
-            </label>
-            <input
-              id="fname"
-              name="fname"
-              type="text"
-              required
-              value={firstName}
-              onChange={event => setFirstName(event.target.value)}
-            />
+          <label htmlFor="fname">
+            First name: <span className="notice">(required)</span>
+          </label>
+          <input
+            id="fname"
+            name="fname"
+            type="text"
+            required
+            value={firstName}
+            onChange={event => setFirstName(event.target.value)}
+          />
 
-            <label htmlFor="lname">Last name:</label>
-            <input
-              id="lname"
-              name="lname"
-              type="text"
-              value={lastName}
-              onChange={event => setLastName(event.target.value)}
-            />
+          <label htmlFor="lname">Last name:</label>
+          <input
+            id="lname"
+            name="lname"
+            type="text"
+            value={lastName}
+            onChange={event => setLastName(event.target.value)}
+          />
 
-            <label htmlFor="email">Email address:</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              value={email}
-              onChange={event => setEmail(event.target.value)}
-            />
+          <label htmlFor="email">Email address:</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            value={email}
+            onChange={event => setEmail(event.target.value)}
+          />
 
-            <label htmlFor="phone">
-              Phone number: <span className="notice">(required)</span>
-            </label>
-            <input
-              id="phone"
-              name="phone"
-              required
-              value={phone}
-              onChange={event => setPhone(event.target.value)}
-            />
+          <label htmlFor="phone">
+            Phone number: <span className="notice">(required)</span>
+          </label>
+          <input
+            id="phone"
+            name="phone"
+            required
+            value={phone}
+            onChange={event => setPhone(event.target.value)}
+          />
 
-            <br />
-            <label htmlFor="languages-list">
-              Set the contact's target language{" "}
-              <span className="notice">(required)</span>
-            </label>
-            <select
-              required
-              className="language-list add-contact select-container"
-              id="languages-list"
-              value={targetLanguage}
-              onChange={e => {
-                const selectedLang = Array.apply(null, e.currentTarget.options)
-                  .filter(opt => opt.selected)
-                  .map(opt => opt.value);
-                setTargetLanguage(selectedLang[0]);
-              }}
-            >
-              {languageOptions}
-            </select>
-          </fieldset>
-          <input type="submit" value="Add contact" />
+          <br />
+          <label htmlFor="languages-list">
+            Set the contact's target language{" "}
+            <span className="notice">(required)</span>
+          </label>
+          <select
+            required
+            className="language-list add-contact select-container"
+            id="languages-list"
+            value={targetLanguage}
+            onChange={e => {
+              const selectedLang = Array.apply(null, e.currentTarget.options)
+                .filter(opt => opt.selected)
+                .map(opt => opt.value);
+              setTargetLanguage(selectedLang[0]);
+            }}
+          >
+            {languageOptions}
+          </select>
+          <input type="submit" value="Save" />
         </form>
       )}
     </React.Fragment>
