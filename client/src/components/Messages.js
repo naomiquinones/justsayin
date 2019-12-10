@@ -3,6 +3,7 @@ import axios from "axios";
 import AddContactsForm from "./AddContactsForm";
 
 const Messages = ({ match }) => {
+  const [owner_id, setOwner_id] = React.useState(1);
   const [messageToSend, setMessageToSend] = React.useState("");
   const [contacts, setContacts] = React.useState([]);
   const [recipients, setRecipients] = React.useState([]);
@@ -29,7 +30,6 @@ const Messages = ({ match }) => {
 
   // get initial list of contacts to display
   const getContacts = async () => {
-    let owner_id = 1;
     let response = await axios.get("/contacts", {
       params: {
         owner_id: owner_id
@@ -42,10 +42,14 @@ const Messages = ({ match }) => {
   const editContact = async id => {
     /* let response =  */ await axios.put(`/contacts/${id}`);
   };
+
   // delete contact
   const deleteContact = async id => {
-    await axios.delete(`/contacts/`);
-    setContacts(contacts.filter(c => c.id !== id));
+    let confirmDelete = window.confirm("Delete item forever?");
+    if (confirmDelete) {
+      let result = await axios.delete(`/contacts/`, { data: { owner_id, id } });
+      setContacts(contacts.filter(c => c.id !== id));
+    }
   };
 
   // messaging functions
@@ -137,12 +141,17 @@ const Messages = ({ match }) => {
         </td>
         <td className="contact-phone">{c.phone}</td>
         <td className="ud-buttons">
-          <button className="edit-button muted-button" onClick={editContact}>
+          <button
+            type="button"
+            className="edit-button muted-button"
+            onClick={() => editContact(c.id)}
+          >
             Edit
           </button>
           <button
+            type="button"
             className="delete-button muted-button"
-            onClick={deleteContact}
+            onClick={() => deleteContact(c.id)}
           >
             Delete
           </button>
@@ -166,7 +175,7 @@ const Messages = ({ match }) => {
 
         <fieldset>
           <legend>Recipients</legend>
-          <table className="contact-info" deleteContact={deleteContact}>
+          <table className="contact-info">
             <thead>
               <tr>
                 <th colSpan="2">Name</th>

@@ -130,7 +130,10 @@ const deleteContact = async (request, response) => {
   // const contact_id = parseInt(request.params.id);
   const { owner_id, id } = request.body;
   console.log(request.body);
-
+  if (!owner_id || !id) {
+    console.log("Missing information");
+    response.status(500).json("Missing data");
+  }
   const client = await pool.connect();
   try {
     await client.query("BEGIN");
@@ -139,7 +142,7 @@ const deleteContact = async (request, response) => {
       [owner_id, id]
     );
     await client.query("COMMIT");
-    response.status(200).json(`Deleted contact with id: ${id}`);
+    response.status(200).json(id);
   } catch (e) {
     await client.query("ROLLBACK");
     response.status(500).json("Problem deleting contact");
