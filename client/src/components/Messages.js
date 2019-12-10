@@ -7,7 +7,7 @@ const Messages = ({ match }) => {
   const [contacts, setContacts] = React.useState([]);
   const [recipients, setRecipients] = React.useState([]);
   const [sendMessageResult, setSendMessageResult] = React.useState([]);
-  const [sentMessage,setSentMessage] = React.useState('');
+  const [sentMessage, setSentMessage] = React.useState("");
   const [addContacts, setAddContacts] = React.useState(false);
 
   const sourceLanguage = "en";
@@ -16,7 +16,7 @@ const Messages = ({ match }) => {
     recipients.includes(contact)
       ? setRecipients(recipients.filter(r => r !== contact))
       : setRecipients([...recipients, contact]);
-  }
+  };
 
   React.useEffect(() => {
     getContacts();
@@ -25,7 +25,7 @@ const Messages = ({ match }) => {
   // user CRUD operations
   const showAddContacts = () => {
     setAddContacts(true);
-  }
+  };
 
   // get initial list of contacts to display
   const getContacts = async () => {
@@ -38,10 +38,15 @@ const Messages = ({ match }) => {
     setContacts(response.data);
   };
 
-  // delete user
-  const deleteContact = async () => {
-    let response = await axios.get("/contacts",)
-  }
+  // update contact
+  const editContact = async id => {
+    /* let response =  */ await axios.put(`/contacts/${id}`);
+  };
+  // delete contact
+  const deleteContact = async id => {
+    await axios.delete(`/contacts/`);
+    setContacts(contacts.filter(c => c.id !== id));
+  };
 
   // messaging functions
   const sendMessages = async event => {
@@ -112,6 +117,7 @@ const Messages = ({ match }) => {
   }; //end translate function
 
   const showContacts = contacts.map((c, index) => {
+    console.log(c);
     return (
       <tr key={index}>
         <td>
@@ -131,8 +137,15 @@ const Messages = ({ match }) => {
         </td>
         <td className="contact-phone">{c.phone}</td>
         <td className="ud-buttons">
-          <button className="edit-button muted-button">Edit</button>
-          <button className="delete-button muted-button">Delete</button>
+          <button className="edit-button muted-button" onClick={editContact}>
+            Edit
+          </button>
+          <button
+            className="delete-button muted-button"
+            onClick={deleteContact}
+          >
+            Delete
+          </button>
         </td>
       </tr>
     );
@@ -153,16 +166,14 @@ const Messages = ({ match }) => {
 
         <fieldset>
           <legend>Recipients</legend>
-          <table className="contact-info">
+          <table className="contact-info" deleteContact={deleteContact}>
             <thead>
               <tr>
                 <th colSpan="2">Name</th>
                 <th colSpan="2">Phone number</th>
               </tr>
             </thead>
-            <tbody>  
-              {showContacts}
-            </tbody>
+            <tbody>{showContacts}</tbody>
           </table>
           <button
             className="add-contacts-button"
@@ -175,7 +186,7 @@ const Messages = ({ match }) => {
         <br />
         <button type="submit">Send message</button>
       </form>
-          {addContacts && <AddContactsForm setAddContacts={setAddContacts} />}
+      {addContacts && <AddContactsForm setAddContacts={setAddContacts} />}
 
       {sendMessageResult.length > 0 && (
         <section className="sent-messages-display">
