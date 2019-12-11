@@ -42,7 +42,7 @@ const AddEditForm = props => {
     
     // minimal validation, if these three, can send to db
     if (firstName && phone && targetLanguage) {
-      if(!id) {
+      if(!props.id) {
         await axios
           .post("/contacts", {
             owner_id: owner_id,
@@ -63,13 +63,13 @@ const AddEditForm = props => {
         await axios
         .put(`/contacts/`,
           {
-            id:id
+            id:props.id,
             owner_id: owner_id,
-            first_name: first_name,
-            last_name: last_name,
+            first_name: firstName,
+            last_name: lastName,
             email: email,
             phone: phone,
-            target_lang_code: target_lang_code
+            target_lang_code: targetLanguage
           })
           .catch(e => {
             console.log(e);
@@ -158,6 +158,9 @@ const AddEditForm = props => {
           </select>
           <button type="button" onClick={handleAddRequest}>
             Save
+          </button>
+          <button type="button" onClick={() =>{props.setAddContacts(false)}}>
+            Cancel
           </button>
         </form>
       )}
