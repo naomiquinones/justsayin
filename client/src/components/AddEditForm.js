@@ -1,5 +1,4 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 
 import axios from "axios";
 
@@ -144,4 +143,4 @@ const AddEditForm = props => {
     </React.Fragment>
   );
 };
-export default withRouter(AddEditForm);
+export default AddEditForm;
