@@ -293,14 +293,6 @@ button:active,
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.05);
   color: var(--app-blue);
 }
-.btn {
-  background-color: var(--app-blue,#49f);
-  border: none;
-  color: var(--app-black,#222);
-  padding: 12px 16px;
-  font-size: 16px;
-  cursor: pointer;
-}
 [type="checkbox"] {
   box-shadow: inset 0 2px 5px var(--app-blue, #49f);
   border: 1px solid var(--app-blue);
@@ -433,8 +425,22 @@ option:active {
 .ud-buttons button:active {
   box-shadow: inset 0 1px 1px var(--app-grey-translucent);
 }
-.delete-button {
+/* .delete-button {
+  background: red;
+  height: 100px;
+  position: relative;
+  width: 20px;
+  transform: rotate(45deg);
 }
+.delete-button:after {
+  background: red;
+  content: "";
+  height: 20px;
+  left: -40px;
+  position: absolute;
+  top: 40px;
+  width: 100px;
+} */
 /* ******************** */
 /*   RESPONSIVE FORM    */
 /* ******************** */
