@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import AddContactsForm from "./AddEditForm";
+import AddEditForm from "./AddEditForm";
 
 const Messages = ({ match }) => {
   const owner_id = 1;
@@ -196,7 +196,7 @@ const Messages = ({ match }) => {
         <button type="submit">Send message</button>
       </form>
       {addContacts && (
-        <AddContactsForm
+        <AddEditForm
           setAddContacts={setAddContacts}
           getContacts={getContacts}
         />

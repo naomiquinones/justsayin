@@ -5,7 +5,7 @@ import axios from "axios";
 
 import Loading from "./Loading";
 
-const AddContactsForm = props => {
+const AddEditForm = props => {
   const [isLoading, setIsLoading] = React.useState(true);
   // const [goBack, setGoBack] = React.useState(false);
   const [availableLanguages, setAvailableLanguages] = React.useState([]);
@@ -144,4 +144,4 @@ const AddContactsForm = props => {
     </React.Fragment>
   );
 };
-export default withRouter(AddContactsForm);
+export default withRouter(AddEditForm);
