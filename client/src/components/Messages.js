@@ -3,7 +3,7 @@ import axios from "axios";
 import AddContactsForm from "./AddContactsForm";
 
 const Messages = ({ match }) => {
-  const [owner_id, setOwner_id] = React.useState(1);
+  const owner_id = 1;
   const [messageToSend, setMessageToSend] = React.useState("");
   const [contacts, setContacts] = React.useState([]);
   const [recipients, setRecipients] = React.useState([]);
@@ -47,8 +47,8 @@ const Messages = ({ match }) => {
   const deleteContact = async id => {
     let confirmDelete = window.confirm("Delete item forever?");
     if (confirmDelete) {
-      let result = await axios.delete(`/contacts/`, { data: { owner_id, id } });
-      setContacts(contacts.filter(c => c.id !== id));
+      await axios.delete(`/contacts/`, { data: { owner_id, id } });
+      getContacts();
     }
   };
 
@@ -121,7 +121,7 @@ const Messages = ({ match }) => {
   }; //end translate function
 
   const showContacts = contacts.map((c, index) => {
-    console.log(c);
+    // console.log(c);
     return (
       <tr key={index}>
         <td>
@@ -195,7 +195,12 @@ const Messages = ({ match }) => {
         <br />
         <button type="submit">Send message</button>
       </form>
-      {addContacts && <AddContactsForm setAddContacts={setAddContacts} />}
+      {addContacts && (
+        <AddContactsForm
+          setAddContacts={setAddContacts}
+          getContacts={getContacts}
+        />
+      )}
 
       {sendMessageResult.length > 0 && (
         <section className="sent-messages-display">
