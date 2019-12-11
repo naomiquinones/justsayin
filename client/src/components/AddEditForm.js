@@ -39,25 +39,46 @@ const AddEditForm = props => {
 
     // change the owner_id to pull from the logged-in user
     const owner_id = 1;
-
+    
     // minimal validation, if these three, can send to db
     if (firstName && phone && targetLanguage) {
-      await axios
-        .post("/contacts", {
-          owner_id: owner_id,
-          first_name: firstName,
-          last_name: lastName,
-          email: email,
-          phone: phone,
-          target_lang_code: targetLanguage
-        })
-        .catch(e => {
-          console.log(e);
-        })
-        .finally(() => {
-          props.setAddContacts(false);
-          props.getContacts();
-        });
+      if(!id) {
+        await axios
+          .post("/contacts", {
+            owner_id: owner_id,
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            phone: phone,
+            target_lang_code: targetLanguage
+          })
+          .catch(e => {
+            console.log(e);
+          })
+          .finally(() => {
+            props.setAddContacts(false);
+            props.getContacts();
+          });
+      } else {
+        await axios
+        .put(`/contacts/`,
+          {
+            id:id
+            owner_id: owner_id,
+            first_name: first_name,
+            last_name: last_name,
+            email: email,
+            phone: phone,
+            target_lang_code: target_lang_code
+          })
+          .catch(e => {
+            console.log(e);
+          })
+          .finally(() => {
+            props.setAddContacts(false);
+            props.getContacts();
+          });
+      }
     }
   };
 

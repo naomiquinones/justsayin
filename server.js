@@ -89,8 +89,8 @@ const addContact = async (request, response) => {
 
 // update contact
 const updateContact = async (request, response) => {
-  const id = parseInt(request.params.id);
   const {
+    id,
     owner_id,
     first_name,
     last_name,

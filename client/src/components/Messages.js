@@ -40,7 +40,7 @@ const Messages = ({ match }) => {
 
   // update contact
   const editContact = async id => {
-    /* let response =  */ await axios.put(`/contacts/`);
+    /* let response =  */
   };
 
   // delete contact
