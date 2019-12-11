@@ -30,7 +30,6 @@ const translator = require("./translate/translate");
 // get contacts
 const getContacts = async (request, response) => {
   const { owner_id } = request.query;
-  console.log("owner_id is", owner_id);
 
   const client = await pool.connect();
   try {
@@ -127,11 +126,8 @@ const updateContact = async (request, response) => {
 };
 // delete contact
 const deleteContact = async (request, response) => {
-  // const contact_id = parseInt(request.params.id);
   const { owner_id, id } = request.body;
-  console.log(request.body);
   if (!owner_id || !id) {
-    console.log("Missing information");
     response.status(500).json("Missing data");
   }
   const client = await pool.connect();
@@ -166,7 +162,6 @@ app
 
 // language list endpoint
 app.get("/languages", async (req, res) => {
-  console.log("get languages");
   const langs = await translator.getSupportedLanguages("en");
 
   res.status(200).json(langs);
@@ -189,8 +184,6 @@ app.post("/translate", async (req, res) => {
     sourceLang,
     targetLang
   );
-  // console.log("the translated text is:",translation);
-  // }
   res.status(200).json(translation);
 });
 
