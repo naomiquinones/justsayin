@@ -1,9 +1,7 @@
 import React from "react";
 import { Route, Link } from "react-router-dom";
 import JustSayInlogo from "./images/JustSayIn-logo-wordmark.svg";
-// import axios from "axios";
 
-// import SavedTexts from './components/SavedTexts';
 import Translation from "./components/Translation";
 
 import Messages from "./components/Messages";

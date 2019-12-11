@@ -150,9 +150,10 @@ const Messages = ({ match }) => {
           </button>
           <button
             type="button"
-            className="delete-button muted-button"
+            className="btn delete-button muted-button"
             onClick={() => deleteContact(c.id)}
           >
+            <i class="fa fa-trash"></i>
             Delete
           </button>
         </td>
