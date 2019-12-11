@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import AddContactsForm from "./AddContactsForm";
+import AddContactsForm from "./AddEditForm";
 
 const Messages = ({ match }) => {
   const owner_id = 1;
@@ -40,7 +40,7 @@ const Messages = ({ match }) => {
 
   // update contact
   const editContact = async id => {
-    /* let response =  */ await axios.put(`/contacts/${id}`);
+    /* let response =  */ await axios.put(`/contacts/`);
   };
 
   // delete contact

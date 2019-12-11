@@ -75,10 +75,7 @@ const AddContactsForm = props => {
       {isLoading ? (
         <Loading message="Getting available languages" />
       ) : (
-        <form
-          className="form-container add-contact-box"
-          onSubmit={handleAddRequest}
-        >
+        <form className="form-container add-contact-box">
           <label htmlFor="fname">
             First name: <span className="notice">(required)</span>
           </label>
@@ -139,7 +136,9 @@ const AddContactsForm = props => {
           >
             {languageOptions}
           </select>
-          <input type="submit" value="Save" />
+          <button type="button" onClick={handleAddRequest}>
+            Save
+          </button>
         </form>
       )}
     </React.Fragment>
