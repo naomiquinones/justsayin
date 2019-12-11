@@ -43,19 +43,22 @@ const AddContactsForm = props => {
 
     // minimal validation, if these three, can send to db
     if (firstName && phone && targetLanguage) {
-      console.log("have three, can send", firstName, phone, targetLanguage);
-      await axios.post("/contacts", {
-        owner_id: owner_id,
-        first_name: firstName,
-        last_name: lastName,
-        email: email,
-        phone: phone,
-        target_lang_code: targetLanguage
-      })
-        .catch( e => {console.log(e)})
-        .finally( () => {
-          props.setAddContacts(false)
+      await axios
+        .post("/contacts", {
+          owner_id: owner_id,
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          phone: phone,
+          target_lang_code: targetLanguage
         })
+        .catch(e => {
+          console.log(e);
+        })
+        .finally(() => {
+          props.setAddContacts(false);
+          props.getContacts();
+        });
     }
   };
 
