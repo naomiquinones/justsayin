@@ -276,6 +276,13 @@ button:focus,
   box-shadow: 0 1px 0 0 var(--app-grey);
   color: var(--app-blue);
 }
+.save-cancel-button {
+  width: 45%;
+  display: inline-block;
+}
+.save-cancel-button.save {
+  margin-right: 3%;
+}
 button:focus {
   outline: 1px solid rgba(255, 255, 255, 0.75);
   outline-offset: -4px;
