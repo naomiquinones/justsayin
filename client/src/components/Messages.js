@@ -162,7 +162,7 @@ const Messages = ({ match }) => {
 
   return (
     <React.Fragment>
-      <form className="form-container recipient-box" onSubmit={sendMessages}>
+      <form className="form-container" onSubmit={sendMessages}>
         <div className="form-group textarea-container">
           <textarea
             className="form-input"
@@ -172,7 +172,10 @@ const Messages = ({ match }) => {
             placeholder="Enter text to send"
           />
         </div>
-
+        <br />
+        <button type="submit">Send message</button>
+      </form>
+      <form className="form-container recipient-box">
         <fieldset>
           <legend>Recipients</legend>
           <table className="contact-info">
@@ -192,8 +195,6 @@ const Messages = ({ match }) => {
             Add Contacts
           </button>
         </fieldset>
-        <br />
-        <button type="submit">Send message</button>
       </form>
       {addContacts && (
         <AddEditForm
