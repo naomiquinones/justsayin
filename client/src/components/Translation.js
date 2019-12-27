@@ -9,10 +9,13 @@ const Translation = () => {
   const [availableLanguages, setAvailableLanguages] = React.useState([]);
   const sourceLanguage = "en";
   const [targetLanguages, setTargetLanguages] = React.useState([
-    "pt",
     "ja",
+    "pt",
     "ar",
-    "es"
+    "es",
+    "ru",
+    "in",
+    "tl"
   ]);
   const [textToTranslate, setTextToTranslate] = React.useState("");
   const [formattedTranslations, setFormattedTranslations] = React.useState([]);
