@@ -276,6 +276,13 @@ button:focus,
   box-shadow: 0 1px 0 0 var(--app-grey);
   color: var(--app-blue);
 }
+.save-cancel-button {
+  width: 45%;
+  display: inline-block;
+}
+.save-cancel-button.save {
+  margin-right: 3%;
+}
 button:focus {
   outline: 1px solid rgba(255, 255, 255, 0.75);
   outline-offset: -4px;
@@ -375,8 +382,6 @@ option:active {
   margin-left: 0.25rem;
 }
 .contact-info td {
-  /* background-color: #49f; */
-  /* vertical-align: middle; */
   border-bottom: 1px solid var(--app-grey-light-translucent);
 }
 [type="checkbox"]:checked + label {
@@ -413,8 +418,12 @@ option:active {
   display: inline-block;
   color: var(--app-grey);
   border: 1px solid var(--app-grey-light);
-  background: var(--app-white);
   box-shadow: 0 2px 0 0 var(--app-blue-translucent);
+  background: var(--app-white);
+  width: 45%;
+}
+.ud-buttons .edit-button {
+  margin-right: 8%;
 }
 .ud-buttons button:hover,
 .ud-buttons button:focus {
@@ -425,22 +434,16 @@ option:active {
 .ud-buttons button:active {
   box-shadow: inset 0 1px 1px var(--app-grey-translucent);
 }
-/* .delete-button {
-  background: red;
-  height: 100px;
-  position: relative;
-  width: 20px;
-  transform: rotate(45deg);
+.ud-buttons .delete-button {
+  background: none;
+  border-style: none;
+  border-width: 0;
+  box-shadow: none;
+  text-decoration: underline;
 }
-.delete-button:after {
-  background: red;
-  content: "";
-  height: 20px;
-  left: -40px;
-  position: absolute;
-  top: 40px;
-  width: 100px;
-} */
+.ud-buttons .delete-button:hover {
+  box-shadow: none;
+}
 /* ******************** */
 /*   RESPONSIVE FORM    */
 /* ******************** */

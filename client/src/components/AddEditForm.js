@@ -39,10 +39,10 @@ const AddEditForm = props => {
 
     // change the owner_id to pull from the logged-in user
     const owner_id = 1;
-    
+
     // minimal validation, if these three, can send to db
     if (firstName && phone && targetLanguage) {
-      if(!props.id) {
+      if (!props.id) {
         await axios
           .post("/contacts", {
             owner_id: owner_id,
@@ -61,9 +61,8 @@ const AddEditForm = props => {
           });
       } else {
         await axios
-        .put(`/contacts/`,
-          {
-            id:props.id,
+          .put(`/contacts/`, {
+            id: props.id,
             owner_id: owner_id,
             first_name: firstName,
             last_name: lastName,
@@ -156,10 +155,20 @@ const AddEditForm = props => {
           >
             {languageOptions}
           </select>
-          <button type="button" onClick={handleAddRequest}>
+          <button
+            type="button"
+            className="save-cancel-button save"
+            onClick={handleAddRequest}
+          >
             Save
           </button>
-          <button type="button" onClick={() =>{props.setAddContacts(false)}}>
+          <button
+            type="button"
+            className="save-cancel-button"
+            onClick={() => {
+              props.setAddContacts(false);
+            }}
+          >
             Cancel
           </button>
         </form>
