@@ -20,7 +20,7 @@ const TargetLanguageSelector = ({
       <div className="form-group select-group">
         <select
           multiple
-          className="language-list select-container"
+          className="language-list translation-select select-container"
           id={"languages-list"}
           name={name}
           value={targetLanguages}

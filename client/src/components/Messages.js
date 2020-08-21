@@ -163,7 +163,7 @@ const Messages = ({ match }) => {
   return (
     <React.Fragment>
       <form className="form-container" onSubmit={sendMessages}>
-        <div className="form-group textarea-container">
+        <div className="form-group textarea-container message-text">
           <textarea
             className="form-input"
             name="textToTranslate"

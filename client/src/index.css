@@ -400,7 +400,7 @@ option:active {
 }
 .add-contact-box {
   width: 80%;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .add-contact-box label {
@@ -455,15 +455,16 @@ option:active {
     flex-direction: row;
     align-items: flex-end;
   }
+  input {
+    width: 100%;
+  }
 }
 @media (min-width: 600px) {
-  button,
-  input[type="submit"] {
+  button {
     width: 85%;
   }
-  .textarea-container,
-  .select-container {
-    width: 47.25%;
+  .initial-text.textarea-container,
+  .translation-select.select-container {
     margin: 0;
     margin-bottom: 0.5em;
     float: left;
@@ -471,8 +472,7 @@ option:active {
 
   .add-contact.select-container {
     float: none;
-    margin: 2em 2.5%;
-    height: 3em;
+    margin: 2em 0;
   }
   .notice {
     font-size: 0.6em;
@@ -481,21 +481,17 @@ option:active {
     font-style: italic;
   }
   .recipient-box {
-    padding: 0 1rem 5% 0;
+    padding: 0 1rem 1.5% 0;
   }
 
   .textarea-container {
     margin-right: 2.5%;
   }
-  .select-container {
-    width: 43%;
-    margin-left: 5%;
-  }
   .select-instruction {
     font-size: 0.75rem;
     margin: 0 1.25% 0.5rem 3.75%;
   }
-  select {
+  .translation-select.select-container {
     min-height: 20vh;
   }
   option {
@@ -504,7 +500,7 @@ option:active {
     padding: 0.125rem 0 0.25rem 2.5%;
   }
   fieldset {
-    min-height: 22vh;
+    min-height: 12vh;
     padding: 0 1.25%;
   }
   legend {
@@ -528,25 +524,25 @@ option:active {
   }
 }
 @media (min-width: 740px) {
-  .textarea-container {
+  .initial-text.textarea-container {
     width: 55%;
     padding: 1.5%;
     margin-right: 2%;
   }
-  .select-container {
+  .translation-select.select-container {
     width: 35%;
   }
   .add-contact-box {
     width: 60%;
-    padding: 2rem 5%;
+    padding: .5rem 5% 2rem;
   }
 }
 @media (min-width: 800px) {
-  .textarea-container {
+  .initial-text.textarea-container {
     width: 60%;
     padding: 1.25%;
   }
-  .select-container {
+  .translation-select.select-container {
     width: 30%;
   }
 }
@@ -558,7 +554,7 @@ option:active {
   }
 }
 @media (min-width: 1200px) {
-  .textarea-container {
+  .initial-text.textarea-container {
     width: 60%;
     padding: 1%;
   }

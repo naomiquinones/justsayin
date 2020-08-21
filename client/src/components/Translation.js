@@ -111,7 +111,7 @@ const Translation = () => {
         <Loading message="Getting available languages" />
       ) : (
         <form className="form-container" onSubmit={handleTranslationRequest}>
-          <div className="form-group textarea-container">
+          <div className="form-group textarea-container initial-text">
             <textarea
               className="form-input"
               name="textToTranslate"
