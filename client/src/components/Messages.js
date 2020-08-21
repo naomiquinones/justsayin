@@ -140,7 +140,7 @@ const Messages = ({ match }) => {
           </label>
         </td>
         <td className="contact-phone">{c.phone}</td>
-        <td className="ud-buttons">
+        <td className="edit-buttons">
           <button
             type="button"
             className="edit-button muted-button"

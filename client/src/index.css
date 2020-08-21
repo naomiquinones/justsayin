@@ -206,6 +206,7 @@ thead {
 /* ******************** */
 form {
   font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 fieldset,
 legend,
@@ -326,7 +327,6 @@ legend {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   min-width: 7.5em;
-  text-align: center;
 }
 textarea {
   min-height: 20vh;
@@ -404,14 +404,14 @@ option:active {
 }
 
 .add-contact-box label {
-  display: inline-block;
+  display: block;
   width: 10em;
   font-size: 0.7em;
   color: var(--app-grey-light);
   margin-top: 0.5rem;
 }
 
-.ud-buttons button {
+.edit-buttons button {
   font-size: 0.15em;
   letter-spacing: 0;
   padding: 1px 0.25em;
@@ -425,26 +425,26 @@ option:active {
   background: var(--app-white);
   width: 45%;
 }
-.ud-buttons .edit-button {
+.edit-buttons .edit-button {
   margin-right: 8%;
 }
-.ud-buttons button:hover,
-.ud-buttons button:focus {
+.edit-buttons button:hover,
+.edit-buttons button:focus {
   background-color: var(--app-blue-translucent);
   background: linear-gradient(0.25turn var(--app-grey, var(--app-grey-light)));
   box-shadow: 0 1px 0 0 var(--app-blue-translucent);
 }
-.ud-buttons button:active {
+.edit-buttons button:active {
   box-shadow: inset 0 1px 1px var(--app-grey-translucent);
 }
-.ud-buttons .delete-button {
+.edit-buttons .delete-button {
   background: none;
   border-style: none;
   border-width: 0;
   box-shadow: none;
   text-decoration: underline;
 }
-.ud-buttons .delete-button:hover {
+.edit-buttons .delete-button:hover {
   box-shadow: none;
 }
 /* ******************** */
