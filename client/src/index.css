@@ -495,7 +495,7 @@ option:active {
     min-height: 20vh;
   }
   option {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
     margin: 0;
     padding: 0.125rem 0 0.25rem 2.5%;
   }
