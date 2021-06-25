@@ -387,6 +387,9 @@ option:active {
 .contact-info td {
   border-bottom: 1px solid var(--app-grey-light-translucent);
 }
+.contact-info input[type="checkbox"] {
+  width: auto;
+}
 [type="checkbox"]:checked + label {
   color: var(--app-blue, #49f);
   font-weight: bold;
@@ -412,7 +415,7 @@ option:active {
 }
 
 .edit-buttons button {
-  font-size: 0.15em;
+  font-size: 0.75rem;
   letter-spacing: 0;
   padding: 1px 0.25em;
   margin-bottom: 4px;
@@ -534,7 +537,7 @@ option:active {
   }
   .add-contact-box {
     width: 60%;
-    padding: .5rem 5% 2rem;
+    padding: 0.5rem 5% 2rem;
   }
 }
 @media (min-width: 800px) {
