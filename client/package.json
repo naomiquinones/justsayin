@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "google-translate": "^3.0.0",
     "i": "^0.3.7",
     "react": "^17.0.1",
