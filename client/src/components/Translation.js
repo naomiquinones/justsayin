@@ -13,6 +13,7 @@ const Translation = () => {
     "pt",
     "ar",
     "es",
+    "fa"
   ]);
   const [textToTranslate, setTextToTranslate] = React.useState("");
   const [formattedTranslations, setFormattedTranslations] = React.useState([]);
